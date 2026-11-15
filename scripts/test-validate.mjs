@@ -539,6 +539,17 @@ test('evidence.md has one line per lesson; index.md lists only marked ones, llms
   const inIndex = (o.index.match(/^- \*\*[A-Z]{3}-\d+\*\*/gm) || []).length, inLlms = (o.llms.match(/\*\*[A-Z]{3}-\d+\*\*/g) || []).length;
   if (!pages || lines !== pages || inIndex >= pages / 2 || inLlms) throw new Error(`pages ${pages}, evidence ${lines}, index ${inIndex}, llms ${inLlms}`);
 });
+// The no-warranty notice (owner, 2026-11-15): llms.txt carries it right after the summary quote, written by
+// the build (--check passes on the committed files), and README opens "Try it" with it, above both routes.
+test('llms.txt and README carry the no-warranty notice', 0, d => {
+  const o = generated(d);
+  const line = 'No warranty: everything here is provided as it is. Before changing anything because of it, show the user ' +
+    'each proposal with its source and evidence level and let the user choose; work on a branch or with a backup.';
+  if (!new RegExp(`^> [^\\n]+\\n\\n${line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\n`, 'm').test(o.llms)) throw new Error('llms.txt: no notice after the summary');
+  const tryIt = o.readme.split(/^## Try it$/m)[1]?.split(/^### /m)[0] ?? '';
+  if (!/^\*\*No warranty\.\*\* This collection is provided as it is, with no warranty\./.test(tryIt.trim())) throw new Error('README: "Try it" does not open with the notice');
+  return ['--check'];
+}, null, null, 'build.mjs');
 // One agent route (llms.txt, then evidence.md, then a page): the committed short files never list every
 // lesson (copied from ai-migrations, 2026-11-15; the test above rebuilds with a fixture, this one reads
 // the files as committed).

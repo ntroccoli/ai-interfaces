@@ -329,12 +329,16 @@ const evidenceKB = Math.round(Buffer.byteLength(out['lessons/evidence.md'], 'utf
 const APPLYING = join(ROOT, 'docs', 'applying-lessons.md');
 const kbOf = p => existsSync(p) ? Math.round(Buffer.byteLength(readFileSync(p, 'utf8').replace(/\r\n/g, '\n'), 'utf8') / 1024) : 0;
 
-// llms.txt (https://llmstxt.org)
+// llms.txt (https://llmstxt.org). The no-warranty line follows the summary quote (owner, 2026-11-15); a test
+// in test-validate.mjs checks it.
+const NO_WARRANTY = 'No warranty: everything here is provided as it is. Before changing anything because of it, show the ' +
+  'user each proposal with its source and evidence level and let the user choose; work on a branch or with a backup.';
 out['llms.txt'] = [
   '# AI interfaces', '',
   '> Case studies and measurements on user interfaces designed, built, changed or checked with AI: what was measured, ' +
     'against whom (people, automated checkers or a model judge), what worked, what failed, and which part AI did versus ' +
     'rule-based tools and people. Lessons drawn from them by aspect.', '',
+  NO_WARRANTY, '',
   'Unofficial; company names describe the subject only. The collection measures; it never says which look is better: ' +
     'taste stays with a person. A lesson\'s "Checked against people" tag says what checked its evidence: people (yes), ' +
     'people for part of it (partly), only deterministic checks (checker), only model judges or simulated users (model), ' +

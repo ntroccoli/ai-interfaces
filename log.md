@@ -3,6 +3,20 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — no-warranty notice
+
+- **Why:** agents apply proposals from this collection to other people's projects; the owner asked
+  for a plain statement that it comes with no warranty and that the user chooses each change.
+- **Added:** a no-warranty paragraph at the top of the README's "Try it", above both routes, and a
+  line right after the summary in `llms.txt`, written by the build so it cannot drift; a test checks
+  both. The checklist carries no copy.
+
+### Checklist and lessons impact
+
+- **Checklist:** none.
+- **New lessons:** none.
+- **Changed lessons:** none.
+
 ## 2026-11-15 — provenance and behaviour checks
 
 - **Why:** a size limit nobody had measured travelled from one project's test into a published

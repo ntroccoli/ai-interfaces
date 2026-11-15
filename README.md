@@ -49,6 +49,10 @@ The collection measures; it never says which look is better: taste stays with a 
 
 ## Try it
 
+**No warranty.** This collection is provided as it is, with no warranty. Read every proposal an agent makes
+from it before applying it, on a branch or with a backup; the maintainer is not liable for what applying it
+changes.
+
 Open your coding agent (Claude Code, Codex, Cursor, …) in your project and pick a route. Step 1
 only reads your project and changes nothing: you get measurements and numbered proposals, each
 with a one-word recommendation (do, later or skip) and a reason, and you choose. No proposal says

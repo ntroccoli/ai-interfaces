@@ -343,8 +343,8 @@ cover by type, by what AI did and by what it was checked against), `lessons/inde
 of contents for people: aspect pages with counts, "May be outdated", "By model", where cases
 disagree; no list of every lesson), `lessons/evidence.md` (one line per lesson: tag, the lesson,
 model-ability, people and strength tags, the "may be outdated" mark, the cases it cites by label,
-"(own)" after a maintainer-own case, and those its "Against" cites), `llms.txt` (entry point for agents: how
-to use, one line per lesson page, and one line pointing to `index.md` for the cases) and
+"(own)" after a maintainer-own case, and those its "Against" cites), `llms.txt` (entry point for agents: the
+no-warranty line right after the summary (owner, 2026-11-15; a test checks it), how to use, one line per lesson page, and one line pointing to `index.md` for the cases) and
 `llms-full.txt` (the single opt-in file with everything: every lesson and case line, and the
 checklist once it exists). It also keeps hand-written files in step: every URL to this repository
 comes from `REPO_SLUGS` in `scripts/lib.mjs` (to rename the repository, put the new owner/name first
