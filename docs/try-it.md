@@ -1,52 +1,55 @@
 # Try it: apply, revisit and share
 
-The paste-ready prompts that follow step 1 of each route in the [README](../README.md#try-it). Run
-step 2 in the same session as step 1; run each revisit in a fresh session. Before applying
-anything, check step 1's claims: a proposal can rest on a wrong reading of your project. The method,
-the report and the record are in [applying-lessons.md](applying-lessons.md).
+What follows step 1 of each route in the [README](../README.md#try-it). Step 1 is one prompt that
+serves the first review and every revisit: the agent looks for the route's record in your project
+and says in its first line which path it took and why. Run step 1 in a fresh session and step 2 in
+the same session. Before applying anything, check step 1's claims: a proposal can rest on a wrong
+reading of your project. The method, the report, the record and the apply steps are in
+[applying-lessons.md](applying-lessons.md).
 
 ## Before an interface change
 
 ### Step 2: apply
 
-To accept the agent's recommendations, paste:
+Answer the report with one line:
 
 ```text
-Apply the proposals you marked "do". Do the work the way this project normally runs work (yourself, or by briefing workers). Before changing anything, write each baseline the report gives to docs/interface-baselines/, and the record https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md defines for the checklist in docs/interface-review.md with each chosen proposal's baseline: its count, or how often its problem has happened so far, with the evidence. For each proposal, first state its "Check now" and its "Event that proves it"; it is applied when the check now passes (waiting for first use), proven only once later work shows the event. Where the owner left a question unanswered, assume the default the report states and record the assumption. After the interface change, rerun every baselined count with the same command and list each that rose. Then complete the record, with every proposal, including the later and skipped ones, and the newest entry of https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/log.md this review covered.
+Apply what you recommended.
 ```
 
-To choose yourself, replace the first sentence with "Apply proposals 1, 3 and 5."
+To choose yourself, write "Apply proposals 1, 3 and 5." instead; to apply nothing yet, "Apply none;
+write the record." The agent follows "[Apply](applying-lessons.md#apply-step-2)": it writes each
+baseline to `docs/interface-baselines/` and the record to `docs/interface-review.md` (every
+proposal, the later and skipped ones too), then applies one proposal at a time on a branch, stops
+at the first failing check and reports it, and after the interface change reruns every baselined
+count and lists each that rose.
 
 ### Step 3: revisit later
 
-When the collection has grown (llms.txt names a newer log entry than your record) or after a few
-weeks of work, run a revisit in a fresh session. It reads the corrections first, stops at once if nothing is new or due; else
-it reruns the baselined counts and re-checks the record, then measures and proposes only what is
-new since your record's log entry. Paste:
-
-```text
-Read docs/interface-review.md, https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/corrections.md. First, for each corrections.md entry the record does not list as checked, follow its "Recognise it" on this project; where it matches, follow "Find what it changed" and put its "Propose to the owner" first among your proposals. Compare the log entry the record names (date and title) with the newest entry llms.txt names; if they match, no correction was unchecked and no item is due for re-check (an item is due when it is waiting or open and the project has commits since the record's date or its due date has passed), tell me and stop. Else read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md and follow its revisit section. Re-check each item: rerun its "Check now" unchanged (for a count, the command in its baseline file, same tool version), look for its "Event that proves it" in the work since, compare with its baseline, and mark it exactly "proven", "still waiting", "stopped holding" or "not shown" (its event cannot be seen yet), with the numbers. For each log.md entry newer than the record's, read its changes/ file (the lesson IDs and checklist questions it added, changed or removed); open only those, and measure them; do not judge from memory. List the applied lessons a newer lesson now contradicts or supersedes, and the items whose lesson or question changed. Propose only the new or changed ones, earlier "later" items, applied items that stopped holding and what that list found, each with exactly one word, do, later or skip, and a reason. List first the open and waiting items past their due date, with their owners. Update the record in its existing layout: name the newest log.md entry you read, by date and title, and every corrections.md entry you checked; give each open or waiting item an owner and a due date. Your one-word recommendations are suggestions. Change nothing else until I choose.
-```
+Paste the step 1 prompt of this route ([README](../README.md#before-an-interface-change)) again, in
+a fresh session, when the collection has grown (`llms.txt` names a newer log entry than your
+record) or after a few weeks of work. Because `docs/interface-review.md` exists, it does the
+revisit: corrections first, then it reruns the baselined counts, re-checks the record and proposes
+only what is new, earlier "later" items and items that stopped holding. Items you skipped or
+declined stay closed unless a new lesson, a correction or a changed measurement bears on them, and
+the agent says which. When nothing is new or due it says so and stops. Then step 2 as above.
 
 ## Learning from the lessons
 
 ### Step 2: apply
 
-To accept the agent's recommendations, paste:
-
-```text
-Apply the proposals you marked "do". Do the work the way this project normally runs work (yourself, or by briefing workers). Before changing anything, write the record https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md defines in docs/interface-lessons-review.md with each chosen proposal's baseline: how often its problem has happened so far, with the evidence, and for a count its baseline file in docs/interface-baselines/. For each proposal, first state its "Check now" and its "Event that proves it"; it is applied when the check now passes (waiting for first use), proven only once later work shows the event. Where the owner left a question unanswered, assume the default the report states and record the assumption. Then complete the record, with every proposal, including the later and skipped ones, and the newest entry of https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/log.md this review covered.
-```
-
-To choose yourself, replace the first sentence with "Apply proposals 1, 3 and 5."
+As in the other route: "Apply what you recommended.", "Apply proposals 1, 3 and 5." or "Apply
+none; write the record." The record is `docs/interface-lessons-review.md`, with a baseline file in
+`docs/interface-baselines/` for each count.
 
 ### Step 3: revisit later
 
-As in the other route, in a fresh session. Paste:
+Paste the step 1 prompt of this route ([README](../README.md#learning-from-the-lessons)) again, in
+a fresh session. Because `docs/interface-lessons-review.md` exists, it does the revisit, as in the
+other route.
 
-```text
-Read docs/interface-lessons-review.md, https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/corrections.md. First, for each corrections.md entry the record does not list as checked, follow its "Recognise it" on this project; where it matches, follow "Find what it changed" and put its "Propose to the owner" first among your proposals. Compare the log entry the record names (date and title) with the newest entry llms.txt names; if they match, no correction was unchecked and no item is due for re-check (an item is due when it is waiting or open and the project has commits since the record's date or its due date has passed), tell me and stop. Else read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md and follow its revisit section. Re-check each item: rerun its "Check now" unchanged (for a count, the command in its baseline file, same tool version), look for its "Event that proves it" in the work since, compare with its baseline, and mark it exactly "proven", "still waiting", "stopped holding" or "not shown" (its event cannot be seen yet), with the numbers. For each log.md entry newer than the record's, read its changes/ file (the lesson IDs it added, changed or removed); open only those lessons, and measure them; do not judge from memory. List the applied lessons a newer lesson now contradicts or supersedes, and the items whose lesson changed. Propose only the new or changed ones, earlier "later" items, applied items that stopped holding and what that list found, each with exactly one word, do, later or skip, and a reason. List first the open and waiting items past their due date, with their owners. Update the record in its existing layout: name the newest log.md entry you read, by date and title, and every corrections.md entry you checked; give each open or waiting item an owner and a due date. Your one-word recommendations are suggestions. Change nothing else until I choose.
-```
+Revisit prompts published before 2026-11-15 (they began "Read docs/interface-review.md" or "Read
+docs/interface-lessons-review.md") still work: every file and section they name is kept.
 
 ## Share what you learned (optional)
 

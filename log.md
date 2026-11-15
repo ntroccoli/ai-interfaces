@@ -3,6 +3,38 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — one review prompt
+
+- **Why:** the owner asked that one step do both the first review and every later update. Until
+  now each route had a step 1 prompt for the first review and a separate, much longer step 3
+  prompt for the revisit, and the details of each step lived in the prompts.
+- **Rules:** step 1 of each route is one short prompt that serves the first review and every
+  revisit. `llms.txt` routes it by the project's record (`docs/interface-review.md` or
+  `docs/interface-lessons-review.md`): no record, a first review that measures, proposes and changes
+  nothing; a record, a revisit that reads `corrections.md` first, then the newer log entries, and
+  proposes only what is new, what was left for later and what stopped holding. The agent says in
+  one line which path it took and why. The old step 3 headings stay and point to step 1.
+- **Rules:** the agent downloads the files into a temporary folder, reads them whole from disk and
+  deletes the folder when done: a fetch tool may summarise a page and drop parts.
+- **Rules:** step 2 is a short prompt ("Apply what you recommended", "Apply proposals 1, 3 and 5",
+  "Apply none; write the record"); how to apply moved to a new "Apply" section of
+  `docs/applying-lessons.md`: one proposal at a time on a branch, stop at the first failing check
+  and report, write the record once the owner has chosen.
+- **Rules:** the report and record formats are templates with a "Path" line, a trade-off line per
+  proposal and, new, a revisit report. Closed items stay closed: a skipped or declined proposal
+  returns only for a new or changed lesson or question, a correction that matches it, or a changed
+  measurement, and the agent says which; an owner's choice that differs from a lesson is recorded
+  with its date, reason and the owner's words.
+- **Kept:** nothing an earlier step 1 or step 3 prompt relies on was removed; behaviour checks ran
+  an old step 3 prompt against the new files.
+
+### Checklist and lessons impact
+
+- **Checklist:** no question changed; "How to run" now starts from the review prompt's routing and
+  points to the "Apply" section.
+- **New lessons:** none.
+- **Changed lessons:** none.
+
 ## 2026-11-15 — no-warranty notice
 
 - **Why:** agents apply proposals from this collection to other people's projects; the owner asked

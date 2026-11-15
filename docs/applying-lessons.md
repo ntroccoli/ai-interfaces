@@ -1,9 +1,11 @@
 # Applying the lessons
 
 Two routes apply this collection to a project, and both read alike: the same method, report and
-record. The paste-ready prompts are in README "Try it" and [try-it.md](try-it.md). The checklist
-route also reads, on this page, the [measuring notes](#measuring-notes) and
-[the checklist report](#the-checklist-report).
+record. The paste-ready prompts are in README "Try it" and [try-it.md](try-it.md): step 1 of each
+route is one prompt that `llms.txt` ("Review a project") turns into a first review when the
+project has no record and into a [revisit](#revisit) when it has one; step 2 is one line that
+runs [Apply](#apply-step-2). The checklist route also reads, on this page, the
+[measuring notes](#measuring-notes) and [the checklist report](#the-checklist-report).
 
 - **Before an interface change:** run the [checklist](../checklist.md) on the project. It measures
   the interface (jobs, accessibility, contrast, controls and consistency) and how the project's
@@ -47,20 +49,24 @@ applied without the owner's yes.
    the exact command and mark it "not run" with the reason. A fact only the owner knows: mark it
    "ask the owner" and state the default you will assume; if the owner does not answer, assume
    it, write the assumption in the record, and go on (the owner can overturn it later).
-5. Report as below, then stop until the owner picks. One change per proposal: split a proposal
-   with several parts, or number its parts 3a, 3b, each with its own checks.
+5. Report in the template below, starting with its "Path" line, then stop until the owner picks.
+   One change per proposal: split a proposal with several parts, or number its parts 3a, 3b, each
+   with its own checks.
 6. Record: after the owner picks, write `docs/interface-lessons-review.md` in the project
-   (format below), and each baseline the record cites. In a read-only run, write no file; show
-   the record after the report.
-7. Revisit, in a fresh session, as below.
+   (format below), and each baseline the record cites, as [Apply](#apply-step-2) says. In a
+   read-only run, write no file; show the record after the report.
+7. Revisit: the same step 1 prompt, in a fresh session; with the record it runs the revisit below.
 8. Share what you learned (optional): a field report, as below.
 
 ## Revisit
 
-Run it when the collection has grown or after a few weeks of work, in a fresh session, with the
-record the review wrote (`docs/interface-review.md` for the checklist,
-`docs/interface-lessons-review.md` for the lessons).
+The step 1 prompt runs this section when the project has the record a review wrote
+(`docs/interface-review.md` for the checklist, `docs/interface-lessons-review.md` for the lessons):
+when the collection has grown or after a few weeks of work, in a fresh session. It changes
+nothing until the owner chooses, and reports in the [revisit report](#revisit-report) template.
 
+- Path: begin the answer with `Path: revisit (<route>) — <the record found and the log entry it
+  names>`.
 - Corrections first, every time: read [corrections.md](../corrections.md). For each entry the
   record does not list as checked, follow its "Recognise it" on the project; where it matches,
   follow "Find what it changed" and put its "Propose to the owner" first among the proposals. Name
@@ -74,8 +80,13 @@ record the review wrote (`docs/interface-review.md` for the checklist,
   file, with the same tool version) and look for its "Event that proves it" in the work since;
   compare with its baseline. Mark each exactly proven, still waiting, stopped holding or not
   shown (its event cannot be seen yet), with the numbers; in the record, still waiting and not
-  shown stay "waiting for first use". Date each change; reopen proven or skipped items only if
-  their check now fails.
+  shown stay "waiting for first use". Date each change.
+- Closed items stay closed: a proven, skipped or declined item, and an owner's choice recorded
+  under the table, is not proposed again unless one of these holds, and the proposal names which:
+  its check now fails (a proven item), a new or changed lesson or question bears on it (from the
+  changes files), a correction matches it, or its measurement changed since the record (give both
+  values). An owner's choice that differs from a lesson stays the owner's: never propose the
+  lesson against it for the same reason again.
 - New: for each [log.md](../log.md) entry newer than the record's, read its file in `changes/`,
   named by the entry's date and title (`2026-11-14 — checklist and apply routes` is
   `changes/2026-11-14-checklist-and-apply-routes.md`): the lesson IDs and checklist questions
@@ -84,9 +95,11 @@ record the review wrote (`docs/interface-review.md` for the checklist,
   record's items whose lesson or question changed.
 - Propose only the corrections that matched, the new or changed lessons and questions, earlier
   "later" items, applied items that stopped holding and what the lint found, each with exactly one
-  word, do, later or skip (a suggestion), and a reason. Update the record in its existing layout,
-  give each open or waiting row an owner and a new due date, and name in it the newest log entry
-  read, by date and title.
+  word, do, later or skip (a suggestion), and a reason.
+- Record: once the owner has chosen ([Apply](#apply-step-2)), update the record in its existing
+  layout, give each open or waiting row an owner and a new due date, and name in it the newest log
+  entry read, by date and title, and every corrections.md entry checked. A revisit prompt published
+  before 2026-11-15 asks for this update in the same step; it may do it then.
 - The too-early rule below holds for the re-check only: new lessons can be proposed before
   anything has met its problem.
 
@@ -94,6 +107,8 @@ record the review wrote (`docs/interface-review.md` for the checklist,
 
 ```markdown
 # Interface lessons review: <project>, <YYYY-MM-DD>
+
+Path: first review (lessons route) — <no docs/interface-lessons-review.md in the project>.
 
 Work measured: <what agents do to the interface here: build pages, fix accessibility, review or
 rate screens, walk jobs as a user>.
@@ -112,9 +127,10 @@ rate screens, walk jobs as a user>.
 
 ## Proposals
 
-1. <lesson ID> <the lesson in a few words>.
+1. <the change in a few words> — <lesson ID> ([<aspect page>](<link to the lesson's page>)).
    Today: <what the project does, with the measurement>.
    Change: <the proposal>.
+   Trade-off: <what it costs or risks, and when not to do it>.
    Evidence: the lesson's strength and people tag, its "Against" line, and links to case sections you read.
    Depends on: <proposal numbers, or none>.
    Cost: S | M | L (S under a day of agent work, M a few days, L a week or more).
@@ -123,7 +139,56 @@ rate screens, walk jobs as a user>.
    Check now: <a command or count that passes once the change is applied>.
    Event that proves it: <what later work must show for the change to have held>.
 2. ...
+
+## Outside this review
+- <what you found that no lesson or question covers (a security bug, a broken route), one line
+  each, for the owner; never a numbered proposal>.
+
+## Next step
+Reply "Apply what you recommended", "Apply proposals <numbers from this report>" or "Apply none;
+write the record". Step 2 follows "Apply" in <raw URL of docs/applying-lessons.md>: the record
+first, one proposal at a time on a branch, a stop at the first failing check.
 ```
+
+Every proposal fills every line; write "none" or "not known" rather than leave one out. The "Next
+step" section ends every report, first review or revisit, so the next step is read even when the
+files read earlier have left the session. Links go to
+the raw URL of the lesson page or case section you read.
+
+## Revisit report
+
+Both routes, when the project has a record:
+
+```markdown
+# Interface review, revisit: <project>, <YYYY-MM-DD>
+
+Path: revisit (<checklist | lessons> route) — <record path>, log entry "<date — title>".
+Newest log entry now: "<date — title>". Changes files read: <names, or none>.
+
+## Corrections
+- <date — title>: matches | does not match — <what you looked at in the project>.
+
+## Past due
+- Row <n> (<ID or Q<n>>): due <date>, owner <who>. Or: none.
+
+## Re-check
+- Row <n> (<ID or Q<n>>): proven | still waiting | stopped holding | not shown — <check now and its
+  value, beside the baseline>.
+
+## Closed items
+- Row <n> (<ID or Q<n>>): stays closed | reopened — <for a reopened one: the new or changed lesson
+  or question, the correction, or the measurement before and now>.
+
+## Proposals
+<numbered, in the first review's template; a correction that matches comes first; a reopened item
+adds "Reopened by: <reason>">
+
+## Next step
+<as in the first review's template>
+```
+
+When nothing is new or due (see "Start" above), the report is the Path line, the Corrections
+section, one line saying so, and the Next step section.
 
 ## The record
 
@@ -140,6 +205,9 @@ Corrections checked: <date and title of each corrections.md entry checked, or "n
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | <ID> | <one line> | <how often, evidence> | <status> | <commit, test run, count or incident> | <who> | <YYYY-MM-DD> | <YYYY-MM-DD> |
 | 3a | <ID> | <one part of a bundled proposal> | ... | ... | ... | ... | ... | ... |
+
+Assumed: <question> — <default>, <YYYY-MM-DD>.
+Owner's choice: row <n>, <YYYY-MM-DD> — <the owner's words>; reason: <reason, or "none given">.
 ```
 
 One status per row: a proposal with parts gets a row per part (3a, 3b...), each with its own status
@@ -147,7 +215,10 @@ and event. Every open or waiting row has an owner (the person or session that ac
 and a due date (when it is checked next; default: four weeks after the record's date, our guess);
 a revisit lists the rows past their due date first. Proven and skipped rows leave both as "—".
 Assumed owner answers go under the table, one line each: "Assumed: <question> — <default>,
-<date>".
+<date>". So does each owner's choice that differs from a lesson, a question or the agent's
+recommendation (declining a "do", applying against a lesson), one line each: "Owner's choice: row
+<n>, <date> — <the owner's words>; reason: <the owner's reason, or "none given">". A revisit keeps
+these closed (see [Revisit](#revisit)).
 
 Baseline: written before any change, how often the proposal's problem happened so far, with the
 evidence (a count from the history, logs or a checker run), marked "(recorded)" when it comes from
@@ -161,6 +232,46 @@ whose check failed stays open, and its event names the failed check. A "do" that
 action, or on work outside this session, stays open, and its event says what it waits on. An
 applied change whose "Check now" passes is waiting for first use; once later work shows its
 "Event that proves it", it is proven.
+
+## Apply (step 2)
+
+The owner answers the report in the same session with one line: "Apply what you recommended" (the
+proposals marked do), "Apply proposals 1, 3 and 5", or "Apply none; write the record". Do the work
+the way the project normally runs work (yourself, or by briefing workers).
+
+1. Record first, once the owner has chosen and before changing anything: write each baseline the
+   report gives to `docs/interface-baselines/`, then the route's record (`docs/interface-review.md`
+   or `docs/interface-lessons-review.md`; on a revisit, update it in its existing layout) with every
+   proposal of the report, chosen or not: chosen ones open, "later" ones open, declined ones
+   skipped, with their baselines, the newest log entry the review covered and the corrections it
+   checked (after a first review, "none: first review", so the first revisit checks every
+   entry). Add the "Assumed" lines (where the owner left a question unanswered, assume the default
+   the report states) and an "Owner's choice" line for each choice that differs from a lesson, a
+   question or your recommendation.
+2. "Apply none": stop here; the record is the whole step. Say what it holds.
+3. Work on a branch (or, with no version control, ask for a backup first).
+4. One proposal at a time, in the order of "Depends on": state its "Check now" and its "Event that
+   proves it", make the change, then run its "Check now" and the project's own tests and checks,
+   and read their result before you touch the next proposal. Never put the changes or checks of
+   two proposals in one command or script: a chained run applies the next one before the failure
+   shows (a behaviour check's agent did so, then had to revert it). Commit each proposal on the
+   branch once its checks pass.
+5. Stop at the first failing check. Do not start the next proposal, and never weaken, skip or
+   remove the check, a test, a job or a control to make it pass. Leave the proposal open in the
+   record with the failed check as its event, and report: which proposal stopped, the check and its
+   output, what was applied before it, and which proposals were not started. The owner decides what
+   comes next.
+6. A proposal whose "Check now" passes is waiting for first use; it is proven only once later work
+   shows its event.
+7. Checklist route, after the interface change: rerun every baselined count with the same command
+   and tool version, and list each that rose, by job, page or rule, beside its baseline.
+8. Complete the record (each row's status, event and date) and report what was applied, what
+   stopped and what waits, with owners and due dates.
+
+Provenance (our guesses, from the sibling collection karpathy-ideas, 2026-11-15, where a behaviour
+check ran these steps): one proposal at a time and the stop at the first failing check prevent a
+batch of changes whose failures cannot be told apart; applied blindly, changes that only work
+together stop at the first part, so number them 3a, 3b and say "Depends on".
 
 ## Share what you learned (optional)
 
@@ -278,6 +389,8 @@ file and its command instead of copying values.
 ```markdown
 # Interface review: <project>, <YYYY-MM-DD>
 
+Path: first review (checklist route) — <no docs/interface-review.md in the project>.
+
 Interface: <kind; pages, states and themes in scope>. Jobs counted: <n>.
 Change planned: <what, or none yet>. Running page: used | not used (<why>).
 
@@ -297,9 +410,10 @@ Change planned: <what, or none yet>. Running page: used | not used (<why>).
 
 ## Proposals
 
-1. Q<n> <question> — gap | partial gap.
+1. <the change in a few words> — Q<n> ([checklist](<link to checklist.md>)), gap | partial gap.
    Today: <what the project does, with the measurement>.
    Change: <the proposal>.
+   Trade-off: <from the question's Trade-offs and your measurement: what it costs, when not to do it>.
    Evidence: Q<n>, its lesson IDs, and links to case sections you read.
    Depends on: <proposal numbers, or none>.
    Cost: S | M | L (S under a day of agent work, M a few days, L a week or more).
@@ -307,9 +421,19 @@ Change planned: <what, or none yet>. Running page: used | not used (<why>).
    Check now: <the count or command, and the value that passes once applied>.
    Event that proves it: <what later work must show>.
 2. ...
+
+## Outside this review
+<as in the lessons route's template>
+
+## Next step
+<as in the lessons route's template: the three replies and the link to "Apply">
 ```
 
-The record, `docs/interface-review.md` in the project, written after the owner picks:
+Every proposal fills every line, as in the lessons route. A revisit uses the
+[revisit report](#revisit-report).
+
+The record, `docs/interface-review.md` in the project, written after the owner picks
+([Apply](#apply-step-2)):
 
 ```markdown
 # Interface review record: <project>
@@ -321,9 +445,12 @@ Corrections checked: <date and title of each corrections.md entry checked, or "n
 | # | Question | Proposal | Baseline | Status | Event that shows it | Owner | Due | Date |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Q<n> | <one line> | <baseline file and its value> | <status> | <commit, test run or count> | <who> | <YYYY-MM-DD> | <YYYY-MM-DD> |
+
+Assumed: <question> — <default>, <YYYY-MM-DD>.
+Owner's choice: row <n>, <YYYY-MM-DD> — <the owner's words>; reason: <reason, or "none given">.
 ```
 
-Statuses, owners, due dates, baselines and assumed owner answers work as in
+Statuses, owners, due dates, baselines, assumed owner answers and owner's choices work as in
 [the record](#the-record) of the lessons route: one status per row (a proposal's parts: rows 3a,
 3b), every open or waiting row with an owner and a due date, and a revisit reruns each baseline
 file's command and compares.

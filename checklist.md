@@ -154,8 +154,10 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
 
 ## How to run this checklist
 
-1. Run it in a fresh session on the project, changing nothing there. The cases are few and most
-   are single studies: read a case's "What went wrong" before relying on it.
+1. Run it in a fresh session on the project, changing nothing there, from the README's step 1
+   prompt: `llms.txt` ("Review a project") makes it a first review when the project has no
+   `docs/interface-review.md` and a revisit when it has one. The cases are few and most are single
+   studies: read a case's "What went wrong" before relying on it.
 2. Measure first: answer each Check with a number, a file or a command's output, never from
    memory or from how the interface looks to you. A count the project already records (a
    committed baseline, a dated report) may be cited with its file, commit and date, marked
@@ -178,7 +180,9 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    against people before its ratings are used, then the rest.
 7. Report as below, then stop until the owner picks. Proposals are options for the owner; the
    one-word recommendation is your suggestion. One change per proposal (or parts 3a, 3b).
-8. Revisit as [applying the lessons](docs/applying-lessons.md#revisit) says, reading
+8. Apply only what the owner chose, as [Apply](docs/applying-lessons.md#apply-step-2) says: the
+   record first, one proposal at a time on a branch, and a stop at the first failing check.
+9. Revisit as [applying the lessons](docs/applying-lessons.md#revisit) says, reading
    [corrections.md](corrections.md) first; share a [field report](docs/field-reports.md) once an
    item has met its problem (optional).
 
@@ -187,10 +191,10 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
 Report, record and baseline files follow
 [the checklist report](docs/applying-lessons.md#the-checklist-report): each answer with its
 measurement, a baseline file per count in `docs/interface-baselines/` (written before anything
-changes), numbered proposals with a one-word suggestion (do, later or skip), "Check now" and "Event
-that proves it", and the record in `docs/interface-review.md` once the owner picks, where every
-open or waiting item has an owner and a due date. In a read-only run, write no file: the report's
-Baselines section stands in for them.
+changes), a "Path" line first, numbered proposals with a link, a trade-off, a one-word suggestion
+(do, later or skip), "Check now" and "Event that proves it", and the record in
+`docs/interface-review.md` once the owner picks, where every open or waiting item has an owner and
+a due date. In a read-only run, write no file: the report's Baselines section stands in for them.
 
 [Agentic audit]: cases/2026-09-08-mishra-agentic-a11y-audit.md
 [Anthropic harness]: cases/2026-03-24-anthropic-harness-design.md

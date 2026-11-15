@@ -344,7 +344,10 @@ of contents for people: aspect pages with counts, "May be outdated", "By model",
 disagree; no list of every lesson), `lessons/evidence.md` (one line per lesson: tag, the lesson,
 model-ability, people and strength tags, the "may be outdated" mark, the cases it cites by label,
 "(own)" after a maintainer-own case, and those its "Against" cites), `llms.txt` (entry point for agents: the
-no-warranty line right after the summary (owner, 2026-11-15; a test checks it), how to use, one line per lesson page, and one line pointing to `index.md` for the cases) and
+no-warranty line right after the summary (owner, 2026-11-15; a test checks it), "Review a project" (the steps
+README's step 1 prompts send the agent to: download the files and read them from disk, find the route's record, a
+first review without one and a revisit with one, a "Path:" line naming which and why, and step 2's "Apply"; one prompt
+for both, owner 2026-11-15; a test checks it), how to use, one line per lesson page, and one line pointing to `index.md` for the cases) and
 `llms-full.txt` (the single opt-in file with everything: every lesson and case line, and the
 checklist once it exists). It also keeps hand-written files in step: every URL to this repository
 comes from `REPO_SLUGS` in `scripts/lib.mjs` (to rename the repository, put the new owner/name first
@@ -433,3 +436,14 @@ re-run without the harm, and listed in `corrections.md`. The "may not rise" rule
 removed nothing (the agent raised the baseline itself and asked the owner), and the fold rule of
 question 6 removed nothing (the agent asked about controls no job used). One run per item: a
 sample, not proof.
+
+A second round (2026-11-15, for the one review prompt) gave a fresh agent the README's prompts on
+small git projects, with the public files served from a local copy, and a separate model judge
+read each answer and every file change: a first review, a revisit whose record carries the job-list
+damage of the first correction, a revisit with no damage, a revisit with skipped items and owner's
+choices, step 2 with a check seeded to fail, and an old revisit prompt; three runs each. Two
+wordings were changed and run again: an agent chained the three proposals in one command and
+applied the third before the second's failure showed (step 4 of "Apply" now forbids it), and an
+agent holding only the earlier report applied everything on the main branch without a record (every
+report now ends with a "Next step" section linking to "Apply"). Every check then passed three runs
+of three.

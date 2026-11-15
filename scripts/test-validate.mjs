@@ -550,6 +550,27 @@ test('llms.txt and README carry the no-warranty notice', 0, d => {
   if (!/^\*\*No warranty\.\*\* This collection is provided as it is, with no warranty\./.test(tryIt.trim())) throw new Error('README: "Try it" does not open with the notice');
   return ['--check'];
 }, null, null, 'build.mjs');
+// One review prompt (owner, 2026-11-15): README's step 1 prompts send the agent to llms.txt's "Review a project",
+// which downloads the files, routes by each route's record and makes the agent name its path; old step 3
+// anchors in docs/try-it.md stay so old links still land.
+test('llms.txt routes the step 1 prompt by the record; README and try-it point there', 0, d => {
+  const o = generated(d);
+  const review = o.llms.split(/^## Review a project/m)[1]?.split(/^## /m)[0] ?? '';
+  const missing = ['docs/interface-review.md', 'docs/interface-lessons-review.md', 'No record: a first review', 'A record: a revisit',
+    'corrections.md', '`Path: first review (<route>)`', '`Path: revisit (<route>)`', 'curl', 'Read each file whole from disk',
+    'Delete the folder', 'Change nothing', '"Apply none; write the record"'].filter(s => !review.includes(s));
+  if (missing.length) throw new Error(`llms.txt "Review a project" lacks: ${missing.join(' | ')}`);
+  const prompts = o.readme.split(/^## Try it$/m)[1]?.split(/^## /m)[0].match(/^```text\n(.+)\n```$/gm) || [];
+  if (prompts.length !== 2 || !prompts.every(p => p.includes('llms.txt') && p.includes('"Review a project"') && p.includes('Change nothing until I choose')))
+    throw new Error(`README step 1 prompts: ${prompts.length}, each must send to "Review a project"`);
+  const apply = read(join(d, 'docs', 'applying-lessons.md'));
+  const gone = ['How to run it', 'Revisit', 'Report format', 'Revisit report', 'The checklist report', 'Apply (step 2)']
+    .filter(h => !new RegExp(`^## ${h.replace(/[()]/g, '\\$&')}$`, 'm').test(apply));
+  if (gone.length) throw new Error(`docs/applying-lessons.md lacks the sections llms.txt names: ${gone.join(', ')}`);
+  const tryIt = read(join(d, 'docs', 'try-it.md'));
+  if ((tryIt.match(/^### Step 3: revisit later$/gm) || []).length !== 2) throw new Error('docs/try-it.md: the two "Step 3: revisit later" anchors are gone');
+  return ['--check'];
+}, null, null, 'build.mjs');
 // One agent route (llms.txt, then evidence.md, then a page): the committed short files never list every
 // lesson (copied from ai-migrations, 2026-11-15; the test above rebuilds with a fixture, this one reads
 // the files as committed).

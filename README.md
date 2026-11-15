@@ -53,14 +53,20 @@ The collection measures; it never says which look is better: taste stays with a 
 from it before applying it, on a branch or with a backup; the maintainer is not liable for what applying it
 changes.
 
-Open your coding agent (Claude Code, Codex, Cursor, …) in your project and pick a route. Step 1
-only reads your project and changes nothing: you get measurements and numbered proposals, each
-with a one-word recommendation (do, later or skip) and a reason, and you choose. No proposal says
-which look is better. Run step 1 in a fresh session. The prompts for step 2 (apply), step 3
-(revisit later) and sharing a field report are in [docs/try-it.md](docs/try-it.md).
-A revisit reads [corrections.md](corrections.md) first: what this collection published wrong, and
-how to find and repair what it changed in your project. If you ran a route while an entry there
-was published, run the revisit again.
+Open your coding agent (Claude Code, Codex, Cursor, …) in your project, pick a route and paste its
+step 1 prompt in a fresh session. The same prompt serves the first review and every later one: with
+no review record in your project it reviews; with one (`docs/interface-review.md` or
+`docs/interface-lessons-review.md`) it revisits, reading [corrections.md](corrections.md) first (what
+this collection published wrong, and how to find and repair what it changed in your project), then
+only what is new since your record. The agent says in its first line which it did and why. Step 1
+changes nothing: you get measurements and numbered proposals, each with a one-word recommendation
+(do, later or skip) and a reason, and you choose. No proposal says which look is better.
+
+Step 2, in the same session, is one line: "Apply what you recommended.", "Apply proposals 1, 3 and
+5." or "Apply none; write the record." The agent writes the record, then applies one proposal at a
+time on a branch and stops at the first failing check. Sharing a field report, and what each step
+does, are in [docs/try-it.md](docs/try-it.md). If you ran a route while an entry in corrections.md
+was published, run the review prompt again; with a record it does the revisit.
 
 ### Before an interface change
 
@@ -69,7 +75,7 @@ an agent can measure and how your agents check their work, with a baseline for e
 same counts can be taken after the change. Paste:
 
 ```text
-Read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and follow it. Run the checklist on this project: measure every question with its check, on a running page where the check needs one and I allow it, else by its static route marked "static"; do not judge from memory or from how the interface looks. Report in the checklist's report format: each answer with its measurement, a baseline for every count, and the cases behind each gap. Give each proposal a recommendation of exactly one word, do, later or skip, with a reason: proposals are options for me, the owner. Change nothing.
+Download https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt into a temporary folder outside this project, read it whole from disk and follow its "Review a project" for the checklist route (before an interface change) on this project. Change nothing until I choose.
 ```
 
 ### Learning from the lessons
@@ -79,7 +85,7 @@ taught. Lessons whose evidence people confirmed ("Checked against people: yes") 
 each is still judged by its own words. Paste:
 
 ```text
-Read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and follow its route for learning from the lessons, https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md. Compare the lessons with how this project's agents build, change and check its interface today; measure from the repository and its history, do not judge from memory or from how the interface looks. Report in that page's report format: numbered proposals, each with the lesson ID, what the project does now with its measurement, the change, its cost, its baseline and the check that would prove it. Give each proposal a recommendation of exactly one word, do, later or skip, with a reason. Change nothing.
+Download https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt into a temporary folder outside this project, read it whole from disk and follow its "Review a project" for the lessons route (learning from the lessons) on this project. Change nothing until I choose.
 ```
 
 ## Status

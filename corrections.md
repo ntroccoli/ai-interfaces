@@ -4,7 +4,7 @@ What this collection published wrong, so a project that applied it can find and 
 changed. A revisit ([applying the lessons](docs/applying-lessons.md#revisit)) reads this file
 first, every time, even when it holds no entry newer than the project's record, and the record
 then names the entries it checked. Whoever ran a route while an entry was published should run
-the revisit again. A correction is never applied to a project without its owner's yes. Format:
+the review prompt again (README "Try it", step 1); with a record it does the revisit. A correction is never applied to a project without its owner's yes. Format:
 [docs/format.md](docs/format.md#corrections). Newest first.
 
 ## 2026-11-15 — three measuring rules that dropped or deferred findings
