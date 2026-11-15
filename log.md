@@ -3,6 +3,25 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — studio-go process update
+
+- **Covered:** the maintainer's own case (studio-go) after the first night of building its redesign:
+  the coordinator's review of that night and the build's records at that point. It stays `ongoing`
+  and, as the maintainer's own, lifts no lesson's strength.
+- **Changed:** the case and its evidence file gain a round 2 build section: the job counts before,
+  at the review and against the completed mock; the rail drawn by the server so the walk, which runs
+  no scripts, can count it; old pages kept answering inside the new frame until each lane lands;
+  the stops to ask that file lists caused; status lines that guessed their effort; and what is
+  still unproven (the owner has not used the build). The picked mock's counts in the older table are
+  now marked as those of its thin version.
+
+### Checklist and lessons impact
+
+- **Checklist:** none.
+- **New lessons:** JOB-7; BLD-9, BLD-10.
+- **Changed lessons:** JOB-2 (its ceilings held through a build and refused one change), JOB-3 (no
+  newcomer has walked the build either).
+
 ## 2026-11-15 — outside review fixes
 
 - **Rules:** a case is checked against `people` only when the source reports the results of

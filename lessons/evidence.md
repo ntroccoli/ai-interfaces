@@ -2,7 +2,7 @@
 
 # Lesson evidence in one line each
 
-46 lessons. This is the one file that lists every lesson (besides llms-full.txt, which holds everything). To choose lessons: scan this file, then open the aspect page (the heading link) only for the lessons you use; it holds the full "Against" line, the Era (years and newest model family) and the legend. Each line: ID, tag (stated by a source, or ours), the lesson, then model (does it depend on model ability), people (what checked its evidence: people, people in part, a checker, a model, or none but the author), strength, "may be outdated" where it applies, the cases it cites ("(own)" marks the maintainer's own project, never counted toward strength), and the cases its "Against" line cites.
+49 lessons. This is the one file that lists every lesson (besides llms-full.txt, which holds everything). To choose lessons: scan this file, then open the aspect page (the heading link) only for the lessons you use; it holds the full "Against" line, the Era (years and newest model family) and the legend. Each line: ID, tag (stated by a source, or ours), the lesson, then model (does it depend on model ability), people (what checked its evidence: people, people in part, a checker, a model, or none but the author), strength, "may be outdated" where it applies, the cases it cites ("(own)" marks the maintainer's own project, never counted toward strength), and the cases its "Against" line cites.
 
 ## [Build loops](build-loops.md)
 
@@ -14,6 +14,8 @@
 - **BLD-6** [stated] A planner, builder and grader harness cost many times a solo run, though the grader's own share was small; the grader paid off only on work beyond what the model built reliably alone. Model partly; people none; weak. Cases: Anthropic harness. Against: none found.
 - **BLD-7** [stated] When the model changes, remove harness parts one at a time and keep those that still change the result; cutting many at once hid which parts mattered. Model partly; people none; weak. Cases: Anthropic harness. Against: none found.
 - **BLD-8** [ours] After a grading agent passes a build, walk each whole job as a newcomer; a build that passed its per-feature tests kept a workflow the screen never explained. Model partly; people none; weak. Cases: Anthropic harness. Against: none found.
+- **BLD-9** [stated] When parallel lanes rebuild an interface, keep each old page answering inside the new frame until its replacement lands, so the product keeps working after each merge. Model no; people checker; weak. Cases: studio-go (own). Against: none found.
+- **BLD-10** [stated] Lanes that own a fixed list of files stop to ask for one-line edits in shared lists and tests; let them make and name such edits, and turn shared lists into registrations. Model partly; people none; weak. Cases: studio-go (own). Against: none found.
 
 ## [Accessibility](accessibility.md)
 
@@ -64,3 +66,4 @@
 - **JOB-4** [stated] An audit read from code and screenshots can miss what walking the jobs finds: the screens and clicks each job needs, in what order, and whether pages agree; walk the jobs as well. Model partly; people model; weak. Cases: studio-go (own). Against: none found.
 - **JOB-5** [stated] Count the jobs before the first change lands; a baseline taken afterwards cannot show what the change did to them. Model no; people none; weak. Cases: studio-go (own). Against: none found.
 - **JOB-6** [stated] Agents told only to fold options keep them and add controls; say in the design what each job loses. Model partly; people checker; weak. Cases: studio-go (own). Against: none found.
+- **JOB-7** [stated] A job walk that runs no scripts cannot see a control a script draws; draw the controls each job needs on the server, or the walk cannot count them. Model no; people checker; weak. Cases: studio-go (own). Against: none found.

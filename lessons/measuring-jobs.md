@@ -14,11 +14,11 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
 - **JOB-2** [stated] Turn a scripted walk of each job into a test with a committed baseline, so a change that adds screens or clicks fails before it merges.
   - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what worked][sg-worked].
-  - Against: None found; the walk follows the shortest route, its baseline was taken only after the first round of changes, and no change has yet been caught by it, since the redesign has not been built yet.
+  - Against: None found; the walk follows the shortest route on a demo, its baseline was taken only after the first round of changes, and in the redesign's build, where packages brought most jobs down to the mock's numbers under its ceilings, the lower counts are a script's, made before the owner had tried the build.
 - **JOB-3** [ours] Count each job twice, by its shortest route and as a newcomer walks it; the two differ, and an agent standing in for the newcomer takes fewer steps than people do.
   - Depends on model ability: yes. Checked against people: partly. Strength: medium. Era: 2025–2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: numbers][sg-numbers], [UW walkthrough: what went wrong][scw-wrong].
-  - Against: None found; the newcomer counts at studio-go come from a model and cover only the pages before the redesign, never a mock, and the people in the walkthrough study used two mobile apps, not the interface counted.
+  - Against: None found; the newcomer counts at studio-go come from a model and cover only the pages before the redesign, never a mock or the build, and the people in the walkthrough study used two mobile apps, not the interface counted.
 - **JOB-4** [stated] An audit read from code and screenshots can miss what walking the jobs finds: the screens and clicks each job needs, in what order, and whether pages agree; walk the jobs as well.
   - Depends on model ability: partly. Checked against people: model. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: how it was checked][sg-checked], [studio-go: numbers][sg-numbers].
@@ -31,6 +31,10 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
   - Depends on model ability: partly. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what went wrong][sg-wrong].
   - Against: None found; the counts come from one crude text search over the templates, and the records word the brief's limit more and less broadly.
+- **JOB-7** [stated] A job walk that runs no scripts cannot see a control a script draws; draw the controls each job needs on the server, or the walk cannot count them.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what worked][sg-worked].
+  - Against: None found; one project whose pages are drawn by the server, where a model's challenge pass found the gap before the build began.
 
 [sg-checked]: ../cases/2026-11-14-studio-go-interface-redesign.md#how-it-was-checked
 [sg-wrong]: ../cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong

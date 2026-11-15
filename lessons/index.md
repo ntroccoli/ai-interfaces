@@ -12,12 +12,12 @@ The legend of the tags, the Era and the strength rule heads every aspect page.
 
 | Aspect | Prefix | Lessons | stated | ours | model yes | partly | no | people yes | partly | checker | model | none |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Build loops](build-loops.md) | BLD | 8 | 7 | 1 | 3 | 5 | 0 | 0 | 0 | 1 | 0 | 7 |
+| [Build loops](build-loops.md) | BLD | 10 | 9 | 1 | 3 | 6 | 1 | 0 | 0 | 2 | 0 | 8 |
 | [Accessibility](accessibility.md) | ACC | 15 | 13 | 2 | 8 | 3 | 4 | 4 | 2 | 6 | 0 | 3 |
 | [Model judges](model-judges.md) | JDG | 13 | 10 | 3 | 9 | 4 | 0 | 9 | 1 | 0 | 1 | 2 |
 | [Simulated users](simulated-users.md) | SIM | 4 | 3 | 1 | 2 | 2 | 0 | 3 | 1 | 0 | 0 | 0 |
-| [Measuring jobs](measuring-jobs.md) | JOB | 6 | 5 | 1 | 1 | 2 | 3 | 0 | 1 | 2 | 1 | 2 |
-| **All** | | 46 | 38 | 8 | 23 | 16 | 7 | 16 | 5 | 9 | 2 | 14 |
+| [Measuring jobs](measuring-jobs.md) | JOB | 7 | 6 | 1 | 1 | 2 | 4 | 0 | 1 | 3 | 1 | 2 |
+| **All** | | 49 | 41 | 8 | 23 | 17 | 9 | 16 | 5 | 11 | 2 | 15 |
 
 "Model" counts the "Depends on model ability" tag; "people" the "Checked against people" tag.
 
@@ -43,9 +43,9 @@ Families group the model names the cases give by maker, line and major version (
 
 | Model family | Names in the cases | Newest case | Lessons (model ability yes or partly), by the family's role |
 | --- | --- | --- | --- |
-| Claude Fable 5.x | Fable 5.2 | 2026-11-14 | 3: design/check/simulate-user: JOB-3, JOB-4, JOB-6 |
-| Claude Opus 5.x | Opus 5.5; Claude Opus 5 | 2026-11-14 | 7: check: ACC-7, ACC-8, ACC-9, ACC-10; design/build/change/check: JOB-3, JOB-4, JOB-6 |
-| Claude Sonnet 5.x | Sonnet 5.5; Claude Sonnet 5 | 2026-11-14 | 7: check: ACC-7, ACC-8, ACC-9, ACC-10; build/change/check: JOB-3, JOB-4, JOB-6 |
+| Claude Fable 5.x | Fable 5.2 | 2026-11-14 | 4: design/check/simulate-user: BLD-10, JOB-3, JOB-4, JOB-6 |
+| Claude Opus 5.x | Opus 5.5; Claude Opus 5 | 2026-11-14 | 8: design/build/change/check: BLD-10, JOB-3, JOB-4, JOB-6; check: ACC-7, ACC-8, ACC-9, ACC-10 |
+| Claude Sonnet 5.x | Sonnet 5.5; Claude Sonnet 5 | 2026-11-14 | 8: build/change/check: BLD-10, JOB-3, JOB-4, JOB-6; check: ACC-7, ACC-8, ACC-9, ACC-10 |
 | Gemini 3.x; Gemma 4.x; GLM 5.x | Gemini 3.1 Pro; Gemini 3.5 Flash; Gemma 4 (31B); GLM-5.2 | 2026-09-08 | 4: check: ACC-7, ACC-8, ACC-9, ACC-10 |
 | GPT-5.x | GPT-5.5; GPT-5 | 2026-09-08 | 8: check: ACC-7, ACC-8, ACC-9, ACC-10; build: JDG-1, JDG-2, JDG-3, JDG-4 |
 | Kimi K2.x | Kimi K2.6; Kimi K2.5 | 2026-09-08 | 8: change/check: BLD-3, ACC-3, ACC-4, ACC-6; check: ACC-7, ACC-8, ACC-9, ACC-10 |

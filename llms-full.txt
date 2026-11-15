@@ -46,6 +46,14 @@ How agents that build, review or fix an interface were set up to check their own
   - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
   - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong).
   - Against: None found; the source does not say whether the grader was asked about the workflow, blames the base model's product sense, and the one person who found the gap was the author.
+- **BLD-9** [stated] When parallel lanes rebuild an interface, keep each old page answering inside the new frame until its replacement lands, so the product keeps working after each merge.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
+  - Against: None found; the maintainer's own project, judged before the build was finished or used by its owner.
+- **BLD-10** [stated] Lanes that own a fixed list of files stop to ask for one-line edits in shared lists and tests; let them make and name such edits, and turn shared lists into registrations.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong), [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
+  - Against: None found; the coordinator counted the requests roughly from its own night, and the looser rule has not yet been tried.
 
 ## Accessibility (accessibility.md)
 
@@ -204,11 +212,11 @@ How the cost of a user's jobs (screens, clicks, steps, fields typed) was counted
 - **JOB-2** [stated] Turn a scripted walk of each job into a test with a committed baseline, so a change that adds screens or clicks fails before it merges.
   - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
-  - Against: None found; the walk follows the shortest route, its baseline was taken only after the first round of changes, and no change has yet been caught by it, since the redesign has not been built yet.
+  - Against: None found; the walk follows the shortest route on a demo, its baseline was taken only after the first round of changes, and in the redesign's build, where packages brought most jobs down to the mock's numbers under its ceilings, the lower counts are a script's, made before the owner had tried the build.
 - **JOB-3** [ours] Count each job twice, by its shortest route and as a newcomer walks it; the two differ, and an agent standing in for the newcomer takes fewer steps than people do.
   - Depends on model ability: yes. Checked against people: partly. Strength: medium. Era: 2025–2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers), [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
-  - Against: None found; the newcomer counts at studio-go come from a model and cover only the pages before the redesign, never a mock, and the people in the walkthrough study used two mobile apps, not the interface counted.
+  - Against: None found; the newcomer counts at studio-go come from a model and cover only the pages before the redesign, never a mock or the build, and the people in the walkthrough study used two mobile apps, not the interface counted.
 - **JOB-4** [stated] An audit read from code and screenshots can miss what walking the jobs finds: the screens and clicks each job needs, in what order, and whether pages agree; walk the jobs as well.
   - Depends on model ability: partly. Checked against people: model. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#how-it-was-checked), [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers).
@@ -221,6 +229,10 @@ How the cost of a user's jobs (screens, clicks, steps, fields typed) was counted
   - Depends on model ability: partly. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
   - Against: None found; the counts come from one crude text search over the templates, and the records word the brief's limit more and less broadly.
+- **JOB-7** [stated] A job walk that runs no scripts cannot see a control a script draws; draw the controls each job needs on the server, or the walk cannot count them.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
+  - Against: None found; one project whose pages are drawn by the server, where a model's challenge pass found the gap before the build began.
 
 ## Cases
 

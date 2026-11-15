@@ -42,6 +42,14 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
   - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
   - Cases: [Anthropic harness: what went wrong][hd-wrong].
   - Against: None found; the source does not say whether the grader was asked about the workflow, blames the base model's product sense, and the one person who found the gap was the author.
+- **BLD-9** [stated] When parallel lanes rebuild an interface, keep each old page answering inside the new frame until its replacement lands, so the product keeps working after each merge.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what worked][sg-worked].
+  - Against: None found; the maintainer's own project, judged before the build was finished or used by its owner.
+- **BLD-10** [stated] Lanes that own a fixed list of files stop to ask for one-line edits in shared lists and tests; let them make and name such edits, and turn shared lists into registrations.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong][sg-wrong], [studio-go: what worked][sg-worked].
+  - Against: None found; the coordinator counted the requests roughly from its own night, and the looser rule has not yet been tried.
 
 [car-worked]: ../cases/2026-05-26-concordia-llm-accessibility-repair.md#what-worked
 [car-wrong]: ../cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong
@@ -52,4 +60,6 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
 [hd-wrong]: ../cases/2026-03-24-anthropic-harness-design.md#what-went-wrong
 [hol-practices]: ../cases/2025-03-20-uci-human-or-llm-accessible-code.md#practices-to-copy
 [hol-worked]: ../cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-worked
+[sg-worked]: ../cases/2026-11-14-studio-go-interface-redesign.md#what-worked
+[sg-wrong]: ../cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong
 [k-success-criteria-not-steps]: https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2026-01-26-success-criteria-not-steps.md

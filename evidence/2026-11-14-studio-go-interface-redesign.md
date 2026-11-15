@@ -11,6 +11,10 @@ questions this collection put to the project (the owner relayed them, 2026-11-14
 coordinator wrote them from the repository as it stood on 2026-11-14 at 21:40 and from commands
 run for them, says where a figure was only taken from its own earlier log, and notes that it ran the work it
 describes. It was written on 2026-11-14 from copies of those records kept in the maintainer's private archive.
+It was updated on 2026-11-15 from the coordinator's own review of the redesign's build so far (written at
+the owner's request once 15 of the 21 packages were merged overnight, by its count) and from the build's records as they stood at
+that review: the per-job count files of the job walk, the build plan, the walk report of the finished three-pane mock, a
+package's status file and the coordinator's handoff. The review, too, is the coordinator judging its own work.
 Nobody outside the project has checked it, so it is never independent evidence. Numbers appear as the records
 give them; where two records disagree, both are shown. The owner's words are paraphrased.
 
@@ -33,6 +37,9 @@ After the first round of fixes the owner still found the UI cluttered and asked 
 | 2026-11-14, afternoon | A scripted walk of each job becomes a test, with committed counts as its baseline. |
 | 2026-11-14, evening | Three clickable mocks, colour themes, typefaces, two sheets of layout sketch cards and further layout mocks; the owner picks the three-pane layout as the redesign and decides it is built whole before they test it; four losing mocks are removed. |
 | 2026-11-14, late evening | The project answers this collection's questions from the repository as it stood that evening; the three-pane mock is still being completed and nothing of the redesign has been built. |
+| 2026-11-14, before 22:30 | The three-pane mock is completed for the whole studio and its job counts become the build's targets; a plan of 21 packages in six waves is argued against by a fresh-context subagent and revised. |
+| Overnight into 2026-11-15 | 15 build packages are merged by the review's count (16 by the coordinator's handoff), with no more than six sessions at a time; by the end, most jobs walk at the mock's counts (see Round 2 build). |
+| 2026-11-15, about 03:00 | The owner asks what is making the work weak; the coordinator reviews the night and changes its rules. The owner has not yet used the build. |
 
 ## Round 1 audit and build
 
@@ -100,7 +107,7 @@ A Fable session at high effort played a first-time user (the coordinator's hando
 at high effort, with no version number; the walk's own report and the project's answers record no model). Its
 brief barred it from the code, the templates, the tests, the docs and the README: it could learn the app only from what the screens showed. It
 drove headless Chrome with Playwright in a 1440 by 900 pixel window. On a demo copy (sample data, simulated
-engine) it could click anything; on the real studio it only loaded pages, with no clicks and no forms. It tried
+engine) it could click anything; in the real studio its visits were page loads only, with no clicks and no forms. It tried
 the owner's six jobs, each from the home page, and wrote down every screen, click, hesitation and unfamiliar
 word, backed by 187 screenshots.
 
@@ -218,6 +225,98 @@ the mock's count for that job as its target; an agent new to the code walks ever
 and each plan item names the test that proves it. The owner also wanted fewer agent reviews of what they assess
 by eye, such as looks, layouts, wording and flows, since they can point out problems at the end.
 
+Later that evening the three-pane mock covered the whole studio, and its walk report gave every job a count,
+measured by a script clicking each job through the mock's pages. It counts screens in two ways: pages, each a fresh
+page load as in the job-walk test, and views, each time the third pane switches to something else. Completed, the
+mock needs one screen less for a new video than the thin version in the table below (2 pages and 3 clicks); the
+queue job keeps both routes (1 page and 3 clicks from the rail, 2 pages and 4 clicks from the queue page); and it
+adds a variant of job 3 with two shots at once (1 page, 8 clicks). Its styles job costs 11 clicks over 2 pages with
+blending, 1 click more than the old UI without it; leaving the blend out, 7 clicks. Its own limits: an agent reasoned
+its layout from the stylesheet and never saw it, its script sees no layout, sizes or colours, and some parts are
+drawn only in part.
+
+## Round 2 build
+
+**The plan.** The coordinator split the build into 21 packages over six waves, no more than four packages per wave:
+one shared lane (frame and look first, then the change gesture and the rail, with a closing package last), lanes
+per place (Ideas, Videos, Channels, Queue, Workshop, settings) and a lane for pipeline and lab work, in parallel. Every package lists the plan items
+it delivers, and every item names the test that proves it (42 items). A Sonnet subagent with a clean context went
+through plan, code and mock and raised 8 objections; the coordinator verified them against the code, accepted the
+three strongest and took parts of the other five. The first concerned counting: the job walk issues plain HTTP requests without executing scripts,
+while the old side bar was filled in by a script, so the rail's work would stay invisible to the walk and the targets
+for jobs 4 and 5 were out of reach as designed. The answer became a rule for all lanes: the server renders the rail
+and its actions (moving a job up, pausing all work) as fragments refreshed by the live updates, while the script adds
+only extras such as a hover card and dragging; a control that exists only through a script never counts for a job.
+
+**Old pages kept working.** Each merge had to leave a working product. Until the lane for a place had landed, that
+place's old pages showed within the new frame, opened from the rail, and each old address still served its old page;
+once the replacing lane landed, it redirected the old address there and carried along the tests that
+requested it, all in one merge. By the plan, 75 test files requested the old video addresses; the review mentions one
+package that had 76 such files. A test confirms that every route still responds and that old pages show inside the
+frame.
+
+**Counts per job.** The single baseline file of the job walk became one file per job, each line a ceiling that
+changes may lower but never raise. At the time of the review:
+
+| Job | Baseline after round 1 | At the review | Mock's target |
+| --- | --- | --- | --- |
+| 1 Set up a channel | 10 screens with 12 clicks and 3 fields | 2 screens with 5 clicks and 2 fields | 2 pages with 5 clicks and 2 fields |
+| 2 Idea to video | 3 screens with 6 clicks and no field | 2 screens with 3 clicks and no field | 2 pages with 3 clicks and no field |
+| 3 Remake a shot and pick a take | 3 screens with 7 clicks and 1 field | 2 screens with 7 clicks and no field | 1 page with 6 clicks and no field |
+| 3b Remake two shots at once | could not be done at once | 2 screens with 9 clicks and no field | 1 page with 8 clicks and no field |
+| 4 What runs and waits | 2 screens with 1 click and no field | 1 screen, no click, no field | 1 page, no click, no field |
+| 5 Reorder, pause, resume | 3 screens with 6 clicks and 1 field | 1 screen with 3 clicks and no field | 1 page with 3 clicks and no field |
+| 6 Styles | 9 screens with 10 clicks and 1 field, no blending | 2 screens with 11 clicks and 1 field, blending included | 2 pages with 11 clicks and 1 field, blending included |
+
+By the review, four jobs out of six already match the mock. The count files in the review's own commit show five: job
+1 reached its target in a package that the coordinator's handoff lists as merged, and which the review's tally
+probably came before [ours]. Job 3
+waits for the package that makes the studio open on the videos place; its count file expects 1 page with 6 clicks
+after that. The walk counts each page load as a screen and ignores a change of the third pane, so with three panes
+part of the drop in screens comes from what used to be a new page becoming a pane; clicks and fields compare like for
+like [ours]. The review also notes that the walk's ceiling blocked one attempt to shift where a job begins. The
+package that moved the rail to the server lowered jobs 4 and 5 and, by its status file, brought the templates breaking
+the rule on internal names (bound again from the frame package, with pending markers) from 30 templates down to 19
+templates, as the rail stopped showing an id.
+
+**How the night went.** From 22:30 on 2026-11-14 until 03:00 on 2026-11-15, 15 packages were merged by the review's
+count (the coordinator's handoff at the review lists 16), as many as six
+sessions running together, and 28 of the 42 items were done. The review counts:
+
+- About 25 requests from workers who paused for an edit beyond their file list: about 8 for a single entry in a
+  shared list (such as a test's map of exceptions, a map of names, the navigation or a page-time limit), about
+  8 for another file's test that checked an address or a piece of markup which the package had altered deliberately, about 6 for a
+  hook in a package already merged, and 3 for genuine design gaps (the frame offered a page no means to show its
+  list; the rail showed an id). Just those 3 required the coordinator. The single list where each lane registers its
+  own entries drew no requests from the lanes using it.
+- All workers started on Opus 5.5 at high effort, yet 8 of 15 status files say low effort: sessions have no way to
+  see their own effort, so they guessed.
+- Three of the coordinator's own changes went unverified: piping output hid two checks that failed, which were then
+  committed and pushed; a commit that ran no test kept main failing for an hour; and an edit made by script, never
+  reread, left 13 plan items marked as not built and the plan's title garbled for a day, though the plan check
+  printed the number.
+- A rule written down since 2026-11-09, never to pass a script inline to the shell, was broken again in 16 status
+  files and by the coordinator; the earlier proposal to give a failure seen twice a check had been left open.
+- Workers start inside the repository, where the owner's preferences kept in the home folder's notes do not reach
+  them, so no worker saw the preference for the fewest tests.
+- As in round 1, one report did not arrive, leaving its worker idle for half an hour.
+- Page tests: 154 files holding 422 tests in 25,008 lines, against 38,619 lines of code; a full run of the
+  suite needs between four and five minutes, and each package pays for it. The share of tests that merely fix a page's wording or markup
+  has not been counted.
+- Reviews of merges above 300 lines raised about ten findings per package, and most were fixed.
+- No one viewed any page of the build, and no new capability was tried with real models ahead of the owner's test,
+  as the owner chose; the lessons review had recommended waves.
+
+**What the coordinator changed.** Packages may now make three kinds of edits beyond their list without asking, as
+long as the report names them (an entry in a shared list, another file's test asserting what the package altered
+deliberately, a hook in a merged package), and the closing package replaces the shared lists with registration. Well
+specified packages move to medium effort, each logging five numbers next to a high-effort twin, until there are three
+such pairs. Failures that kept coming back get checks instead of more instructions. A testing rule: test behaviour and data
+that looking at the page would not reveal, never wording, classes or markup; when a page is rebuilt its markup tests
+are removed rather than carried over; the closing package trims the suite, times it before and after, and plants
+faults in some handlers, picked as a sample, to find out whether the tests catch them. Finally, the coordinator gives each new
+capability one real run before the owner tests.
+
 ## Who did what
 
 - **AI.** Coordination: one Fable 5.2 session at high effort (plans, briefs, acceptance, the event log).
@@ -226,7 +325,8 @@ by eye, such as looks, layouts, wording and flows, since they can point out prob
   log's two Fable 5.2 sessions in that round are the panel seat and the synthesis). Newcomer walk: Fable at high effort (see above). Job-walk test: Opus 5.5. Mocks: Opus 5.5
   sessions, with the second card sheet on Fable 5.2 at high effort. Reviews: workers were to run a code review at medium effort on their own
   branch (4 of 28 large packages carry no review record), and Sonnet subagents with a clean context reviewed the mocks; a fresh-context subagent made the challenge pass. A
-  later batch of process checks ran on Opus and Haiku.
+  later batch of process checks ran on Opus and Haiku. Round 2: a Sonnet subagent with a fresh context argued
+  against the build plan; every build worker was opened on Opus 5.5 at high effort.
 - **Rule-based tools.** Tests for rules R1 to R12 over templates and handlers, with exception markers that can
   only be removed; the scripted job walk and its baseline; tests that cap the database statements of two pages; a
   test listing plan items that lack a passing test; jsdom walkers and link, button and contrast checks for the
@@ -251,7 +351,9 @@ re-measured:
   7 cards of 18 cards; the answers call this no clean comparison, since the two briefs differed, the Opus set was
   drawn by the session that made the mock itself, and the owner looked at one set after the other.
 - Several Opus workers guessed status lines a tool should have supplied (low effort for a session started
-  at high effort; context near 60% when the tool showed 18%).
+  at high effort; context near 60% when the tool showed 18%). In the round 2 build, 8 of 15 status files record
+  low effort for workers all opened at high, and the review puts it down to a session being unable to read its own
+  effort, not to a model.
 
 ## Counts
 
@@ -293,8 +395,9 @@ Each cell is screens, then clicks, for jobs 1 to 6 as listed in the walkthrough 
 walk on the UI after round 1; "Walk test" is the scripted walk on the same UI once the demo was fixed (its
 baseline, still unchanged that late evening); the mock rows are each mock's own count (script-walked for the
 console and the later layouts; counted by the worker and checked by review for the gallery and editorial mocks).
-The owner's pick is the three-pane layout; its counts become what the build aims at, and the jobs it does
-not yet draw have none. A dash means that mock does not draw the job.
+The owner's pick is the three-pane layout; its counts here are those of the thin version the answers gave on
+2026-11-14 at 21:40, before it was completed (the completed mock's counts, which the build aims at, are in Round 2
+build). A dash means that mock does not draw the job.
 
 | Walk | Job 1 | Job 2 | Job 3 | Job 4 | Job 5 | Job 6 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -303,7 +406,7 @@ not yet draw have none. A dash means that mock does not draw the job.
 | Quiet console mock | 5 screens with 5 clicks | 3 screens with 3 clicks | 3 screens with 6 clicks | 1 screen with 0 clicks | 2 screens with 4 clicks | 6 screens with 12 clicks |
 | Gallery mock | 5 screens with 6 clicks | 3 screens with 3 clicks | 2 screens with 5 clicks | 2 screens with 1 click | 2 screens with 4 clicks | 6 screens with 13 clicks |
 | Editorial mock | 5 screens with 5 clicks | 3 screens with 3 clicks | 2 screens with 4 clicks | 2 screens with 1 click | 2 screens with 4 clicks | 6 screens with 10 clicks |
-| Three-pane layout (picked) | - | 3 screens with 3 clicks | 1 screen with 6 clicks | 1 screen with 0 clicks | 2 screens with 4 clicks (1 screen with 3 clicks from the work cards in the rail) | - |
+| Three-pane layout (picked, thin version) | - | 3 screens with 3 clicks | 1 screen with 6 clicks | 1 screen with 0 clicks | 2 screens with 4 clicks (1 screen with 3 clicks from the work cards in the rail) | - |
 | Parts-in-columns layout | - | - | 2 screens with 6 clicks | 1 screen with 0 clicks | same as the console | - |
 
 Typed fields in the walk test's baseline, jobs 1 to 6: 3, 0, 1, 0, 1, 1 fields; the three-pane layout needs 0
@@ -357,6 +460,12 @@ single crude text search).
 | Opus and Fable sessions whose messages all arrived | 13 of 13 sessions | recorded |
 | Idle notices with no content | about 12 notices | counted from the conversation |
 | Proposals from the review that used the ai-migrations lessons | 16 proposals: 14 chosen (12 passed their own checks, 2 failed them in part), 1 deferred, 1 skipped | recorded |
+| Round 2 packages landed overnight (22:30 to 03:00) | 15 of 21 packages (the review); 16 packages (the coordinator's handoff at the review); as many as 6 sessions at once | two counts, both recorded |
+| Round 2 plan items built by the review | 28 of 42 items | measured (the plan-items test) |
+| Round 2 jobs matching the mock | 4 of 6 jobs (the review); 5 of 6 jobs (the count files at the review's commit) | two counts, both recorded |
+| Round 2 requests for edits beyond a worker's file list | about 25 requests, 3 of them real design gaps | counted by the coordinator |
+| Round 2 status files whose effort line was wrong | 8 of 15 files | recorded (process review) |
+| Page tests at the review | 422 tests in 154 files (25,008 lines), against 38,619 lines of code | measured (process review) |
 
 ### Cost
 
@@ -454,6 +563,14 @@ and building in waves with their use in between. Liked but not chosen: the parts
 - Mocks before building: the owner chose and corrected looks by clicking, before any production code changed.
 - Layout ideas as plain cards: the owner chose by naming cards to see better, over three rounds, and 29 cards took
   one session of 19 minutes and part of another, where three full looks took three sessions and two were thrown away.
+- In round 2, the mock's counts as the build's targets: the packages brought five of six jobs to them by the count
+  files (four by the review), the walk's ceilings kept them from rising, and one ceiling blocked an attempt to shift
+  where a job begins.
+- Arguing against the build plan again: it showed that the walk is blind to any control a script draws, and
+  drawing the rail on the server let jobs 4 and 5 be counted and lowered.
+- Old pages kept answering inside the new frame until each place's lane landed, so that the product would
+  work after each merge; a test checks that every route answers.
+- The single shared list where lanes register their own entries drew no requests from them.
 
 After the lessons review, the event log credits 7 events, out of the 10 that occurred twice or more, with a check (a
 test that fails, or a count each status file must carry) and names three that rest on a sentence of instructions
@@ -481,13 +598,17 @@ before code is written.
 
 ## Still open
 
-As the repository stood on 2026-11-14 at 21:40, with some items from the evening handoff and the review record:
+As the repository stood on 2026-11-14 at 21:40, with some items from the evening handoff and the review record,
+and the first two items brought up to date with the coordinator's review on 2026-11-15:
 
-- No part of the redesign has been built. The three panes the owner picked are being completed as a
-  mock of the whole studio, and its counts per job become the build's targets (jobs 1 and 6 have none yet).
-- Round 2 will be built in one piece and only then tested by the owner; the waves planned earlier, each with its own
+- The redesign is being built: by the review, 15 packages out of 21 were merged (16 by the handoff), 28 items out of 42 were done, and
+  five jobs out of six matched the finished mock (job 3 still above it). The owner has yet to try the build, nobody
+  has looked at its pages, and nothing new has run on real models; the coordinator means to give each new
+  capability one real run before the owner's test, and has asked the owner for a ten-minute look at the live studio
+  before the end.
+- Round 2 is built in one piece and only then tested by the owner; the waves planned earlier, each with its own
   stop rule, will not run. Each job's walk against the mock's target, and a newcomer walk of each job as it
-  lands, are meant to catch a wrong turn before the end.
+  lands, were meant to catch a wrong turn before the end; the records show no newcomer walk of the build yet.
 - What each job loses is still a list of candidates; of the 12 rules, 6 are marked to keep and 6 to change, and
   none is rewritten yet.
 - By the review record, of the 16 review proposals 12 awaited their first use, 3 remained open (two of them
@@ -512,3 +633,9 @@ As the repository stood on 2026-11-14 at 21:40, with some items from the evening
 - The job-walk baseline was taken after round 1, so round 1 has no measured before and after per job.
 - No token or money cost was recorded for the work.
 - The consistency counts come from one crude text search, not from the rendered pages.
+- The round 2 build has known limits the coordinator keeps a list of for the owner's test (for example, writer
+  calls no longer show in the rail).
+- The round 2 counts are the walk's shortest route on the demo, from before the owner's test; in the three panes a
+  change of pane is not a screen, so screens before and after are not like for like.
+- The process review was written by the coordinator about its own night, its request counts are approximate,
+  and it was written before the build was finished.

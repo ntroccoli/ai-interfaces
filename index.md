@@ -4,7 +4,7 @@
 
 10 cases, newest first. Each line: the case's label (the name the lessons and the checklist use for it), title — case type (product, benchmark or study): the interface or set of interfaces; what AI did; what was measured; what the AI's output was checked against (people, an automated checker, a model judge); the sample; how far the claims can be checked; the author's stake in the tools (maintainer-own marks the maintainer's own project); the cost the source gives; a one-line summary.
 
-Lessons drawn from the cases, by aspect: [lessons/index.md](lessons/index.md) (46 lessons on 5 pages). To measure a project: [checklist.md](checklist.md).
+Lessons drawn from the cases, by aspect: [lessons/index.md](lessons/index.md) (49 lessons on 5 pages). To measure a project: [checklist.md](checklist.md).
 
 Cases covered: By type: product 3, benchmark 2, study 5. What AI did: design 2, build 4, change 4, check 8, judge 3, simulate-user 2. Checked against: people 5, checker 3, model 3, none 1 (a case may count under several).
 
