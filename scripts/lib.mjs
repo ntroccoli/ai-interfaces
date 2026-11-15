@@ -77,7 +77,7 @@ export const UNITS = new Set(`
   character word example comment review event rule instruction
   method project library cent mockup round panel finding
   rate sprint iteration feature sentence row platform operation
-  worker gap window miss proposal complaint problem choice sheet card theme typeface layout seat screenshot failure millisecond pixel
+  worker gap window miss proposal complaint problem choice sheet card theme typeface layout seat screenshot failure millisecond pixel fault expectation
 `.trim().split(/\s+/));
 // Words that may sit between a number and its unit without being units themselves.
 export const SCALES = new Set(['thousand', 'million', 'billion', 'k', 'm', 'b']);

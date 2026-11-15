@@ -2,7 +2,7 @@
 
 # Lesson evidence in one line each
 
-49 lessons. This is the one file that lists every lesson (besides llms-full.txt, which holds everything). To choose lessons: scan this file, then open the aspect page (the heading link) only for the lessons you use; it holds the full "Against" line, the Era (years and newest model family) and the legend. Each line: ID, tag (stated by a source, or ours), the lesson, then model (does it depend on model ability), people (what checked its evidence: people, people in part, a checker, a model, or none but the author), strength, "may be outdated" where it applies, the cases it cites ("(own)" marks the maintainer's own project, never counted toward strength), and the cases its "Against" line cites.
+54 lessons. This is the one file that lists every lesson (besides llms-full.txt, which holds everything). To choose lessons: scan this file, then open the aspect page (the heading link) only for the lessons you use; it holds the full "Against" line, the Era (years and newest model family) and the legend. Each line: ID, tag (stated by a source, or ours), the lesson, then model (does it depend on model ability), people (what checked its evidence: people, people in part, a checker, a model, or none but the author), strength, "may be outdated" where it applies, the cases it cites ("(own)" marks the maintainer's own project, never counted toward strength), and the cases its "Against" line cites.
 
 ## [Build loops](build-loops.md)
 
@@ -16,6 +16,7 @@
 - **BLD-8** [ours] After a grading agent passes a build, walk each whole job as a newcomer; a build that passed its per-feature tests kept a workflow the screen never explained. Model partly; people none; weak. Cases: Anthropic harness. Against: none found.
 - **BLD-9** [stated] When parallel lanes rebuild an interface, keep each old page answering inside the new frame until its replacement lands, so the product keeps working after each merge. Model no; people checker; weak. Cases: studio-go (own). Against: none found.
 - **BLD-10** [stated] Lanes that own a fixed list of files stop to ask for one-line edits in shared lists and tests; let them make and name such edits, and turn shared lists into registrations. Model partly; people none; weak. Cases: studio-go (own). Against: none found.
+- **BLD-11** [ours] After a model prunes model-written page tests, plant a sample of faults and run the suite on each; there, the faults it missed pointed to fixtures a case short. Model partly; people checker; weak. Cases: studio-go (own). Against: none found.
 
 ## [Accessibility](accessibility.md)
 
@@ -67,3 +68,7 @@
 - **JOB-5** [stated] Count the jobs before the first change lands; a baseline taken afterwards cannot show what the change did to them. Model no; people none; weak. Cases: studio-go (own). Against: none found.
 - **JOB-6** [stated] Agents told only to fold options keep them and add controls; say in the design what each job loses. Model partly; people checker; weak. Cases: studio-go (own). Against: none found.
 - **JOB-7** [stated] A job walk that runs no scripts cannot see a control a script draws; draw the controls each job needs on the server, or the walk cannot count them. Model no; people checker; weak. Cases: studio-go (own). Against: none found.
+- **JOB-8** [ours] Write down per job and moment (before it starts, as it runs, once it ends, if it fails) what the user expects to see, and check the running build against it; green rule tests and job walks do not. Model partly; people model; weak. Cases: studio-go (own). Against: none found.
+- **JOB-9** [ours] A job walk on a demo with a simulated backend can pass while the job fails on the real one; record when each job last ran for real, and run it where the project allows. Model no; people none; weak. Cases: studio-go (own). Against: none found.
+- **JOB-10** [ours] Before a redesign deletes a page, list what it shows or lets the user do that the new design lacks, and put each such line to the owner; a note of a known limit is not the owner's yes. Model partly; people none; weak. Cases: studio-go (own). Against: none found.
+- **JOB-11** [ours] Click counts can stay level across a rewritten form or across layouts that differ; add a measure that tells them apart, such as the settings a form shows that need no choice. Model no; people checker; weak. Cases: studio-go (own). Against: none found.

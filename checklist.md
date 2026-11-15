@@ -11,6 +11,10 @@ blindly) and the **Lessons** behind it (`ACC-5`: lesson 5 on the accessibility p
 [lessons/evidence.md](lessons/evidence.md)). Every answer is a count, a file or a command's output.
 No question asks which look is better: taste stays with a person.
 
+Where to start: questions 1 and 2 come before any design work, and question 11 before a redesign
+deletes or replaces a page; the others measure the interface as it stands and again after each
+change.
+
 How to take each measurement (tools, the static route, server templates, examples) is in the
 [measuring notes](docs/applying-lessons.md#measuring-notes); read the note of a question before
 measuring it. A Check marked "running page" needs the served interface (a browser or an HTTP
@@ -31,21 +35,37 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    newcomer count is a floor, not people's cost.
    Ask: which jobs do the docs, the navigation and the tests name, and does the owner know others?
    Trade-offs: a scripted walk costs set-up; a static count is a floor for multi-step flows. Not
-   needed for a change that touches no job.
+   needed for a change that touches no job. A count that does not move can hide a gain or a loss
+   in finding: where a fold hides a control, also record whether a newcomer found it and how many
+   folds it opened ([studio-go][]: a form rewritten in words kept its clicks).
    Provenance: a baseline before any change — our single case ([studio-go][]: taken after its first
    round, whose effect then could not be shown). Prevents: a change whose effect cannot be shown.
    Applied blindly: a baseline of only some jobs leaves the rest unmeasured; list every job.
-   Lessons: JOB-1, JOB-2, JOB-3, JOB-5, SIM-1.
-2. **Do the jobs finish, end to end, in the running interface?**
-   Check: the jobs of question 1 that no passing test drives from start to finish (no test, a
-   failing test, or one that does not run), by name.
+   Lessons: JOB-1, JOB-2, JOB-3, JOB-5, JOB-11, SIM-1.
+2. **Do the jobs finish, end to end, in the running interface, and do the pages say so?**
+   Check: per job of question 1: whether a passing test drives it from start to finish (no test,
+   a failing test, or one that does not run, by name); its last run against the real backend
+   (date, who, result; "simulated only" is a partial gap); and, on a running page, which of four
+   moments a page the user is on states (that it started, where it is, that it ended, why it
+   failed), each yes or no with the text and the page, as moments stated of moments.
    Evidence: in the [Anthropic harness][] a solo build looked finished while its core feature
    failed; a grading agent that drove the app against agreed criteria caught specific bugs. A
    build that passed its per-feature tests still kept a workflow the screen never explained (ours:
-   walk whole jobs after the grader passes).
-   Ask: does each job's test run on every change, and who wrote its criteria, and when?
-   Trade-offs: whole-job tests run slower and break more often than unit tests.
-   Lessons: BLD-1, BLD-8, JOB-1.
+   walk whole jobs after the grader passes). At [studio-go][] every job's walk passed on a demo
+   with a simulated engine; a change's first run for real failed twice and the queue called both
+   failed jobs finished; the owner's expectations, checked line by line, held in 16 of 52 lines.
+   Ask: does each job's test run on every change, who wrote its criteria, and when did each job
+   last run for real?
+   Trade-offs: whole-job tests run slower and break more often than unit tests; a real run may
+   cost money, GPU time or the owner's data: run it where the project allows, else ask the owner.
+   Provenance: the four moments — standard or vendor guidance (Nielsen's usability heuristics 1
+   and 9: visibility of system status; help users recognise errors, diagnose them and recover) and
+   our single case ([studio-go][]); "simulated only" as a partial gap — our single case. Prevents: a
+   job that passes on a stand-in and fails for real, or ends or fails with nothing on the page
+   saying so. Applied blindly: a paid or destructive real run made only to close the gap, or a
+   status message added to every page; propose the run to the owner, and count a moment stated on
+   any page the user is on.
+   Lessons: BLD-1, BLD-8, JOB-1, JOB-8, JOB-9.
 3. **How many accessibility violations does an automated checker find, by page and by rule?**
    Check: a named rule checker's violations by page, rule and impact, on every page and state the
    jobs reach (running page; static route in the note), written to a baseline file.
@@ -87,14 +107,18 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    the page.
    Lessons: ACC-5, ACC-7, ACC-8, ACC-10, ACC-11, ACC-15.
 6. **How many controls does each page carry, and do the pages agree?**
-   Check: per page, the interactive controls shown and those behind a fold, and the style values
-   and controls that bypass the design tokens and shared components, written to a baseline file.
+   Check: per page, the interactive controls shown and those behind a fold, the style values and
+   controls that bypass the design tokens and shared components, and the internal identifiers,
+   file paths and raw error chains shown on the pages a job reaches, rendered with real data,
+   written to a baseline file.
    Evidence: at [studio-go][] agents told only to fold options kept them and added controls, and a
    walk of the jobs found pages that disagreed where an audit from code and screenshots did not.
-   The token and component counts are ours.
+   There a check of the build found on its pages a source path, a channel id and a raw error. The
+   token and component counts are ours, and so is counting names on rendered pages with real data:
+   such names come from data and error paths, which a template read does not show.
    Ask: which job does each control serve, and which serve no job the owner listed?
    Trade-offs: fewer controls can cost a job more clicks, and a fold hides a control from
-   newcomers. A control that serves no listed job is a question for the owner, not a cut.
+   newcomers. A control that serves no listed job is the owner's to decide, not a cut.
    Lessons: JOB-4, JOB-6.
 7. **Where a model rates, reviews or grades the interface, was it checked against people?**
    Check: for each place a model scores, reviews or grades the interface, the set of items both it
@@ -106,8 +130,11 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    cross-screen problems missed. In the [Anthropic harness][] the builder rated its own work too
    kindly, and its QA agent argued real bugs away until tuned on logs.
    Ask: who acts on the model's findings, and has a person ever rated the same items?
-   Trade-offs: people's ratings cost their time; a small shared set is a start.
-   Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-9, JDG-10, JDG-13.
+   Trade-offs: people's ratings cost their time; a small shared set is a start. Where no model
+   reviews the interface, a model review of the running screens against a named heuristic set is a
+   cheap check to add (ours), if a person sorts its non-issues and problems that span screens are
+   walked apart (JDG-9, JDG-10).
+   Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-7, JDG-9, JDG-10, JDG-11, JDG-13.
 8. **Where a model walks the interface as a user, how far do its runs agree, and with people?**
    Check: for each agent walk used as usability evidence, the runs per setup, how far repeat runs
    agree, and whether its steps were ever compared with people's on the same tasks.
@@ -140,17 +167,36 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
     fails when it rises above a committed baseline, and who may raise that baseline; the job walk
     of question 1 is kept as such a test.
     Evidence: [studio-go][]'s job walk is a test that fails when a job cannot finish or a count
-    goes above its committed baseline, taken after the first round and not yet tested by a change.
-    Fixes that lower a total can raise single rules ([Concordia repair][], [UCI code study][]).
-    Gating every count, not only jobs, is ours.
+    goes above its committed baseline, taken after the first round; through the redesign's build
+    no line rose but one, where the job gained a step its mock planned. Fixes that lower a total
+    can raise single rules ([Concordia repair][], [UCI code study][]). Gating every count, not
+    only jobs, is ours.
     Ask: who may raise a baseline here, and does anything outside the agent's reach review it?
     Trade-offs: a gate makes needed growth (a new job's control) wait for a review; without one,
     counts drift unseen.
-    Provenance: no count above its baseline — our single case ([studio-go][], untested by a change);
-    gating every count is our guess. Prevents: a fix that lowers one count while another rises
+    Provenance: no count above its baseline — our single case ([studio-go][]: held through one
+    build); gating every count is our guess. Prevents: a fix that lowers one count while another rises
     unseen. Applied blindly: a control, job or check removed or hidden to make the number hold; a
     rise a change needs is listed with the job it serves, for the owner to accept.
     Lessons: JOB-2, JOB-5, ACC-3, ACC-4.
+11. **Before a redesign deletes or replaces a page, what would the user lose?**
+    Check: per job, each thing the old pages show or let the user do, inside a page as well as by
+    route, marked kept, moved (to where) or removed in the new design, a replacement that shows or
+    does less counting as removed for what it drops; and the removed lines not yet put to the
+    owner, counted before the old page is deleted.
+    Evidence: at [studio-go][] a table drawn from the code gave every old route a home, yet
+    deleting the old pages removed functions that lived inside them (the deleting package listed
+    them and a later one restored most), and a run's live squares, given a card that shows less,
+    went with a note of a known limit until the owner missed them in the first use.
+    Ask: which old pages does the redesign replace, and who answers for each removed line?
+    Trade-offs: the list costs a reading of the old pages and their code; a design drawn free of
+    them did not thereby reject what it omits. Not needed when no page is deleted or replaced.
+    Provenance: a removed line goes to the owner before the deletion — our single case
+    ([studio-go][]). Prevents: a function lost with a page nobody meant to drop. Applied blindly:
+    every small difference sent to the owner, or a deletion held for a line the owner already
+    dropped in the design; ask only about removed lines, and cite the owner's earlier choice where
+    one covers a line.
+    Lessons: JOB-6, JOB-10.
 
 ## How to run this checklist
 

@@ -3,7 +3,7 @@ title: studio-go's video UI passes every agent-written rule test yet stays costl
 label: studio-go
 date: 2026-11-14
 org: studio-go
-summary: Agents landed 39 of 40 UI packages (20 of 40 findings complete) with rule tests green, yet jobs stayed long; a newcomer agent and a job walk counted them.
+summary: Agents rebuilt a video app's UI with rule tests and job walks green; then the owner's first try and a check of 52 expectations found gaps no test asked about.
 source_url: https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md
 also: []
 source_type: evidence-file
@@ -26,13 +26,13 @@ superseded_by:
 
 # studio-go's video UI passes every agent-written rule test yet stays costly to use; a newcomer agent and a job walk count it
 
-The maintainer's video pipeline had its local web UI audited and fixed by agents in one night: inventories,
-a blind panel of six model seats, 40 findings, 12 tested rules and 39 of 40 packages landed, though a later check found 20 of the 40 findings complete. Every rule test passed, yet the owner found three misses in minutes and
-still found the UI cluttered. A model playing a newcomer needed 31 clicks over 14 screens
-to set up a channel; half of its 10 ranked changes were new to the audit. A scripted walk of each job became a
-test whose counts may never rise, and the owner picked a three-pane layout. Overnight on 2026-11-15, 15 or 16 of 21 build packages landed and most jobs fell to
-the mock's counts (channel set-up from 12 clicks to 5 clicks); the owner has yet to try
-it
+The maintainer's video pipeline had its local web UI audited and fixed by agents in one night: 40 findings,
+12 tested rules and 39 of 40 packages landed, though a later check found 20 of the 40 findings complete. Every rule
+test passed, yet the owner found three misses in minutes. A model playing a newcomer needed 31 clicks over 14 screens
+to set up a channel. A scripted walk of each job became a test whose counts may never rise, and the owner picked a
+three-pane layout. The redesign's build brought every job to the mock's counts (channel set-up from 12 clicks to 5
+clicks), yet the owner's first use found three more misses, a check met 16 of 52 expectations of the owner's, and
+the first real change failed where the simulated demo had passed
 ([evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md)).
 
 ## Source
@@ -42,8 +42,12 @@ our summary of the project's records (the coordinator's event log, audit and wal
 test and its baseline, the mock walk reports, the owner's dated decisions, the session status files) and of the
 project's written answers to ten questions from this collection, written on 2026-11-14 from copies held in the
 maintainer's private archive, and updated on 2026-11-15 from the coordinator's review of the build's first night
-and the build's records at that point (per-job counts, the plan, the completed mock's walk). The answers and the
-review come from the coordinator who ran the work. Nobody outside the project
+and the build's records at that point (per-job counts, the plan, the completed mock's walk), and again on the
+afternoon of 2026-11-15 from the records left when the build closed (the count files, status files, the decision log,
+the real runs and the test of the finished studio against the owner's expectations), named by the suggestions the
+studio-go coordinator sent us. The answers, the review and the suggestions come from the coordinator who ran the work;
+every project record cited, apart from the owner's words it reports, was written by model sessions (the coordinator on
+Fable 5.2, the workers on Opus 5.5 with Sonnet helpers). Nobody outside the project
 has checked any of it. It is never independent evidence and does not count toward a lesson's strength. The
 evidence file describes how most counts were taken, but the records behind them are not public, so the case is
 marked assertion-only.
@@ -89,8 +93,12 @@ script-walked for the console and the later layouts, counted by the worker and r
 editorial looks. In the round 2 build each job's count is a ceiling a merge may only lower, and the finished
 mock's number for that job is what it aims at; the walk runs no scripts, so the rail's controls were drawn by the server to be
 counted. Consistency was counted once by text search over the templates. The owner judged the looks; no one has
-measured time per job, and nobody has yet looked at the build's pages
+measured time per job
 ([The scripted job walk](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#the-scripted-job-walk)).
+When the build closed, the coordinator wrote 52 lines of what the owner expects per job and moment, from the
+owner's recorded words, and two model subagents held the build up to each line, on a real test production and the demo;
+the owner used the build once, and a newcomer agent walked the built demo
+([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
 
 ## Numbers
 
@@ -118,9 +126,17 @@ measured time per job, and nobody has yet looked at the build's pages
 | 54 runs | repeats of the six job walks while three test processes ran at once, all with identical counts | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#the-scripted-job-walk) |
 | 0 commits | commits since round 1 began whose message mentions a revert, among 271 commits | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#process-counts) |
 | 10 runs | gate runs (7 runs full, 3 runs short) lost because main moved during a worker's gate | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#process-counts) |
-| 3 of 4 workers | Sonnet workers with something to send that failed at least once to deliver it (every one of the 13 sessions on Opus or Fable delivered) | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#process-counts) |
+| 3 of 4 workers | Sonnet workers with something to send that failed at least once to deliver it (all 13 sessions on Opus or Fable delivered) | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#process-counts) |
 | 14 minutes to 2.5 hours | wall time per package after the job walk (12 packages), the upper end rounded | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#cost) |
 | 29 cards | layout sketch cards in two sheets, made in one 19-minute session plus part of a second; three full looks needed three sessions | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#mockups-and-the-owners-choices) |
+| 2 screens, 5 clicks | setting up a channel in the job walk when the build closed; every job's count file holds the completed mock's count, and only job 6's clicks went up, when the job gained blending two styles | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 16 of 52 lines | the owner's expectations, written by the coordinator per job and moment, fully met when two model subagents checked the build (two of them only for part of their scope) | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 2 failed jobs | the first real change on a test video: the final video and a narration line failed, and the queue showed both as finished | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 5 clicks to 5 clicks | remaking an already finished video with its channel's present settings, before and after its form was rewritten in sentences | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 3,972 lines | deleted with the old pages (901 lines added); functions whose only home they were had to be restored | reported | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 426 to 411 tests | page tests after a prune by model helpers of tests pinning words and markup, with some 360 assertion lines cut; the helpers deleted 18 tests, 3 tests of which came back | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 13 of 20 faults | faults planted one at a time after the prune that the tests caught; 4 faults of the 7 faults missed got a test | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
+| 6 cards | sketch cards of a column layout whose three asked click counts barely differed; a fourth count was added | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use) |
 | 65 pages | HTML pages in the mock folders at one count; 32 pages after four losing mocks were removed | measured | [evidence](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#mockups-and-the-owners-choices) |
 
 ## What worked
@@ -143,6 +159,8 @@ measured time per job, and nobody has yet looked at the build's pages
   ([Round 2 build](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#round-2-build)).
 - Old pages kept answering inside the new frame until each place's lane landed, so the product kept working after each merge, with a test that every route answers; the single shared list where lanes register their own entries drew no requests from them
   ([Round 2 build](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#round-2-build)).
+- The walk's ceilings held through the rest of the build: at the end every job's count file held the completed mock's count, and the three later status files read for this update report the walks unchanged by their work
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
 - Plain layout cards let the owner choose by naming which cards to see in detail, at a fraction of the sessions full looks took
   ([Mockups](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#mockups-and-the-owners-choices)).
 
@@ -200,15 +218,29 @@ measured time per job, and nobody has yet looked at the build's pages
   ([What worked](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#what-worked)).
 - The round 2 plan capped workers at four, yet the same evening 8 packages ran at once at the owner's request; the owner then dropped its waves, each to be followed by their own use, and will test once everything is built
   ([Events](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#events-and-failures)).
-- In the round 2 build, ownership by file list cost about 25 requests from workers pausing for an edit beyond their list, mostly an entry in a shared list, another file's test fixing markup the package had altered deliberately, or a hook in a landed package; just 3 requests were real design gaps
+- In the round 2 build, ownership by file list cost about 25 requests from workers pausing for an edit beyond their list, mostly an entry in a shared list, another file's test fixing markup the package had altered deliberately, or a hook in a package already merged; just 3 requests were real design gaps
   ([Round 2 build](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#round-2-build)).
 - Status files written by the workers guessed their own effort (8 files of 15 files wrong), the coordinator made three changes of its own without checking them (one left main failing for an hour), a rule against inline shell scripts written down days before was broken again in 16 status files, and the page tests number 422 tests that take four to five minutes per package, with the share that only pins words or markup unmeasured
   ([Round 2 build](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#round-2-build)).
 - No one viewed any page of the build and no new capability was tried with real models ahead of the owner's test, as the owner chose; in the three panes switching a pane does not add a screen, so the fall in screens is partly a change in what is counted [ours]
   ([Round 2 build](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#round-2-build)).
-- **Not reported:** any time per job, for the owner or anyone; the owner's use of the round 2 build; the owner's hours, money, or tokens for this work;
+- When the build closed, with every plan item built and every job at its target, the owner's first try (half an hour by one record, an hour by another, partly on the earlier build) met three problems no test looked for: a form carried over unchanged as the old table, a running video's parts listed out of the order the work makes them, and a run's live squares deleted after the coordinator filed them as a known limit rather than asking
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- Held up to 52 lines of what the owner expects, written per job and moment by the coordinator, the build fully met 16 lines; by the project's sorting most misses were the studio not saying that something finished or failed and why, or code names on the pages, which by its reading no rule test or job walk catches, though a rule test on internal names existed
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- The job walks ran on a demo with a simulated engine; the first real change on a test video then failed twice, once on a mode the video's voice model lacks, and the queue showed both failed jobs as finished, while other panels also reported done or ready wrongly; the fixes have run only on fakes so far
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- The planned newcomer walk of each job as it landed ran once, after the build; that agent, reading pages over HTTP and never shown the old squares, listed none of the three things the owner found [ours]
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- A table drawn from the code had given each of the old studio's routes a home, yet deleting the old pages removed functions that lived inside them, and a run's squares were mapped to a card that shows less without the owner being asked; the deleting package listed the functions and a later package restored most, and a test of a removed page passed because its helper read the redirect's blank reply
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- After model helpers pruned the page tests (2 of the 18 tests they deleted carried behaviour and were restored), 7 of 20 faults planted after the prune went uncaught; by the worker's reading 4 of those faults would not show to a person looking, and each was caught once its fixture gained a case
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- The click counts asked for six sketch cards came out equal or nearly so on every card; only a fourth count, added by the worker, told them apart, and the owner picked one of the two cards with the most clicks on it
+  ([Build closed](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#when-the-build-closed-the-owners-first-use)).
+- **Not reported:** any time per job, for the owner or anyone; the owner's own test of the round 2 build; the owner's hours, money, or tokens for this work;
   whether the contradictions the newcomer saw on the
-  demo also occur in the real studio; a newcomer walk of any mock or of the build; a count from a person other than
+  demo also occur in the real studio; a newcomer walk of any mock; a count from a person other than
   the owner; whether the build's counts hold on real data rather than the demo; mock layouts at phone width;
   contrast or an accessibility check on the product itself; nested frames (the owner's cards within cards) were
   never counted; plan usage per phase
@@ -242,9 +274,9 @@ measured time per job, and nobody has yet looked at the build's pages
 - The process changes after round 1 came from a review that measured the work with the
   [ai-migrations](https://github.com/ntroccoli/ai-migrations) lessons; the owner picked which proposals to adopt,
   and most have not yet been put to use, which round 2 will do.
-- Still open: the build of the three panes is under way (15 of 21 packages by the review of 2026-11-15, 16 packages by the coordinator's handoff); it is
-  built whole before the owner tries it, with each job's walk against the mock's count meant to catch a wrong
-  turn earlier; no newcomer has walked the build
+- Still open: the plan's items are built and the afternoon's gaps went to small packages; the failed change is to
+  be run again for real, a channel draft has not run for real, and the owner's own test of the build is still to
+  come
   ([Still open](https://github.com/ntroccoli/ai-interfaces/blob/main/evidence/2026-11-14-studio-go-interface-redesign.md#still-open)).
 - The maintainer's own project: it shows what one owner met, with models as builders, reviewers and a stand-in
   newcomer.

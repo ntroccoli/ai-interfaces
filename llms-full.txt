@@ -54,6 +54,10 @@ How agents that build, review or fix an interface were set up to check their own
   - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong), [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
   - Against: None found; the coordinator counted the requests roughly from its own night, and the looser rule has not yet been tried.
+- **BLD-11** [ours] After a model prunes model-written page tests, plant a sample of faults and run the suite on each; there, the faults it missed pointed to fixtures a case short.
+  - Depends on model ability: partly. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong), [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers).
+  - Against: None found; one package's sample of faults, chosen by the worker that pruned the tests, in one project, and run only after the prune, so what the prune itself lost was not measured.
 
 ## Accessibility (accessibility.md)
 
@@ -212,7 +216,7 @@ How the cost of a user's jobs (screens, clicks, steps, fields typed) was counted
 - **JOB-2** [stated] Turn a scripted walk of each job into a test with a committed baseline, so a change that adds screens or clicks fails before it merges.
   - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
-  - Against: None found; the walk follows the shortest route on a demo, its baseline was taken only after the first round of changes, and in the redesign's build, where packages brought most jobs down to the mock's numbers under its ceilings, the lower counts are a script's, made before the owner had tried the build.
+  - Against: None found; the walk follows the shortest route on a demo, its baseline was taken only after the first round of changes, and in the redesign's build, where packages brought every job down to the mock's numbers under its ceilings, the lower counts are a script's, and the owner's first use of the build found misses no walk asked about.
 - **JOB-3** [ours] Count each job twice, by its shortest route and as a newcomer walks it; the two differ, and an agent standing in for the newcomer takes fewer steps than people do.
   - Depends on model ability: yes. Checked against people: partly. Strength: medium. Era: 2025–2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers), [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
@@ -233,10 +237,26 @@ How the cost of a user's jobs (screens, clicks, steps, fields typed) was counted
   - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
   - Against: None found; one project whose pages are drawn by the server, where a model's challenge pass found the gap before the build began.
+- **JOB-8** [ours] Write down per job and moment (before it starts, as it runs, once it ends, if it fails) what the user expects to see, and check the running build against it; green rule tests and job walks do not.
+  - Depends on model ability: partly. Checked against people: model. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong), [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers).
+  - Against: None found; the maintainer's own project, where the coordinator wrote the expectations from the owner's recorded words and model subagents gave the verdicts, which the owner has not judged.
+- **JOB-9** [ours] A job walk on a demo with a simulated backend can pass while the job fails on the real one; record when each job last ran for real, and run it where the project allows.
+  - Depends on model ability: no. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; one project and one real change on a test video, by the coordinator's account, whose causes a package then fixed with tests on fakes, not yet run again for real.
+- **JOB-10** [ours] Before a redesign deletes a page, list what it shows or lets the user do that the new design lacks, and put each such line to the owner; a note of a known limit is not the owner's yes.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; one project, where a table of every old route and its new home existed before the build and did not prevent the loss, the deleting package's own report listed the lost functions, and only the owner's use caught the run's lost squares.
+- **JOB-11** [ours] Click counts can stay level across a rewritten form or across layouts that differ; add a measure that tells them apart, such as the settings a form shows that need no choice.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers), [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; one project, where the gain claimed for the rewritten form is the package's own account, and the owner picked by eye one of the two cards with the most clicks on the added measure [ours: the counts measured moving around, not whether content fits].
 
 ## Cases
 
-- **studio-go**: [studio-go's video UI passes every agent-written rule test yet stays costly to use; a newcomer agent and a job walk count it](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) — product: the local web UI of a single-owner video pipeline, its pages after a first round of fixes and the clickable mocks of a redesign; AI: design, build, change, check, simulate-user; measured: task-cost, function, consistency, contrast, human-preference, cost; checked against: checker, model; sample: 1 web app with 1 user (its owner), 6 jobs, 40 audit findings, 6 mockups (65 HTML pages at one count, 32 HTML pages later); evidence: assertion-only; author: maintainer-own; cost: wall time only, between 14 minutes and roughly 2.5 hours per package for the 12 packages after the job walk; tokens and money not recorded for this work. Agents landed 39 of 40 UI packages (20 of 40 findings complete) with rule tests green, yet jobs stayed long; a newcomer agent and a job walk counted them.
+- **studio-go**: [studio-go's video UI passes every agent-written rule test yet stays costly to use; a newcomer agent and a job walk count it](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) — product: the local web UI of a single-owner video pipeline, its pages after a first round of fixes and the clickable mocks of a redesign; AI: design, build, change, check, simulate-user; measured: task-cost, function, consistency, contrast, human-preference, cost; checked against: checker, model; sample: 1 web app with 1 user (its owner), 6 jobs, 40 audit findings, 6 mockups (65 HTML pages at one count, 32 HTML pages later); evidence: assertion-only; author: maintainer-own; cost: wall time only, between 14 minutes and roughly 2.5 hours per package for the 12 packages after the job walk; tokens and money not recorded for this work. Agents rebuilt a video app's UI with rule tests and job walks green; then the owner's first try and a check of 52 expectations found gaps no test asked about.
 - **Agentic audit**: [One browser agent per WCAG criterion finds more audit-reported barriers than axe-core or a single-pass model, and more unlisted ones](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md) — benchmark: saved copies of 24 pages from eleven scholarly publishing platforms, audited against 40 WCAG success criteria; AI: check; measured: accessibility, issue-coverage, cost; checked against: people; sample: 250 page-criterion pairs (78 reported failures, 172 pairs inferred to pass) on 24 pages; 40 criteria, 15 criteria with a reported failure; 9 compared runs in the main table, 4 later worker runs, 6 further batch model runs; evidence: shown-in-source; author: independent; cost: USD 6.38 to USD 74.52 per 250-pair workload, estimates (API-equivalent for the coding agents); the reference worker run has no usage record. Per-criterion agents found 67 of 78 barriers in expert audits (axe-core 28) at 56% precision; their lead was largest on keyboard failures.
 - **Concordia repair**: [Kimi K2.5 repairs 308 scraped pages; most improve, a quarter pass axe, and a retry loop adds cost but no fixes](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md) — study: static HTML of scraped real-world web pages (news, education, standards sites), checked for accessibility violations and then repaired; AI: check, change; measured: accessibility, issue-coverage, cost; checked against: checker; sample: 662 pages for detection (331 pages with violations, 331 corrected pages); 308 pages repaired by each of two strategies; 1 model, 1 run reported; evidence: shown-in-source; author: independent; cost: $4.92 for the single-pass repair of 308 pages and $7.50 for the agent loop, as reported; the code prices tokens at fixed GPT-4o-mini rates. Kimi K2.5 cut axe violations from 3.98 violations to 1.7 violations per page; a quarter of 308 pages came out clean; a retry loop cost 52% more, fixed no more.
 - **GitHub a11y agent**: [GitHub's accessibility agent reviews front-end pull requests with one reviewer and one fixer, and is told to refuse risky patterns](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md) — product: pull requests that change GitHub's front-end code, reviewed for WCAG issues by an agent that also answers accessibility questions in Copilot CLI and VS Code; AI: check, change; measured: accessibility; checked against: none; sample: 3,535 pull requests reviewed; evidence: assertion-only; author: seller-of-tool; cost: unstated. GitHub's pilot agent reviewed 3,535 pull requests at a 68% "resolution rate" it never defines; it hands complex code and risky widgets to people.
@@ -260,6 +280,10 @@ blindly) and the **Lessons** behind it (`ACC-5`: lesson 5 on the accessibility p
 [lessons/evidence.md](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/lessons/evidence.md)). Every answer is a count, a file or a command's output.
 No question asks which look is better: taste stays with a person.
 
+Where to start: questions 1 and 2 come before any design work, and question 11 before a redesign
+deletes or replaces a page; the others measure the interface as it stands and again after each
+change.
+
 How to take each measurement (tools, the static route, server templates, examples) is in the
 [measuring notes](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md#measuring-notes); read the note of a question before
 measuring it. A Check marked "running page" needs the served interface (a browser or an HTTP
@@ -280,21 +304,37 @@ Cases named below, each by its label (all in [index.md](https://raw.githubuserco
    newcomer count is a floor, not people's cost.
    Ask: which jobs do the docs, the navigation and the tests name, and does the owner know others?
    Trade-offs: a scripted walk costs set-up; a static count is a floor for multi-step flows. Not
-   needed for a change that touches no job.
+   needed for a change that touches no job. A count that does not move can hide a gain or a loss
+   in finding: where a fold hides a control, also record whether a newcomer found it and how many
+   folds it opened ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md): a form rewritten in words kept its clicks).
    Provenance: a baseline before any change — our single case ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md): taken after its first
    round, whose effect then could not be shown). Prevents: a change whose effect cannot be shown.
    Applied blindly: a baseline of only some jobs leaves the rest unmeasured; list every job.
-   Lessons: JOB-1, JOB-2, JOB-3, JOB-5, SIM-1.
-2. **Do the jobs finish, end to end, in the running interface?**
-   Check: the jobs of question 1 that no passing test drives from start to finish (no test, a
-   failing test, or one that does not run), by name.
+   Lessons: JOB-1, JOB-2, JOB-3, JOB-5, JOB-11, SIM-1.
+2. **Do the jobs finish, end to end, in the running interface, and do the pages say so?**
+   Check: per job of question 1: whether a passing test drives it from start to finish (no test,
+   a failing test, or one that does not run, by name); its last run against the real backend
+   (date, who, result; "simulated only" is a partial gap); and, on a running page, which of four
+   moments a page the user is on states (that it started, where it is, that it ended, why it
+   failed), each yes or no with the text and the page, as moments stated of moments.
    Evidence: in the [Anthropic harness](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md) a solo build looked finished while its core feature
    failed; a grading agent that drove the app against agreed criteria caught specific bugs. A
    build that passed its per-feature tests still kept a workflow the screen never explained (ours:
-   walk whole jobs after the grader passes).
-   Ask: does each job's test run on every change, and who wrote its criteria, and when?
-   Trade-offs: whole-job tests run slower and break more often than unit tests.
-   Lessons: BLD-1, BLD-8, JOB-1.
+   walk whole jobs after the grader passes). At [studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) every job's walk passed on a demo
+   with a simulated engine; a change's first run for real failed twice and the queue called both
+   failed jobs finished; the owner's expectations, checked line by line, held in 16 of 52 lines.
+   Ask: does each job's test run on every change, who wrote its criteria, and when did each job
+   last run for real?
+   Trade-offs: whole-job tests run slower and break more often than unit tests; a real run may
+   cost money, GPU time or the owner's data: run it where the project allows, else ask the owner.
+   Provenance: the four moments — standard or vendor guidance (Nielsen's usability heuristics 1
+   and 9: visibility of system status; help users recognise errors, diagnose them and recover) and
+   our single case ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md)); "simulated only" as a partial gap — our single case. Prevents: a
+   job that passes on a stand-in and fails for real, or ends or fails with nothing on the page
+   saying so. Applied blindly: a paid or destructive real run made only to close the gap, or a
+   status message added to every page; propose the run to the owner, and count a moment stated on
+   any page the user is on.
+   Lessons: BLD-1, BLD-8, JOB-1, JOB-8, JOB-9.
 3. **How many accessibility violations does an automated checker find, by page and by rule?**
    Check: a named rule checker's violations by page, rule and impact, on every page and state the
    jobs reach (running page; static route in the note), written to a baseline file.
@@ -336,14 +376,18 @@ Cases named below, each by its label (all in [index.md](https://raw.githubuserco
    the page.
    Lessons: ACC-5, ACC-7, ACC-8, ACC-10, ACC-11, ACC-15.
 6. **How many controls does each page carry, and do the pages agree?**
-   Check: per page, the interactive controls shown and those behind a fold, and the style values
-   and controls that bypass the design tokens and shared components, written to a baseline file.
+   Check: per page, the interactive controls shown and those behind a fold, the style values and
+   controls that bypass the design tokens and shared components, and the internal identifiers,
+   file paths and raw error chains shown on the pages a job reaches, rendered with real data,
+   written to a baseline file.
    Evidence: at [studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) agents told only to fold options kept them and added controls, and a
    walk of the jobs found pages that disagreed where an audit from code and screenshots did not.
-   The token and component counts are ours.
+   There a check of the build found on its pages a source path, a channel id and a raw error. The
+   token and component counts are ours, and so is counting names on rendered pages with real data:
+   such names come from data and error paths, which a template read does not show.
    Ask: which job does each control serve, and which serve no job the owner listed?
    Trade-offs: fewer controls can cost a job more clicks, and a fold hides a control from
-   newcomers. A control that serves no listed job is a question for the owner, not a cut.
+   newcomers. A control that serves no listed job is the owner's to decide, not a cut.
    Lessons: JOB-4, JOB-6.
 7. **Where a model rates, reviews or grades the interface, was it checked against people?**
    Check: for each place a model scores, reviews or grades the interface, the set of items both it
@@ -355,8 +399,11 @@ Cases named below, each by its label (all in [index.md](https://raw.githubuserco
    cross-screen problems missed. In the [Anthropic harness](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md) the builder rated its own work too
    kindly, and its QA agent argued real bugs away until tuned on logs.
    Ask: who acts on the model's findings, and has a person ever rated the same items?
-   Trade-offs: people's ratings cost their time; a small shared set is a start.
-   Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-9, JDG-10, JDG-13.
+   Trade-offs: people's ratings cost their time; a small shared set is a start. Where no model
+   reviews the interface, a model review of the running screens against a named heuristic set is a
+   cheap check to add (ours), if a person sorts its non-issues and problems that span screens are
+   walked apart (JDG-9, JDG-10).
+   Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-7, JDG-9, JDG-10, JDG-11, JDG-13.
 8. **Where a model walks the interface as a user, how far do its runs agree, and with people?**
    Check: for each agent walk used as usability evidence, the runs per setup, how far repeat runs
    agree, and whether its steps were ever compared with people's on the same tasks.
@@ -389,17 +436,36 @@ Cases named below, each by its label (all in [index.md](https://raw.githubuserco
     fails when it rises above a committed baseline, and who may raise that baseline; the job walk
     of question 1 is kept as such a test.
     Evidence: [studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md)'s job walk is a test that fails when a job cannot finish or a count
-    goes above its committed baseline, taken after the first round and not yet tested by a change.
-    Fixes that lower a total can raise single rules ([Concordia repair](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md), [UCI code study](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md)).
-    Gating every count, not only jobs, is ours.
+    goes above its committed baseline, taken after the first round; through the redesign's build
+    no line rose but one, where the job gained a step its mock planned. Fixes that lower a total
+    can raise single rules ([Concordia repair](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md), [UCI code study](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md)). Gating every count, not
+    only jobs, is ours.
     Ask: who may raise a baseline here, and does anything outside the agent's reach review it?
     Trade-offs: a gate makes needed growth (a new job's control) wait for a review; without one,
     counts drift unseen.
-    Provenance: no count above its baseline — our single case ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md), untested by a change);
-    gating every count is our guess. Prevents: a fix that lowers one count while another rises
+    Provenance: no count above its baseline — our single case ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md): held through one
+    build); gating every count is our guess. Prevents: a fix that lowers one count while another rises
     unseen. Applied blindly: a control, job or check removed or hidden to make the number hold; a
     rise a change needs is listed with the job it serves, for the owner to accept.
     Lessons: JOB-2, JOB-5, ACC-3, ACC-4.
+11. **Before a redesign deletes or replaces a page, what would the user lose?**
+    Check: per job, each thing the old pages show or let the user do, inside a page as well as by
+    route, marked kept, moved (to where) or removed in the new design, a replacement that shows or
+    does less counting as removed for what it drops; and the removed lines not yet put to the
+    owner, counted before the old page is deleted.
+    Evidence: at [studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) a table drawn from the code gave every old route a home, yet
+    deleting the old pages removed functions that lived inside them (the deleting package listed
+    them and a later one restored most), and a run's live squares, given a card that shows less,
+    went with a note of a known limit until the owner missed them in the first use.
+    Ask: which old pages does the redesign replace, and who answers for each removed line?
+    Trade-offs: the list costs a reading of the old pages and their code; a design drawn free of
+    them did not thereby reject what it omits. Not needed when no page is deleted or replaced.
+    Provenance: a removed line goes to the owner before the deletion — our single case
+    ([studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md)). Prevents: a function lost with a page nobody meant to drop. Applied blindly:
+    every small difference sent to the owner, or a deletion held for a line the owner already
+    dropped in the design; ask only about removed lines, and cite the owner's earlier choice where
+    one covers a line.
+    Lessons: JOB-6, JOB-10.
 
 ### How to run this checklist
 

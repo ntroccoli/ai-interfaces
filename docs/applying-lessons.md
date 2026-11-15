@@ -311,6 +311,17 @@ template file, leave out included partials and loop repeats, and say so.
   Run the tests once (a running page or the project's harness). For work an agent built, also note
   whether a check apart from the builder used the running app against criteria in a file committed
   before the build's first commit; a review of the diff alone does not count (it feeds Q9).
+  Real backend: the services a job uses in production (a model, a renderer, a payment or mail
+  provider, the real database), not a demo, fake or simulated engine; take the last run from logs,
+  run records or the owner, marked "recorded", and never start a run that spends money, GPU hours
+  or the owner's data without the owner's yes (write the command under "Not run"). Four moments:
+  drive the job to queued or started, in progress, finished, and a failure you can force (a demo
+  switch, a missing input, a stopped service); per moment, yes or no with the page's address and
+  the words it shows. A moment shown only on a page the user must go looking for is a no; a raw
+  error with no reason in words counts for "why" as a partial. Provenance: the four moments follow
+  Nielsen's usability heuristics 1 and 9 (standard guidance); counting them per job is ours, from
+  [studio-go](../cases/2026-11-14-studio-go-interface-redesign.md), where both kinds of gap were
+  found only after the build.
 - **Q3 checker.** axe-core through the project's browser tests, or `npx @axe-core/cli <url>` on a
   running page; states without their own address need the checker inside the walk of Q1 (list the
   states a run by address missed). Static: a component linter (`eslint-plugin-jsx-a11y` for JSX) or
@@ -356,7 +367,13 @@ template file, leave out included partials and loop repeats, and say so.
   one icon or icons with more than one label. Static from the code; shown counts are firmer on a
   running page. A change meant to remove or fold options states what each job loses; a control
   that serves no job the owner listed is a question for the owner, never removed on that ground
-  (a behaviour check's agent held to this and asked).
+  (a behaviour check's agent held to this and asked). Internal names: ids of records or jobs,
+  file paths, field, class or function names, version strings, and error text that carries a
+  chain of wrapped errors or a stack, shown on the pages each job reaches (Technical detail
+  behind a fold counts apart). Count them on rendered pages with real data or a copy of it, where
+  rules allow; such names come from the data and from error paths, so a template read or a demo
+  fixture shows only some: from templates, mark the count "static, floor". A name the owner uses
+  (a product or model name) is not internal; ask when unsure.
 - **Q7 judges.** Look in scripts, CI steps, prompts, agent instructions and past audit or review
   reports written by models; leave out models that rate the content the product makes. Note
   whether the shared items were held out from tuning, the judge version (changed since: not
@@ -387,6 +404,16 @@ template file, leave out included partials and loop repeats, and say so.
   behaviour check an agent asked to add a needed control kept every control, raised the baseline
   itself and asked the owner to accept it: nothing blocked an agent there, which is the gap this
   question asks about.
+- **Q11 what a redesign removes.** Before an old page is deleted or replaced, read it and its code
+  (route, template, handlers, scripts) for what it shows and what it lets the user do, a function
+  reached only from that page included; list inside each page, not only by route (a plan that gave
+  every route a home still lost functions inside pages). Then look for each in the new design (the
+  mock, the plan or the built pages): kept (same place), moved (name where) or removed (no home);
+  a replacement that shows or does less is removed for what it drops (a card in place of a live
+  square per unit, say), and only that part goes to the owner. Put each
+  removed line to the owner before the deletion; a "known limit" written by a builder or a
+  coordinator is not the owner's answer, while a choice the owner recorded is (cite it). Count
+  removed lines not yet asked. Read only: delete nothing while measuring.
 
 ## The checklist report
 

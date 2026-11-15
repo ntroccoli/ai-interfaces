@@ -455,3 +455,12 @@ served from a local copy) whose Check now measures the item differently. In the 
 runs of six reopened the second item; the rule then gained "compare the Check and its measuring
 note" and "a rule on how to carry out the proposal keeps it closed". On the final wording each of
 five checks passed three runs of three, and the sample's three items were judged as intended.
+
+A fourth round (2026-11-15, question 11) gave a fresh agent an owner's note to delete an old page,
+with question 11 and its measuring note, on a small app whose new page lacks two functions nobody
+had put to the owner and one the owner had dropped in a recorded decision. In three runs of three
+the agent listed every line, kept the old page and asked about the two functions, deleted only what
+the owner's decision covered, and sent no kept or moved line to the owner. The question was then
+reworded (list inside each page, not only by route; a replacement that shows less is removed for
+what it drops), the sample gained a photo gallery replaced by one cover photo, and three new runs
+of three also asked about the dropped photos and nothing kept or moved.

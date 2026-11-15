@@ -3,6 +3,32 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — studio-go suggestions
+
+- **Why:** studio-go's coordinator read the checklist as someone starting a redesign and sent
+  suggestions from the end of its build: every job walked at the mock's counts and every plan item
+  was built, yet the owner's first use, a check against the owner's expectations and the first real
+  run found what no test asked. The maintainer's own project: a single case, never independent
+  evidence.
+- **Cases:** studio-go updated from its records at the end of the build (the job walk held, what
+  went wrong since).
+- **Kept:** every question's existing Check; the new parts are added beside them.
+
+### Checklist and lessons impact
+
+- **Checklist:** questions 2, 6 and 11 change what they measure: question 2 adds each job's last
+  run against the real backend and whether the pages say that a job started, where it is, that it
+  ended and why it failed; question 6 adds a count of internal names, file paths and raw errors on
+  rendered pages with real data; question 11 is new (what a redesign would remove, before an old
+  page is deleted). Questions 1 and 7 gain a trade-off line only; three lines at the top say which
+  questions come first. Question 10 changes only in its Evidence and Provenance (the job walk held
+  through the build), which keeps a closed item closed.
+- **New lessons:** JOB-8, JOB-9, JOB-10, JOB-11 and BLD-11, from the studio-go records, each
+  `[ours]` and weak. One candidate was declined: that a rule checked on templates passes while
+  rendered pages with real data break it (the records do not show which names came from data);
+  question 6's measuring note takes the rendered route instead.
+- **Changed lessons:** JOB-2 (its "Against" line: the owner has now used the build).
+
 ## 2026-11-15 — reopen rule
 
 - **Why:** behaviour runs of the revisit disagreed on whether a reworded checklist question

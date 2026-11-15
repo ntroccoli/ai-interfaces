@@ -15,7 +15,13 @@ It was updated on 2026-11-15 from the coordinator's own review of the redesign's
 the owner's request once 15 of the 21 packages were merged overnight, by its count) and from the build's records as they stood at
 that review: the per-job count files of the job walk, the build plan, the walk report of the finished three-pane mock, a
 package's status file and the coordinator's handoff. The review, too, is the coordinator judging its own work.
-Nobody outside the project has checked it, so it is never independent evidence. Numbers appear as the records
+A third update, written on the afternoon of 2026-11-15, draws on the records left when the build closed: the job walk's count
+files, the plan, the status files of the packages that deleted the old pages, pruned the tests, rewrote one form,
+drew sketch cards and fixed the first real run, the coordinator's handoff and decision log, and its written test of
+the finished studio against the owner's expectations, all named by the suggestions that the studio-go coordinator sent
+us. Every project record behind it, apart from the owner's words it reports, was written by model sessions (the
+coordinator on Fable 5.2, the workers on Opus 5.5 with Sonnet helpers). Nobody outside the project has checked it, so
+it is never independent evidence. Numbers appear as the records
 give them; where two records disagree, both are shown. The owner's words are paraphrased.
 
 ## The product and why it was redesigned
@@ -40,6 +46,8 @@ After the first round of fixes the owner still found the UI cluttered and asked 
 | 2026-11-14, before 22:30 | The three-pane mock is completed for the whole studio and its job counts become the build's targets; a plan of 21 packages in six waves is argued against by a fresh-context subagent and revised. |
 | Overnight into 2026-11-15 | 15 build packages are merged by the review's count (16 by the coordinator's handoff), with no more than six sessions at a time; by the end, most jobs walk at the mock's counts (see Round 2 build). |
 | 2026-11-15, about 03:00 | The owner asks what is making the work weak; the coordinator reviews the night and changes its rules. The owner has not yet used the build. |
+| 2026-11-15, morning to early afternoon | The last packages land: the old pages are deleted, the page tests pruned and a sample of faults planted; every plan item is built and every job walks at the mock's count. |
+| 2026-11-15, afternoon | The owner tries the build for the first time and meets three problems; the coordinator checks the build against the owner's expectations, runs a test production and a change on it for real, has a newcomer agent walk the built demo, and shows the owner six sketch cards of a new idea. |
 
 ## Round 1 audit and build
 
@@ -204,7 +212,7 @@ try to get around it, and no agent ever saw a mock rendered; the owner's look wa
 for a 1440 by 900 pixel window only: no phone width, and in two of them no keyboard way to reorder the queue.
 
 The owner clicked through all three and took the quiet console as the base, with changes: centre it, enlarge type and
-controls, borrow the editorial spacing, use pure black, and keep the work in progress and the queue visible in
+controls, borrow the editorial spacing, use pure black, and keep the running work and the queue on view in
 the left bar at all times; the gallery look was set aside. The base then came in seven colour themes. The owner
 liked one of them, but said the themes they had asked for meant different layouts and components, not colours,
 shown first as plain cards. Eleven layout cards and eight typefaces followed (drawn by the same session that made the
@@ -243,8 +251,8 @@ per place (Ideas, Videos, Channels, Queue, Workshop, settings) and a lane for pi
 it delivers, and every item names the test that proves it (42 items). A Sonnet subagent with a clean context went
 through plan, code and mock and raised 8 objections; the coordinator verified them against the code, accepted the
 three strongest and took parts of the other five. The first concerned counting: the job walk issues plain HTTP requests without executing scripts,
-while the old side bar was filled in by a script, so the rail's work would stay invisible to the walk and the targets
-for jobs 4 and 5 were out of reach as designed. The answer became a rule for all lanes: the server renders the rail
+while the old side bar was filled in by a script, so the rail's work would stay invisible to the walk and jobs 4 and 5
+could not reach their targets as drawn. The answer became a rule for all lanes: the server renders the rail
 and its actions (moving a job up, pausing all work) as fragments refreshed by the live updates, while the script adds
 only extras such as a hover card and dragging; a control that exists only through a script never counts for a job.
 
@@ -316,6 +324,101 @@ that looking at the page would not reveal, never wording, classes or markup; whe
 are removed rather than carried over; the closing package trims the suite, times it before and after, and plants
 faults in some handlers, picked as a sample, to find out whether the tests catch them. Finally, the coordinator gives each new
 capability one real run before the owner tests.
+
+## When the build closed: the owner's first use
+
+On 2026-11-15, early in the afternoon, the plan-items test counted all 42 items built; the last planned packages had
+been split by size into several, and further packages followed from what the afternoon found. Before the build, the
+plan had drawn from the code a table of what the old studio did and where each part would live in the three panes:
+each of the server's 209 routes had a row and a home, and the plan stated that nothing was dropped.
+
+**The job walk held.** When the build closed, each job's count file matched the completed mock: job 1 at 2 screens, 5
+clicks and 2 fields; job 2 at 2 screens and 3 clicks; job 3 at 1 screen and 6 clicks; two shots at once at 1 screen
+and 8 clicks; job 4 at 1 screen and no click; job 5 at 1 screen with 3 clicks from the rail, or 2 screens with 4 clicks
+from the queue page; job 6 at 2 screens, 11 clicks and 1 field. The comments in those files record only lowerings,
+apart from job 6, whose job took on blending two styles as its mock had drawn (10 clicks without it before). The three
+later status files read for this update (the deletion of the old pages, the test prune and the form rewrite below)
+each report the walks unchanged by their work. All of these are shortest-route counts on the demo.
+
+**The owner's first use.** That afternoon the owner worked in the studio while the last package ran and then the
+finished build (half an hour by the decision log, an hour by a later brief; the owner also called the app amazing),
+and met three problems none of the tests looked for:
+
+- Remaking a video already finished, with the settings its channel uses today: the owner found it on the earlier build's
+  long page for a video, buried in a long list of choices; the studio was rebuilt within the hour, and in the new
+  pane the coordinator found the same form under a fold, carried over unchanged: five settings in a table, with
+  version numbers and field names, two of them different for that video. A package redrew it to list only what
+  differs, one sentence per setting. By its own count the job took 5 clicks before and 5 clicks after (4 clicks when
+  one setting differs); what it claims to have improved is how fast the form is found and read, not the clicks.
+- On the finished build, while a test production was running, its parts were listed in the pane's order, not in the
+  sequence the pipeline makes them.
+- The old side bar had shown a square per unit while a run went on, each opening a big preview when hovered; on the
+  finished build these had vanished. The mock and the plan's table had put one card per video in their place, which
+  shows less; the package that deleted the old pages took their code with it, and the coordinator had filed the loss
+  as a known limit rather than put it to the owner. A later package redrew them in the new look.
+
+**What the owner expects, checked.** The owner next asked the coordinator to work out what they hope to see and
+receive along each flow. From the owner's recorded words the coordinator wrote 52 checkable lines: 9 for every job and
+the rest by job (8 for a new channel, 11 for a new video, 9 for fixing parts of one, 5 for the queue, 4 for reordering
+it, 6 for styles), covering four moments: before the job, during it, at its end and on failure. Two Opus subagents
+judged the build line by line, one reading the real test production without changing it and trying the demo, the other
+on the demo alone, reading templates for what the demo never reaches. Result: 16 of 52 lines fully met (two of them
+only for part of their scope: on the demo, or for one kind of stop), the rest met in part or missed. The project sorts
+the misses into two groups: the studio keeps quiet about what happened (a video or a round being done, a failure and
+its cause, the reason something waits), or it shows the code's label for a thing (job numbers, a channel id, one video
+under two titles, a path in the source code, a raw database error); its own table also lists misses outside those two
+groups, such as the order of a run's parts, its squares, where old and new takes sit side by side, and trying a style.
+In the same record, neither group is caught by the project's rule tests, nor by its walks of the jobs; a rule test
+on internal names did exist. The misses went to small packages, to the queue's next package, or to the owner's choice.
+
+**The first real runs.** Up to then every job walk had used the demo, whose engine is simulated. The coordinator made
+a three-shot test production on a test channel (36 minutes; its checks passed; its pane counted 87 shots for a run of
+three), then had an agent change a shot and a line of its narration. A new take of the shot arrived within about 4
+minutes, and keeping it worked. After that, putting the final video together failed, since a change run began without
+the unit limit a test video needs (it holds only its first three units); voicing the line again failed too, because
+the request asked for a mode the video's voice model lacks, as it would have on the owner's older videos made with
+that model; and the queue listed both failed jobs as finished, since a status rule made for productions marked a
+failed job done whenever its video read as finished, and a change does not alter that status. Other panels also
+reported success or readiness wrongly: the pairs panel said everything was done, a shot read ready before its clip
+existed, and the owner's to-do list mislabelled the take and listed it twice. The round's first time
+estimate was more than ten hours, for a round of about 4 minutes. A package removed the causes, each with a test on
+fakes that fails while its fix is absent; showing such failures on the pages is left to another package, and the round
+is to be repeated for real after a rebuild, which had not happened when this was written.
+
+**A newcomer on the built demo.** The plan had a newcomer walk each job as soon as it was built; it ran once, after the
+build was whole. An Opus subagent kept away from the code, reading pages over HTTP alone, completed every one of the six jobs
+there and listed the terms it could not follow and an error message that doubled a word; the coordinator sorted its
+findings into fixes, demo-only issues and questions for the owner. Its list holds none of the three problems the owner
+met [ours, from the two records side by side]; reading over HTTP it could not see a preview drawn by a script on
+hover, and it could not miss squares it had never seen.
+
+**Deleting the old pages.** One package took out the old full page of a video, the side tray and other old views:
+3,972 lines removed and 901 lines added. As proof that nothing still used them it ran a dead-code tool from the
+program's entry point, a script tracing which templates are reached, and a search for every route. Its report named
+functions that had lived only on the old page, below the level of the plan's table (building the final video from
+old-style marks, still present on two videos in the real database; a note on a re-encoded thumbnail; a line telling
+that a step never started; and more), and a later package brought most of them back; two were left out on purpose.
+The tray's polling had also carried pipeline behaviour (applying choices saved while a run went on), which its brief did
+not know of, and a model helper moving tests relaxed one rule test (each button's own cost line), which the coordinator then
+allowed with a condition. The package also noted that a test of a removed page could pass on its own: the helper did
+not follow redirects, so asserting that the page lacked some text held true on the empty body of the redirect; its
+helpers found two tests of that kind.
+
+**Pruning the tests, then planting faults.** One package had four Sonnet helpers cut the web package's page tests that
+only fix wording and markup. They deleted 18 tests, 2 of which carried behaviour; the worker restored those, and a
+third came back when a plan check asked for it: 411 tests were left of 426, and some 360 assertion lines went. After
+the prune (none before it) the worker planted 20 faults of its own choosing, one at a time through a script, running
+the suite on each: 13 were caught. Of the 7 that got through, the worker judged 3 a person would see by looking at the
+page; the other 4 each received a test that fails on that fault. As the worker read it, each of those 4 escaped through
+a fixture lacking one case: two queued videos, so moving one up equals moving it to the top; a branch no fixture
+reaches; a confirmation on a path no test sends; a filter with no draft in its fixture.
+
+**A sketch round.** For an idea of the owner's (columns opening to the right as one goes further in), a session drew
+six clickable sketch cards on one page in about 20 minutes, and a script counted each card's fewest clicks. The three
+numbers its brief named came out the same, or almost, on every card, so the worker added a fourth (returning to a place
+already visited), on which the cards differed. A model reviewer's strongest point against the first set was that it
+tested moving around, not whether wide content fits. No one had viewed the page before the owner did; the owner chose
+one card within the hour, one of the two with the most clicks on the added count.
 
 ## Who did what
 
@@ -586,8 +689,9 @@ saying outright what goes, rather than folding it away. What failed, or what the
 one design in several looks (the owner picked from layout cards instead); waves of building, each tried by the
 owner (declined); agents viewing the pages they made (the permission guard stopped the mock sessions, so a
 scripted page model could find script errors and count clicks while seeing nothing of the look); and more agent
-reviews of things the owner checks by eye (the owner wants fewer). Nobody has yet built from a mock, so that step of
-the method is untested here.
+reviews of things the owner checks by eye (the owner wants fewer). At the time of those answers nobody had built from a
+mock; the build since then followed the three-pane mock and a table of the old studio drawn from the code, and still
+lost functions that lived inside the old pages (see "When the build closed").
 
 Its proposed changes: count the jobs with the tool before the first package lands; tell the audit's blind seats
 which decisions already apply; before turning a mock into code, draw up a single table, built by reading the code, of everything the
@@ -599,16 +703,15 @@ before code is written.
 ## Still open
 
 As the repository stood on 2026-11-14 at 21:40, with some items from the evening handoff and the review record,
-and the first two items brought up to date with the coordinator's review on 2026-11-15:
+the first two items brought up to date with the records left when the build closed (2026-11-15, afternoon):
 
-- The redesign is being built: by the review, 15 packages out of 21 were merged (16 by the handoff), 28 items out of 42 were done, and
-  five jobs out of six matched the finished mock (job 3 still above it). The owner has yet to try the build, nobody
-  has looked at its pages, and nothing new has run on real models; the coordinator means to give each new
-  capability one real run before the owner's test, and has asked the owner for a ten-minute look at the live studio
-  before the end.
-- Round 2 is built in one piece and only then tested by the owner; the waves planned earlier, each with its own
-  stop rule, will not run. Each job's walk against the mock's target, and a newcomer walk of each job as it
-  lands, were meant to catch a wrong turn before the end; the records show no newcomer walk of the build yet.
+- The plan's 42 items are built and every job walks at the mock's count. The owner has tried it once, and what that
+  showed went to small packages; the expectations check's gaps are being fixed, the failed change round is to be run
+  again for real after a rebuild, a channel draft has not run for real, and the owner's own test is still to come.
+  The owner picked a sketch card for columns that go deeper; it is to be drawn on real content before the product's
+  frame changes.
+- Round 2 was built in one piece; the waves planned earlier did not run. A newcomer walked the built demo once,
+  after the build rather than as each job landed.
 - What each job loses is still a list of candidates; of the 12 rules, 6 are marked to keep and 6 to change, and
   none is rewritten yet.
 - By the review record, of the 16 review proposals 12 awaited their first use, 3 remained open (two of them
@@ -617,8 +720,7 @@ and the first two items brought up to date with the coordinator's review on 2026
 - Of the 3 UI defects the owner reported after round 1, 2 are fixed; the missing way to a video's cast waits for the
   redesign.
 - By the evening handoff, the rebuilt research button had not had its first real run.
-- The newcomer walk has not been repeated on the fixed demo or on any mock; the mock counts are the shortest
-  route.
+- No newcomer has walked any mock; the mock counts are the shortest route.
 
 ## Limits of this record
 
@@ -639,3 +741,8 @@ and the first two items brought up to date with the coordinator's review on 2026
   change of pane is not a screen, so screens before and after are not like for like.
 - The process review was written by the coordinator about its own night, its request counts are approximate,
   and it was written before the build was finished.
+- The expectations were written by the coordinator from the owner's recorded words, not by the owner, and checked
+  by two model subagents; the owner has not judged the verdicts. The real runs were on a test channel only.
+- The planted faults were chosen by the worker that pruned the tests, 20 faults in one package's tests, run only after
+  the prune, so what the prune itself lost was not measured; the sketch cards' click counts are a script's on static
+  pages.

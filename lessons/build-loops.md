@@ -50,6 +50,10 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
   - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
   - Cases: [studio-go: what went wrong][sg-wrong], [studio-go: what worked][sg-worked].
   - Against: None found; the coordinator counted the requests roughly from its own night, and the looser rule has not yet been tried.
+- **BLD-11** [ours] After a model prunes model-written page tests, plant a sample of faults and run the suite on each; there, the faults it missed pointed to fixtures a case short.
+  - Depends on model ability: partly. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong][sg-wrong], [studio-go: numbers][sg-numbers].
+  - Against: None found; one package's sample of faults, chosen by the worker that pruned the tests, in one project, and run only after the prune, so what the prune itself lost was not measured.
 
 [car-worked]: ../cases/2026-05-26-concordia-llm-accessibility-repair.md#what-worked
 [car-wrong]: ../cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong
@@ -60,6 +64,7 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
 [hd-wrong]: ../cases/2026-03-24-anthropic-harness-design.md#what-went-wrong
 [hol-practices]: ../cases/2025-03-20-uci-human-or-llm-accessible-code.md#practices-to-copy
 [hol-worked]: ../cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-worked
+[sg-numbers]: ../cases/2026-11-14-studio-go-interface-redesign.md#numbers
 [sg-worked]: ../cases/2026-11-14-studio-go-interface-redesign.md#what-worked
 [sg-wrong]: ../cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong
 [k-success-criteria-not-steps]: https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2026-01-26-success-criteria-not-steps.md
