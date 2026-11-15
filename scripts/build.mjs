@@ -360,7 +360,8 @@ const REVIEW_STEPS = [
     `[docs/applying-lessons.md](${APPLY_URL}): read the changes/ file of each log entry newer than the record's, re-check ` +
     'each item, measure; propose only the corrections that match, what is new or changed, earlier "later" items and ' +
     'items that stopped holding. Closed items stay closed: a skipped, declined or proven item comes back only for a reason ' +
-    'that section names, and you say which. Report in its "Revisit report" template. Change nothing.',
+    'that section names, and you say which. A reworded question or lesson reopens a closed item only when what it asks ' +
+    'of this item changed; say what changed, old and new. Report in its "Revisit report" template. Change nothing.',
   '5. Begin your answer with one line: `Path: first review (<route>)` or `Path: revisit (<route>)`, then a dash and why: ' +
     'the record you found, or that none exists.',
   '6. Step 2 comes when the user says what to apply ("Apply what you recommended", "Apply proposals 1, 3 and 5" or ' +

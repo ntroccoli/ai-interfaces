@@ -32,7 +32,8 @@ record) or after a few weeks of work. Because `docs/interface-review.md` exists,
 revisit: corrections first, then it reruns the baselined counts, re-checks the record and proposes
 only what is new, earlier "later" items and items that stopped holding. Items you skipped or
 declined stay closed unless a new lesson, a correction or a changed measurement bears on them, and
-the agent says which. When nothing is new or due it says so and stops. Then step 2 as above.
+the agent says which; a reworded question or lesson reopens a closed item only when what it asks of
+this item changed, and the agent says what changed, old and new. When nothing is new or due it says so and stops. Then step 2 as above.
 
 ## Learning from the lessons
 

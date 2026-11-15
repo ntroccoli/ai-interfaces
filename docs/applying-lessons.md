@@ -85,8 +85,16 @@ nothing until the owner chooses, and reports in the [revisit report](#revisit-re
   under the table, is not proposed again unless one of these holds, and the proposal names which:
   its check now fails (a proven item), a new or changed lesson or question bears on it (from the
   changes files), a correction matches it, or its measurement changed since the record (give both
-  values). An owner's choice that differs from a lesson stays the owner's: never propose the
-  lesson against it for the same reason again.
+  values). A reworded question or lesson reopens a closed item only when what it asks of this item
+  changed; say what changed, old and new. It changed when the item would now be measured
+  differently: a new or changed Check, measuring step or threshold. Compare the Check and its
+  measuring note, old and new: a clause new to the Check that the old note already asked is no
+  change. A rule on how to carry out the proposal once adopted, new wording, links, Evidence, Ask
+  or Trade-offs keep the item closed. The old text is in the files at the commit the record names:
+  `https://raw.githubusercontent.com/ntroccoli/ai-interfaces/<commit>/checklist.md` and
+  `.../<commit>/docs/applying-lessons.md` (or the lesson's page); when the record names only a
+  date, judge from the newer log entries' words and say so. An owner's choice that differs from a
+  lesson stays the owner's: never propose the lesson against it for the same reason again.
 - New: for each [log.md](../log.md) entry newer than the record's, read its file in `changes/`,
   named by the entry's date and title (`2026-11-14 — checklist and apply routes` is
   `changes/2026-11-14-checklist-and-apply-routes.md`): the lesson IDs and checklist questions
@@ -176,8 +184,10 @@ Newest log entry now: "<date — title>". Changes files read: <names, or none>.
   value, beside the baseline>.
 
 ## Closed items
-- Row <n> (<ID or Q<n>>): stays closed | reopened — <for a reopened one: the new or changed lesson
-  or question, the correction, or the measurement before and now>.
+- Row <n> (<ID or Q<n>>): stays closed | reopened — <for a reopened one: the new lesson, what a
+  changed lesson or question asks of this item before and now, the correction, or the measurement
+  before and now; for a closed one whose question or lesson was reworded, why what it asks is
+  unchanged>.
 
 ## Proposals
 <numbered, in the first review's template; a correction that matches comes first; a reopened item

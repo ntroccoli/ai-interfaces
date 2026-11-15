@@ -3,6 +3,26 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — reopen rule
+
+- **Why:** behaviour runs of the revisit disagreed on whether a reworded checklist question
+  reopens an item the owner skipped: one of three runs reopened it, two kept it closed.
+- **Rules:** a reworded question or lesson reopens a closed item only when what it asks of this
+  item changed: the item would now be measured differently (a new or changed Check, measuring step
+  or threshold, comparing the Check and its measuring note old and new). A rule on how to carry out
+  the proposal once adopted, new wording, links, Evidence, Ask or Trade-offs keep the item closed.
+  The agent says what changed, old and new, reading the old text at the commit the record names. Stated in "Revisit" of
+  `docs/applying-lessons.md`, in its revisit report template, in `llms.txt` and in
+  `docs/try-it.md`.
+- **Kept:** the other reasons to reopen (a proven item's check fails, a new lesson, a matching
+  correction, a changed measurement) and the rule on an owner's choice.
+
+### Checklist and lessons impact
+
+- **Checklist:** no question changed; the revisit rules above.
+- **New lessons:** none.
+- **Changed lessons:** none.
+
 ## 2026-11-15 — one review prompt
 
 - **Why:** the owner asked that one step do both the first review and every later update. Until

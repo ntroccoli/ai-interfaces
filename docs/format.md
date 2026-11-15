@@ -447,3 +447,11 @@ applied the third before the second's failure showed (step 4 of "Apply" now forb
 agent holding only the earlier report applied everything on the main branch without a record (every
 report now ends with a "Next step" section linking to "Apply"). Every check then passed three runs
 of three.
+
+A third round (2026-11-15, the reopen rule) re-ran the revisit checks after the rule on reworded
+questions: a new sample holds three skipped items whose questions were reworded, one only in
+wording, one with a clause its old measuring note already asked, and one (in a made-up later entry
+served from a local copy) whose Check now measures the item differently. In the first wording two
+runs of six reopened the second item; the rule then gained "compare the Check and its measuring
+note" and "a rule on how to carry out the proposal keeps it closed". On the final wording each of
+five checks passed three runs of three, and the sample's three items were judged as intended.
