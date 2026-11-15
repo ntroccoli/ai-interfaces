@@ -1,0 +1,27 @@
+name: Suggest a case
+description: A well-documented interface designed, built, changed or checked with AI, or a benchmark or study of such work, missing from the collection.
+labels: [case-suggestion]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      description: Link to the engineering post, paper, talk or official repository by the people who did the work or ran the study. Secondhand reports are left out.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What was made or studied
+      description: The interface (or the set of interfaces), what AI did (designed, built, changed, checked, judged, acted as a user), and what was measured, in a sentence or two.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The source is by the people who did the work or ran the study (not a news story or a summary of it).
+          required: true
+        - label: AI designed, built, changed or checked the interface, and the source reports a method and an outcome (not marketing without a method).
+          required: true

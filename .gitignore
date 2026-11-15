@@ -1,0 +1,4 @@
+node_modules/
+.test-tmp/
+.lycheecache
+.claude/settings.local.json

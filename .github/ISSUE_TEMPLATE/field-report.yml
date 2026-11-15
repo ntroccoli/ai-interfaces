@@ -1,0 +1,126 @@
+name: Field report
+description: What the checklist or the lessons predicted on your project's interface, and what actually happened. Usually drafted by your coding agent.
+title: "Field report: "
+labels: [field-report]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        How reports are used, and what never to include: [docs/field-reports.md](https://github.com/ntroccoli/ai-interfaces/blob/main/docs/field-reports.md). Reports are public. No code, diffs, prompts, file paths, URLs, screenshots, secrets, personal data, or names of companies, products or people. The maintainer reads reports in batches at each update: a complete report is closed with the label `collected`; an incomplete one gets `needs-fix` and one comment.
+  - type: dropdown
+    id: ran
+    attributes:
+      label: What the agent ran
+      options:
+        - The checklist (an interface measurement)
+        - Some lessons only
+        - The checklist and some lessons
+    validations:
+      required: true
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Relation to this collection
+      description: Reports from the maintainer's own projects are counted apart from independent ones; they are not independent evidence.
+      options:
+        - Independent (no tie to this collection or its maintainer)
+        - The maintainer's own project
+        - Other (say how in the next box)
+    validations:
+      required: true
+  - type: input
+    id: relation_other
+    attributes:
+      label: If other, the relation
+      description: One line, without names, for example "a colleague of the maintainer". Leave empty otherwise.
+  - type: input
+    id: used
+    attributes:
+      label: Questions and lessons used
+      description: IDs, comma-separated, for example "Q1, Q4, JDG-1". Write "all" for the whole checklist.
+    validations:
+      required: true
+  - type: input
+    id: interface
+    attributes:
+      label: The interface
+      description: A category, for example "web app for internal tools", "desktop editor", "mobile shop", "game menus". No names.
+    validations:
+      required: true
+  - type: input
+    id: models
+    attributes:
+      label: Model(s) used
+      description: The models the agents ran on, comma-separated, as their makers name them, for example "Claude Opus 5, GPT-5.5". Write "unstated" if you do not know.
+    validations:
+      required: true
+  - type: dropdown
+    id: size
+    attributes:
+      label: Screens in scope
+      options:
+        - Under 10 screens
+        - 10 to 50 screens
+        - 50 to 200 screens
+        - Over 200 screens
+        - Not measured
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where the change stands
+      options:
+        - Review only, no change started
+        - In progress
+        - Finished
+        - Stopped or abandoned
+    validations:
+      required: true
+  - type: textarea
+    id: predicted
+    attributes:
+      label: What the review predicted
+      description: A few lines. The counts in the baseline files taken before the change, the proposals applied and the check meant to prove each.
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What actually happened
+      description: Above all the problems you hit, with numbers where you have them (violations, clicks or screens per job, counts before and after). For a review only, write what you decided and why.
+    validations:
+      required: true
+  - type: input
+    id: foreseen
+    attributes:
+      label: IDs that foresaw a problem you hit
+      description: Question or lesson IDs, comma-separated, or "none".
+    validations:
+      required: true
+  - type: input
+    id: wrong
+    attributes:
+      label: IDs whose prediction did not hold
+      description: Question or lesson IDs, comma-separated, or "none". Say why in the next box.
+    validations:
+      required: true
+  - type: input
+    id: untested
+    attributes:
+      label: IDs not yet tested by a real event
+      description: IDs applied or checked where nothing has happened yet that they would catch, comma-separated, or "none".
+    validations:
+      required: true
+  - type: textarea
+    id: missed
+    attributes:
+      label: What nothing foresaw, and what to change
+      description: Problems no question or lesson predicted, wording that confused the agent, a check that could not run (say whether it needed a running page).
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Consent
+      options:
+        - label: I read the exact text; it has no code, secrets or confidential details; I license it under CC BY 4.0.
+          required: true

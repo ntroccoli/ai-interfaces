@@ -1,0 +1,387 @@
+# AI interfaces: every lesson, every case line and the checklist in one file
+
+Unofficial; company names describe the subject only. Summaries and lessons are our own words under CC BY 4.0. Source: https://github.com/ntroccoli/ai-interfaces
+
+Disclosure: the cases and lessons are drafted by Claude, an Anthropic model, and reviewed by the maintainer. At least 5 of the 10 cases involve Claude models or Claude Code, as builders, judges or models under test (studio-go, Agentic audit, Anthropic harness, ArtifactsBench, UW heuristic review); 1 leaves the models unstated. Anthropic is the author or the subject of one case: Anthropic adds a planner and a Playwright grading agent to Claude app builds; by the engineer's account the game maker works where a solo run broke, at over 20x the cost. One case is the maintainer's own project (studio-go, marked maintainer-own): never independent evidence, and never counted toward a lesson's strength.
+
+Evidence base: every lesson here comes from the **cases** in this collection: products, benchmarks and studies of interfaces designed, built, changed or checked with AI. The maintainer's own projects are marked and never count toward a lesson's strength. The lessons measure; they never say which look is better.
+
+`[stated]`: a source says it or reports it as what worked or failed. `[ours]`: our inference from what a source reports. "Depends on model ability" (`yes`, `partly`, `no`): `yes` when the lesson states what models or agents can or cannot do, `partly` when it is a process whose need comes from such a behaviour, `no` when it holds whatever the model; the index marks a `yes` lesson whose newest case is over a year old as possibly outdated. "Checked against people" (`yes`, `partly`, `checker`, `model`, `none`): what told right from wrong in the lesson's evidence: people's results, users or experts measured (`yes`); people's results for part of the claim, the rest from checkers, models or the author's account (`partly`); only deterministic checks such as axe, contrast maths, tests or a scripted walk (`checker`); only model judges or simulated users (`model`); only the author's account (`none`); authors count as people when they code items to a stated protocol, never when they judge their own work, and the maintainer's own use of a project is the author's account; it says where the evidence came from, not where the lesson applies. "Era": the years the cited cases ran (their publication year when they give no period), then the newest model family: the family of the most recent cited case that names a model (its highest version when it names several), `unstated` when none names one; each case lists its models. "Strength", capped by the cases in "Cases" (the validator checks it): `strong` needs two or more cases, or one whose source shows its data, and at least one case whose author does not sell the tool; `medium` needs two or more cases, or one that shows its data; any other lesson is `weak`. The maintainer's own projects never count toward the cap, and a lesson that rests only on cases whose authors sell the tool is at most `medium`.
+
+## Build loops (build-loops.md)
+
+How agents that build, review or fix an interface were set up to check their own work (a separate grading agent, a reviewer and a fixer, a checker's findings fed back, written criteria): what each part caught or missed, what it cost, and when the work must stop and go to people.
+
+- **BLD-1** [stated] A single agent's interface build can look finished while its core feature fails; a second agent that used the running app and tested agreed criteria caught specific bugs, and the core feature worked.
+  - Depends on model ability: yes. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong), [Anthropic harness: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-worked).
+  - Against: None found; one prompt and one run per setup, judged by the author at the company that sells the model, and the grader still missed bugs in features it did not reach.
+  - Related view (karpathy-ideas): [success criteria, not steps](https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2026-01-26-success-criteria-not-steps.md), agrees.
+- **BLD-2** [stated] For an agent that reviews and fixes code, a read-only reviewer and a separate fixer that pass fixed templates through a parent worked better than many parallel specialists.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: unstated.
+  - Cases: [GitHub a11y agent: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-went-wrong), [GitHub a11y agent: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-worked).
+  - Against: None found; one seller's account that shows no token counts, timings or accuracy for any of the designs it tried.
+- **BLD-3** [stated] Tell a repair loop which violations remain: one told only of parse or structure failures cost more and fixed no more; one fed a model-written violation report beat the plain prompt on average.
+  - Depends on model ability: partly. Checked against people: checker. Strength: medium. Era: 2025–2026; newest: Kimi K2.x.
+  - Cases: [Concordia repair: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong), [Concordia repair: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-worked), [UCI code study: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-worked), [UCI code study: practices](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#practices-to-copy).
+  - Against: None found; each loop ran once, on one model or two, scored only by checkers; the loop that named violations had a model write the report from one checker's rules, trailed the plain prompt on one model with one checker, and missed ARIA landmarks.
+  - Related view (karpathy-ideas): [success criteria, not steps](https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2026-01-26-success-criteria-not-steps.md), agrees.
+- **BLD-4** [stated] An agent told to stop and hand work to people may look for ways to write code anyway; back the stop rule with explicit instructions against working around it.
+  - Depends on model ability: yes. Checked against people: none. Strength: weak. Era: 2026; newest: unstated.
+  - Cases: [GitHub a11y agent: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-went-wrong).
+  - Against: None found; the post names no model and says the added instructions worked without a count of how often the agent tried or slipped.
+- **BLD-5** [stated] Grading criteria written into a builder's prompt steer its designs before any feedback, and one phrase in them can pull designs toward the same look.
+  - Depends on model ability: yes. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-worked), [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong).
+  - Against: None found; the only judge of the designs was the engineer who wrote the criteria, and no scores are shown.
+- **BLD-6** [stated] A planner, builder and grader harness cost many times a solo run, though the grader's own share was small; the grader paid off only on work beyond what the model built reliably alone.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#numbers), [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong).
+  - Against: None found; one comparison on one prompt, with the costs reported by the model's seller and no solo run for the second app; the grader's share is our sum for the second app only.
+- **BLD-7** [stated] When the model changes, remove harness parts one at a time and keep those that still change the result; cutting many at once hid which parts mattered.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong), [Anthropic harness: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-worked).
+  - Against: None found; one engineer's account of one harness, with the results of each removal not shown.
+- **BLD-8** [ours] After a grading agent passes a build, walk each whole job as a newcomer; a build that passed its per-feature tests kept a workflow the screen never explained.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong).
+  - Against: None found; the source does not say whether the grader was asked about the workflow, blames the base model's product sense, and the one person who found the gap was the author.
+
+## Accessibility (accessibility.md)
+
+When a language model or an agent writes, fixes or audits an interface for accessibility: what it catches next to a rule checker such as axe and next to expert audits, what its fixes leave behind or break, how its results were counted, and where people stay in the loop.
+
+- **ACC-1** [stated] Code models writing pages without being asked for accessibility handle basic rules such as contrast and alt text better than the human code they replaced, and do worse on ARIA.
+  - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2025; newest: GPT-4o.
+  - Cases: [UCI code study: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-worked), [UCI code study: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-went-wrong).
+  - Against: None found; one study of rewritten pages from two models, scored only by two checkers, where contrast makes up most of the violations and the win holds on the mean, not in every project.
+- **ACC-2** [stated] Asking a model for accessible code, with rules, examples or a self-review, almost never beat the plain prompt; the broad instructions added attributes that broke other rules.
+  - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2025; newest: GPT-4o.
+  - Cases: [UCI code study: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-went-wrong).
+  - Against: None found; one study with two models and one run per setup, no prompt tried beyond the three techniques, and inside the fix loop accessibility instructions did help.
+- **ACC-3** [stated] Model-written accessibility fixes lowered the checker's count on most pages but left only about a quarter of pages clean; count what remains after each fix, not only what went away.
+  - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2026; newest: Kimi K2.x.
+  - Cases: [Concordia repair: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#numbers), [Concordia repair: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong).
+  - Against: None found; one model on static HTML, run once and judged only by axe, which covers part of WCAG; no person tried the fixed pages.
+- **ACC-4** [stated] A model's fix that is right for one element can break the rest of the page (duplicate IDs, ARIA that hides focusable content, misused roles); re-check the whole page after each fix.
+  - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2025–2026; newest: Kimi K2.x.
+  - Cases: [Concordia repair: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong), [UCI code study: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-went-wrong).
+  - Against: None found; the repair examples come from three pages and neither study counts how many pages gained violations; the second study's fix loop raised a few rules' failures, while its prompted rewrites broke rules by adding accessibility attributes.
+- **ACC-5** [stated] A falling checker rate, or code that passes the checks, is no proof a page works for disabled users: such rates count all violations alike, and checkers miss ARIA meaning and keyboard use.
+  - Depends on model ability: no. Checked against people: partly. Strength: medium. Era: 2025–2026; newest: GPT-5.x.
+  - Cases: [UCI code study: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-went-wrong), [GitHub a11y agent: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-went-wrong), [Agentic audit: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#numbers).
+  - Against: None found; two sources state it as a limit (one a seller's account without figures), the third measures a checker against expert audits, and no case here tests checker-clean pages with disabled users themselves.
+- **ACC-6** [stated] As a detector, a model matched a rule checker on whole pages and agreed with it most on roles and labels, but flagged far more markup problems and diverged on layout.
+  - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2026; newest: Kimi K2.x.
+  - Cases: [Concordia repair: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#numbers), [Concordia repair: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong).
+  - Against: None found; the model was scored against axe, not experts, and most pages labelled clean were not clean by axe; against expert audits in another benchmark, a single-pass model found more of the reported failures than axe-core, at lower precision ([Agentic audit: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#numbers)).
+- **ACC-7** [stated] An agent per WCAG criterion that operates the page found more of the failures expert audits reported than axe-core or a single-pass model, and raised more findings the audits never listed.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2026; newest: GPT-5.x.
+  - Cases: [Agentic audit: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#numbers), [Agentic audit: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-worked).
+  - Against: None found; one benchmark on saved scholarly pages, recall known for a minority of the criteria, no pages held out from development, and the extra findings never settled by a person; scored against axe and a dataset's labels instead, a single model call only matched axe on whole pages ([Concordia repair: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#numbers)); a batch model with hints matched the agents' F1 for far less money ([Agentic audit: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-worked)).
+- **ACC-8** [stated] Per-criterion browser agents matched both reported keyboard traps and nearly all keyboard failures; every batch model reading a screenshot and the accessibility tree missed both traps.
+  - Depends on model ability: yes. Checked against people: yes. Strength: weak. Era: 2026; newest: GPT-5.x.
+  - Cases: [Agentic audit: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-worked), [Agentic audit: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#numbers).
+  - Against: None found; few keyboard failures in the set, matched per criterion and not issue by issue, and interaction, instructions and tools changed together, so the gain is not tied to key presses alone; a radio button's focus was also misread as a trap, and the paper does not say whether the two counted trap finds rest on valid traces ([Agentic audit: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-went-wrong)).
+- **ACC-9** [stated] Listing the criteria in a coding agent's audit request raised both the reported failures it found and its findings the audits never listed; measure both when changing the request.
+  - Depends on model ability: yes. Checked against people: yes. Strength: weak. Era: 2026; newest: GPT-5.x.
+  - Cases: [Agentic audit: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-worked), [Agentic audit: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-went-wrong).
+  - Against: None found; two products with one short and one listing request each, different models and built-in system prompts, run in an isolated setting narrower than a developer's own.
+- **ACC-10** [stated] Score a checker that may decline against every known failure and keep what it declines as open work; recall on the items it answered hides the failures it skipped.
+  - Depends on model ability: partly. Checked against people: yes. Strength: medium. Era: 2026; newest: GPT-5.x.
+  - Cases: [Agentic audit: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-went-wrong), [Agentic audit: practices](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#practices-to-copy).
+  - Against: None found; the single-pass model declined there, and the paper does not test whether its declines marked items that needed key presses or simply hard ones.
+- **ACC-11** [stated] An audit report's silence is a weak pass: score a checker's findings on unlisted items against it, but keep them as candidates for a person to settle and never fold them into the labels.
+  - Depends on model ability: no. Checked against people: partly. Strength: medium. Era: 2026; newest: GPT-5.x.
+  - Cases: [Agentic audit: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#what-went-wrong), [Agentic audit: practices](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md#practices-to-copy).
+  - Against: None found; the candidates were reviewed by the authors from logs and screenshots only, so how many are real is unknown.
+- **ACC-12** [ours] Before scoring a detector, confirm with the same checker that the pages labelled clean are clean; otherwise its precision partly measures the labels, not the detector.
+  - Depends on model ability: no. Checked against people: checker. Strength: medium. Era: 2026; newest: Kimi K2.x.
+  - Cases: [Concordia repair: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md#what-went-wrong).
+  - Against: None found; one study, where the clean set came from an automated fix script, per its repository.
+- **ACC-13** [ours] Before quoting or comparing an accessibility agent's fix rate, find out what counts as fixed, out of what total, and who decided; a seller's headline rate may define none of them.
+  - Depends on model ability: no. Checked against people: none. Strength: weak. Era: 2026; newest: unstated.
+  - Cases: [GitHub a11y agent: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#how-it-was-checked), [GitHub a11y agent: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#numbers).
+  - Against: None found; one case, and the undefined rate may be well defined inside the company.
+- **ACC-14** [stated] Give an accessibility agent your own archive of logged issues and the changes that fixed them; the author holds generic best-practice prompts fall short, as models lean toward inaccessible code.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2025–2026; newest: GPT-4o.
+  - Cases: [GitHub a11y agent: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-worked), [GitHub a11y agent: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-went-wrong), [UCI code study: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md#what-went-wrong).
+  - Against: None found; the archive half rests on one seller's account with no figures, the second half also on a study where rules and examples in the prompt rarely helped, and the archive was years of hand-logged issues few teams have.
+- **ACC-15** [stated] Keep an accessibility agent off complex code and off widgets experts mark high-risk, such as drag and drop or data grids, and send them to people.
+  - Depends on model ability: partly. Checked against people: none. Strength: weak. Era: 2026; newest: unstated.
+  - Cases: [GitHub a11y agent: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md#what-went-wrong).
+  - Against: None found; the high-risk list and the complexity threshold are the team's judgement, and the post does not say how often either fired.
+
+## Model judges (model-judges.md)
+
+When a language model scores, rates or reviews interfaces in place of people (a judge for a benchmark, a rater of screens, a heuristic reviewer, a grader inside a build loop), what it needs to see, how its agreement with people was measured, and where that measurement stops.
+
+- **JDG-1** [stated] Before using a model as a rater of interfaces, compare its ratings with people's on the same items, and choose the judge and its inputs by that agreement.
+  - Depends on model ability: partly. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [ArtifactsBench: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md#how-it-was-checked), [UW walkthrough: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#how-it-was-checked), [UW heuristic review: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#how-it-was-checked), [Brazil heuristic review: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#how-it-was-checked).
+  - Against: None found; every check is small (a few hundred queries, ten people, or two or three experts per app), none reports how far the people agreed with one another, and in one heuristic review the model's own findings are part of the reference list.
+- **JDG-2** [stated] A judge of generated pages agreed with experts more often when it saw screenshots of the rendered page and the code together than with either alone.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2025; newest: GPT-5.x.
+  - Cases: [ArtifactsBench: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md#what-worked).
+  - Against: None found; one benchmark by a lab that ranks its own models, measured on a subset of its queries and the answers of a few models, with no held-out check.
+- **JDG-3** [ours] Quote a judge's agreement with people only from items it was not tuned on, with the size of that set, and measure it again whenever the judge model changes.
+  - Depends on model ability: partly. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-5.x.
+  - Cases: [ArtifactsBench: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md#what-went-wrong), [UW heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-went-wrong).
+  - Against: None found; ArtifactsBench shows the gap (one subset, the best of many setups, a replaced judge never re-measured), not a judge that failed on new items; in the heuristic review the same prompt lost coverage on two other models, measured on the same apps, one of them the app it was tuned on.
+  - Related view (karpathy-ideas): [public benchmarks are gameable, so keep your own evals](https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2025-11-18-go-talk-to-the-model-private-evals.md), agrees.
+- **JDG-4** [ours] When a judge ranks models that include its own maker's, check the top ranks with a judge from another maker before trusting the order.
+  - Depends on model ability: partly. Checked against people: model. Strength: weak. Era: 2025; newest: GPT-5.x.
+  - Cases: [ArtifactsBench: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md#what-went-wrong).
+  - Against: None found; the second judge agreed with experts less often, so a changed order there is a reason to look, not proof of bias.
+  - Related view (karpathy-ideas): [several models rank each other anonymously](https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2025-11-22-llm-council-anonymous-peer-review.md), agrees.
+- **JDG-5** [stated] A model grading its own interface work rates it too kindly; a separate grading agent is easier to make sceptical, though it starts out inclined to be lenient toward model output.
+  - Depends on model ability: yes. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong).
+  - Against: None found; one engineer at the model's seller compared the grader with his own judgement, and no rates of leniency are given; a model reviewing others' screens praised them under a short prompt and raised many non-issues once told to list breaches ([UW heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-went-wrong)).
+  - Related view (karpathy-ideas): [several models rank each other anonymously](https://github.com/ntroccoli/karpathy-ideas/blob/main/ideas/2025-11-22-llm-council-anonymous-peer-review.md), contradicts: in Karpathy's small tests, models ranking pooled answers with names hidden showed little bias toward their own text, while the harness grader knew it was judging its own build.
+- **JDG-6** [stated] An untuned model acting as QA found real bugs, then argued them away and approved the build; tune it on logs where its verdict differs from a person's.
+  - Depends on model ability: yes. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Opus 4.x.
+  - Cases: [Anthropic harness: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#what-went-wrong), [Anthropic harness: who did what](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md#who-did-what).
+  - Against: None found; after several rounds of tuning the grader still missed layout issues and bugs in features it did not exercise, and no counts are given.
+- **JDG-7** [stated] Reviewing app screenshots against usability heuristics, one model covered more of the known issues than a single expert or a pool of five experts.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [UW heuristic review: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#numbers), [UW heuristic review: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-worked).
+  - Against: Disagree: GPT-4o found a fifth of three experts' issues on a web system and few of them on control, efficiency and memory load ([Brazil heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#what-went-wrong)); the reference lists were built differently, only GPT-4 beat the pool while two other models with the same prompt fell below it on one app, and the reference list holds the model's own findings.
+- **JDG-8** [stated] Reviewing still screens, a model found fewer of the experts' problems on user control in both studies, and in one study few on efficiency and memory load; keep people on those.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [Brazil heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#what-went-wrong), [UW heuristic review: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#numbers).
+  - Against: Disagree: on flexibility and efficiency GPT-4 covered more of the reference issues than five experts pooled, on both apps ([UW heuristic review: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#numbers)); the reference lists were built differently, and both models missed problems that need use or several screens.
+- **JDG-9** [stated] A model reviewing screenshots raises non-issues (problems not on the screen, misread status icons or banners, common conventions taken as faults); have a person confirm each finding.
+  - Depends on model ability: yes. Checked against people: yes. Strength: strong. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [UW heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-went-wrong), [Brazil heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#what-went-wrong).
+  - Against: None found; in both studies the authors, not outside experts, decided which findings were false, each tested one main model on screenshots only, newer models may read screens better, and one prompt demanded at least two problems for every heuristic, which invites non-issues.
+- **JDG-10** [stated] A model reviewing a sequence of screenshots repeats an issue on every screen where it recurs and misses about half the problems that span screens, even when told to weigh the flow.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [UW heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-went-wrong), [Brazil heuristic review: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#numbers).
+  - Against: None found; the cross-screen misses come from one study (two apps, GPT-4 only) whose authors partly blame their own prompt; the second study shows repeats only, from one prompt per screenshot rather than a sequence.
+- **JDG-11** [stated] A model's heuristic review adds issues experts did not list, with more on wording and visual design than the experts found; use it beside experts, not in place of them.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [Brazil heuristic review: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#what-worked), [UW heuristic review: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-worked).
+  - Against: None found; the extra issues were accepted by the study authors, not by the experts whose list they extend.
+- **JDG-12** [stated] Across a review of several tasks a model reviewer kept its coverage from task to task while experts found less as they went, and repeat runs returned most of its first list.
+  - Depends on model ability: yes. Checked against people: partly. Strength: medium. Era: 2024–2025; newest: GPT-4.x.
+  - Cases: [UW heuristic review: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md#what-worked).
+  - Against: None found; four tasks per app, each expert on one app, and the repeat runs were matched to the first list by the authors; the experts' drop rests on a statistic printed in an impossible form, and the repeat shares use totals the paper does not explain.
+- **JDG-13** [ours] Before quoting a model reviewer's overlap with an expert list, merge its repeats across screens and mark which expert issues could be seen in what the model was shown.
+  - Depends on model ability: partly. Checked against people: yes. Strength: medium. Era: 2024; newest: GPT-4o.
+  - Cases: [Brazil heuristic review: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md#what-went-wrong).
+  - Against: None found; one study, where the gap is our reading of what it leaves out, not a measured error.
+
+## Simulated users (simulated-users.md)
+
+What happens when a language model walks an interface in a person's place (a walkthrough, a think-aloud, a usability test), and how its path, its doubts and its ratings compare with those of real people on the same tasks.
+
+- **SIM-1** [stated] A model that walks tasks in a person's place finishes more of them, in fewer steps and on straighter paths, so its run is no estimate of what the tasks cost people.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2025; newest: GPT-4.x.
+  - Cases: [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
+  - Against: None found; one study of two mobile apps with ten people, on screens assembled by hand rather than a live app, and the models kept a full history people did not; on a live demo at studio-go (maintainer's own) a newcomer agent took up to 2.6x the shortest route's clicks ([studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers)).
+- **SIM-2** [stated] Asked like people to say what confuses it, a simulated user voices far fewer doubts; an explicit confusion rating per screen during the walk recovers where people hesitate.
+  - Depends on model ability: yes. Checked against people: yes. Strength: medium. Era: 2025; newest: GPT-4.x.
+  - Cases: [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong), [UW walkthrough: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-worked).
+  - Against: None found; the ratings were tested against the doubts of the same ten people on tasks written around problems the authors had already found, and false alarms are not reported.
+- **SIM-3** [stated] Give a simulated user the history of its walk when it rates screens; the same screens rated one at a time gave weak ratings that changed from run to run.
+  - Depends on model ability: partly. Checked against people: yes. Strength: medium. Era: 2025; newest: GPT-4.x.
+  - Cases: [UW walkthrough: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-worked), [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
+  - Against: None found; with and without history the models rated different sets of screens, so history is not the only difference.
+- **SIM-4** [ours] Run a simulated user several times and measure how far the runs agree before acting on one run's ratings.
+  - Depends on model ability: partly. Checked against people: partly. Strength: medium. Era: 2025; newest: GPT-4.x.
+  - Cases: [UW walkthrough: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#how-it-was-checked), [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
+  - Against: None found; agreement between runs says the ratings are steady, not that they are right.
+
+## Measuring jobs (measuring-jobs.md)
+
+How the cost of a user's jobs (screens, clicks, steps, fields typed) was counted before and after a change made with AI, and what rule checks on single pages miss.
+
+- **JOB-1** [stated] Tests that every page follows the interface rules can all pass while the user's jobs stay long; count what each job costs in screens and clicks as well.
+  - Depends on model ability: no. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; the maintainer's own project, with one owner who is its only user, so it is not independent evidence.
+- **JOB-2** [stated] Turn a scripted walk of each job into a test with a committed baseline, so a change that adds screens or clicks fails before it merges.
+  - Depends on model ability: no. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what worked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-worked).
+  - Against: None found; the walk follows the shortest route, its baseline was taken only after the first round of changes, and no change has yet been caught by it, since the redesign has not been built yet.
+- **JOB-3** [ours] Count each job twice, by its shortest route and as a newcomer walks it; the two differ, and an agent standing in for the newcomer takes fewer steps than people do.
+  - Depends on model ability: yes. Checked against people: partly. Strength: medium. Era: 2025–2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers), [UW walkthrough: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md#what-went-wrong).
+  - Against: None found; the newcomer counts at studio-go come from a model and cover only the pages before the redesign, never a mock, and the people in the walkthrough study used two mobile apps, not the interface counted.
+- **JOB-4** [stated] An audit read from code and screenshots can miss what walking the jobs finds: the screens and clicks each job needs, in what order, and whether pages agree; walk the jobs as well.
+  - Depends on model ability: partly. Checked against people: model. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: how it was checked](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#how-it-was-checked), [studio-go: numbers](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#numbers).
+  - Against: None found; one project, where models did both the audit and the walk and the project's own coordinator compared the two lists.
+- **JOB-5** [stated] Count the jobs before the first change lands; a baseline taken afterwards cannot show what the change did to them.
+  - Depends on model ability: no. Checked against people: none. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; the maintainer's own project, where the missing count is one round of changes, not a measured harm.
+- **JOB-6** [stated] Agents told only to fold options keep them and add controls; say in the design what each job loses.
+  - Depends on model ability: partly. Checked against people: checker. Strength: weak. Era: 2026; newest: Claude Fable 5.x.
+  - Cases: [studio-go: what went wrong](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md#what-went-wrong).
+  - Against: None found; the counts come from one crude text search over the templates, and the records word the brief's limit more and less broadly.
+
+## Cases
+
+- **studio-go**: [studio-go's video UI passes every agent-written rule test yet stays costly to use; a newcomer agent and a job walk count it](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) — product: the local web UI of a single-owner video pipeline, its pages after a first round of fixes and the clickable mocks of a redesign; AI: design, build, change, check, simulate-user; measured: task-cost, function, consistency, contrast, human-preference, cost; checked against: checker, model; sample: 1 web app with 1 user (its owner), 6 jobs, 40 audit findings, 6 mockups (65 HTML pages at one count, 32 HTML pages later); evidence: assertion-only; author: maintainer-own; cost: wall time only, between 14 minutes and roughly 2.5 hours per package for the 12 packages after the job walk; tokens and money not recorded for this work. Agents landed 39 of 40 UI packages (20 of 40 findings complete) with rule tests green, yet jobs stayed long; a newcomer agent and a job walk counted them.
+- **Agentic audit**: [One browser agent per WCAG criterion finds more audit-reported barriers than axe-core or a single-pass model, and more unlisted ones](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md) — benchmark: saved copies of 24 pages from eleven scholarly publishing platforms, audited against 40 WCAG success criteria; AI: check; measured: accessibility, issue-coverage, cost; checked against: people; sample: 250 page-criterion pairs (78 reported failures, 172 pairs inferred to pass) on 24 pages; 40 criteria, 15 criteria with a reported failure; 9 compared runs in the main table, 4 later worker runs, 6 further batch model runs; evidence: shown-in-source; author: independent; cost: USD 6.38 to USD 74.52 per 250-pair workload, estimates (API-equivalent for the coding agents); the reference worker run has no usage record. Per-criterion agents found 67 of 78 barriers in expert audits (axe-core 28) at 56% precision; their lead was largest on keyboard failures.
+- **Concordia repair**: [Kimi K2.5 repairs 308 scraped pages; most improve, a quarter pass axe, and a retry loop adds cost but no fixes](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md) — study: static HTML of scraped real-world web pages (news, education, standards sites), checked for accessibility violations and then repaired; AI: check, change; measured: accessibility, issue-coverage, cost; checked against: checker; sample: 662 pages for detection (331 pages with violations, 331 corrected pages); 308 pages repaired by each of two strategies; 1 model, 1 run reported; evidence: shown-in-source; author: independent; cost: $4.92 for the single-pass repair of 308 pages and $7.50 for the agent loop, as reported; the code prices tokens at fixed GPT-4o-mini rates. Kimi K2.5 cut axe violations from 3.98 violations to 1.7 violations per page; a quarter of 308 pages came out clean; a retry loop cost 52% more, fixed no more.
+- **GitHub a11y agent**: [GitHub's accessibility agent reviews front-end pull requests with one reviewer and one fixer, and is told to refuse risky patterns](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md) — product: pull requests that change GitHub's front-end code, reviewed for WCAG issues by an agent that also answers accessibility questions in Copilot CLI and VS Code; AI: check, change; measured: accessibility; checked against: none; sample: 3,535 pull requests reviewed; evidence: assertion-only; author: seller-of-tool; cost: unstated. GitHub's pilot agent reviewed 3,535 pull requests at a 68% "resolution rate" it never defines; it hands complex code and risky widgets to people.
+- **Anthropic harness**: [Anthropic adds a planner and a Playwright grading agent to Claude app builds; by the engineer's account the game maker works where a solo run broke, at over 20x the cost](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md) — product: web front ends from a one-line prompt, then two full-stack browser apps (a retro game maker and a music workstation) built by Claude agents; AI: design, build, check, judge; measured: function, cost; checked against: model; sample: 2 full-stack apps built with the harness and 1 solo run for comparison; front-end runs of 5 to 15 iterations each, number of runs unstated; evidence: assertion-only; author: seller-of-tool; cost: game maker $9 solo against $200 with the harness; music workstation $124.70 in tokens. A Claude grader clicking through each sprint filed bugs and the game played where a solo run broke; the grader needed tuning, missed bugs, cost over 20x.
+- **UW walkthrough**: [GPT-4 and Gemini walk two mobile apps more directly than people and flag fewer failure points until asked to rate confusion](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md) — study: two mobile apps, one for learning a language and one for booking trips, given to the models as screenshot sets, six tasks each; AI: simulate-user, judge; measured: task-cost, judge-agreement; checked against: people; sample: 10 participants; 16 LLM runs in study 1; 12 LLM runs in study 2 (3 per model per condition); 2 apps, 12 tasks; evidence: shown-in-source; author: independent; cost: unstated. LLM walkthroughs beat 10 people on app tasks yet raised 3 failure points to their 10; confusion ratings during the walk predicted where people doubted.
+- **ArtifactsBench**: [ArtifactsBench has an LLM judge score generated web artifacts from screenshots and a checklist; the expert check covers a small subset](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md) — benchmark: self-contained web artifacts (games, SVG graphics, web apps, simulations, dashboards, management systems, small tools) generated by LLMs from one prompt each; AI: build, judge; measured: function, judge-agreement; checked against: people, model; sample: 1,825 queries; 33 models in the main table, 22 in the stable-judge table, 25 in the open-judge table; expert check on 280 queries from 6 models; 12 models compared with WebDev Arena; evidence: shown-in-source; author: seller-of-tool; cost: unstated. A Gemini judge scored answers to 1,825 web-artifact queries from screenshots and checklists; its 90.95% expert agreement rests on 280 queries from 6 models.
+- **UW heuristic review**: [GPT-4 heuristic reviews of two mobile apps cover more issues than five pooled experts but miss half the cross-screen ones](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md) — study: screenshots of two mobile apps, one for renting a flat and one for learning a language, four user tasks each, reviewed against Nielsen's 10 heuristics; AI: check; measured: issue-coverage, run-stability; checked against: people; sample: 2 apps, 8 tasks; 10 freelance UX experts (5 per app); five research assistants for the reference set; GPT-4 repeated on two accounts over 3 months; outputs from Claude 3.5 Sonnet and Gemini-1.5-pro (runs unstated); evidence: shown-in-source; author: independent; cost: unstated. GPT-4 covered 73% and 77% of known issues against 57% and 63% for five pooled UX experts, yet raised more non-issues and missed cross-screen problems.
+- **Brazil heuristic review**: [GPT-4o reviews 20 screenshots of a mining-data website against Nielsen's heuristics and finds a fifth of the experts' issues](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md) — study: a public Brazilian web platform of maps and charts on mineral research and production, given to the model as 20 screenshots and reviewed against Nielsen's 10 heuristics; AI: check; measured: issue-coverage; checked against: people; sample: 20 screenshots, one model run each; 66 issues from an earlier review by 3 experts; four researchers classified the model's issues; evidence: shown-in-source; author: independent; cost: unstated. From 20 screenshots GPT-4o raised 111 issues; 41 survived review, 14 of them among 66 expert issues (21.2%), and 27 were false positives.
+- **UCI code study**: [Qwen2.5-Coder and GPT-4o rewrite ten real websites with lower checker violation rates than the original code, but not on ARIA](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md) — study: UI files (HTML, JavaScript, CSS) of ten open-source project websites, regenerated block by block from model-written summaries and rendered; AI: build, check, change; measured: accessibility, contrast, function; checked against: checker; sample: 10 projects; 473 sampled UI files; 10 pages per project; 2 newer projects in a leakage check; 2 models; evidence: shown-in-source; author: independent; cost: unstated. Rewritten from summaries, model code had lower checker violation rates than human code; accessibility prompts rarely helped, a model-report fix loop mostly did.
+
+## Interface checklist: measure before and after a change
+
+Questions an agent answers about a project's interface before a change made with AI, and again
+after it. Each has a **Check** (one measurement an agent runs), an **Evidence** line in our words
+("ours" marks our inference) and the **Lessons** behind it (`ACC-5`: lesson 5 on the accessibility
+page; listed in [lessons/evidence.md](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/lessons/evidence.md)). Every answer is a count, a file or a
+command's output. No question asks which look is better: taste stays with a person.
+
+How to take each measurement (tools, the static route, server templates, examples) is in the
+[measuring notes](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md#measuring-notes); read the note of a question before
+measuring it. A Check marked "running page" needs the served interface (a browser or an HTTP
+client); without one, take the static route the note gives and mark the answer "static".
+
+Cases named below, each by its label (all in [index.md](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/index.md)): [Agentic audit](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md),
+[Anthropic harness](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md), [ArtifactsBench](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md), [Brazil heuristic review](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md), [Concordia repair](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md),
+[GitHub a11y agent](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md), [UCI code study](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md), [UW heuristic review](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md), [UW walkthrough](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md), and
+[studio-go](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md) (the maintainer's own project: never independent evidence).
+
+1. **Which jobs does the interface serve, and what does each cost today?**
+   Check: for each job, the screens, clicks or key presses and fields typed by its shortest route
+   (a scripted walk on a running page, else static), and again as a newcomer walks it, written to
+   a baseline file before any change.
+   Evidence: at studio-go every agent-written rule test passed while jobs stayed long; its job walk
+   became a test with a committed baseline, taken only after the first round of changes. In the UW
+   walkthrough models finished more tasks in fewer steps than people, so an agent's newcomer count
+   is a floor, not people's cost.
+   Lessons: JOB-1, JOB-2, JOB-3, JOB-5, SIM-1.
+2. **Do the jobs finish, end to end, in the running interface?**
+   Check: the jobs of question 1 that no passing test drives from start to finish (no test, a
+   failing test, or one that does not run), by name.
+   Evidence: in the Anthropic harness a solo build looked finished while its core feature failed; a
+   grading agent that drove the app against agreed criteria caught specific bugs. A build that
+   passed its per-feature tests still kept a workflow the screen never explained (ours: walk whole
+   jobs after the grader passes).
+   Lessons: BLD-1, BLD-8, JOB-1.
+3. **How many accessibility violations does an automated checker find, by page and by rule?**
+   Check: a named rule checker's violations by page, rule and impact, on every page and state the
+   jobs reach (running page; static route in the note), written to a baseline file.
+   Evidence: model-written fixes in Concordia repair lowered axe's count on most pages but left only
+   about a quarter of pages clean, and some broke other rules (duplicate IDs, ARIA hiding focusable
+   content). In the UCI code study, asking models for accessible code added attributes that broke
+   other rules. The GitHub a11y agent post quotes a fix rate without defining it.
+   Lessons: ACC-2, ACC-3, ACC-4, ACC-13.
+4. **How many text and control colour pairs fall below the contrast target, in each theme?**
+   Check: the colour pairs below the WCAG contrast target, per theme and state, computed from the
+   design tokens and stylesheets (static), written to a baseline file.
+   Evidence: in the UCI code study contrast made up most checker violations, and pages rewritten by
+   models had fewer than the human code on average, not in every project. Counting pairs from the
+   tokens is ours: it reaches themes and states a page checker never rendered.
+   Lessons: ACC-1.
+5. **What can the checker not see here, and who covers it?**
+   Check: per job, the keyboard traps and controls a keyboard-only walk never reaches (running
+   page; static proxies in the note), with each high-risk widget listed for a person.
+   Evidence: a checker-clean page is no proof it works for disabled users: rates count every
+   violation alike, and checkers miss ARIA meaning and keyboard use (UCI code study, GitHub a11y
+   agent, Agentic audit). There, one browser agent per WCAG criterion found more of the
+   expert-reported failures than axe-core and both keyboard traps the batch models missed; its extra
+   findings were never settled by a person. The GitHub a11y agent keeps off high-risk widgets.
+   Lessons: ACC-5, ACC-7, ACC-8, ACC-10, ACC-11, ACC-15.
+6. **How many controls does each page carry, and do the pages agree?**
+   Check: per page, the interactive controls shown and those behind a fold, and the style values
+   and controls that bypass the design tokens and shared components, written to a baseline file.
+   Evidence: at studio-go agents told only to fold options kept them and added controls, and a walk
+   of the jobs found pages that disagreed where an audit from code and screenshots did not. The
+   token and component counts are ours.
+   Lessons: JOB-4, JOB-6.
+7. **Where a model rates, reviews or grades the interface, was it checked against people?**
+   Check: for each place a model scores, reviews or grades the interface, the set of items both it
+   and people rated: its size, their agreement, and the judge version it was measured on.
+   Evidence: ArtifactsBench chose its judge by agreement with experts, measured on a subset;
+   screenshots and code together agreed with experts more than either alone. UW heuristic review and
+   Brazil heuristic review split on a model's coverage of expert issues (above pooled experts in
+   one, a fifth in the other); both saw non-issues raised and cross-screen problems missed. In the
+   Anthropic harness the builder rated its own work too kindly, and its QA agent argued real bugs
+   away until tuned on logs.
+   Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-9, JDG-10, JDG-13.
+8. **Where a model walks the interface as a user, how far do its runs agree, and with people?**
+   Check: for each agent walk used as usability evidence, the runs per setup, how far repeat runs
+   agree, and whether its steps were ever compared with people's on the same tasks.
+   Evidence: in the UW walkthrough models finished more tasks, in fewer steps, than people and
+   voiced far fewer doubts until asked to rate confusion per screen; screens rated one at a time,
+   without the walk's history, gave weak ratings that changed between runs. Measuring how far runs
+   agree is ours.
+   Lessons: SIM-1, SIM-2, SIM-3, SIM-4, JOB-3.
+9. **How do agents here build, fix and check interface work?**
+   Check: which items of the build loop the project has, and which something enforces (the list
+   is in the note): checker failures fed back by name, a check apart from the builder, a retry
+   limit, rules that send high-risk work to people, and the cost of a run.
+   Evidence: in Concordia repair a retry loop, told only of structural failures, cost more and fixed
+   no more; a UCI code study loop fed a model-written violation report beat the plain prompt on
+   average. GitHub a11y agent runs one reviewer and one fixer, feeds its own archive of fixes, and
+   saw its agent try to work round its stop rule. The Anthropic harness criteria pulled designs
+   toward one look, its harness cost many times a solo run, and it removed parts one at a time when
+   the model changed.
+   Lessons: BLD-2, BLD-3, BLD-4, BLD-5, BLD-6, BLD-7, ACC-14.
+10. **Which counts may not rise, and does anything stop them rising?**
+    Check: for each count of questions 1 to 6, whether a test the project reruns on every change
+    fails when it rises above a committed baseline; the job walk of question 1 is kept as such a
+    test.
+    Evidence: studio-go's job walk is a test that fails when a job cannot finish or a count goes
+    above its committed baseline, taken after the first round and not yet tested by a change. Fixes
+    that lower a total can raise single rules (Concordia repair, UCI code study). Gating every
+    count, not only jobs, is ours.
+    Lessons: JOB-2, JOB-5, ACC-3, ACC-4.
+
+### How to run this checklist
+
+1. Run it in a fresh session on the project, changing nothing there. The cases are few and most
+   are single studies: read a case's "What went wrong" before relying on it.
+2. Measure first: answer each Check with a number, a file or a command's output, never from
+   memory or from how the interface looks to you. A count the project already records (a
+   committed baseline, a dated report) may be cited with its file, commit and date, marked
+   "recorded", with the command that measures it again under "Not run".
+3. A check you may not run (no running page, no browser allowed, no tool run): write the exact
+   command, mark it "not run" with the reason, take the static route if there is one, and never
+   guess its result. Where rules allow a browser only inside tests, propose the Check as a test.
+4. A fact only the owner knows (the jobs that matter, who reviews, which themes ship): write the
+   question, mark it "ask the owner" and state a default; unanswered, assume it, note it in the
+   record, go on.
+5. Mark each question "gap", "partial gap", "no gap" or "not applicable", with the measurement.
+   Give every count a baseline (date, commit, exact command, tool versions, values by job, page or
+   rule).
+6. Base proposals on the Evidence lines and, if you can, the cited lessons (their "Against" lines
+   and "Checked against people" tags) and the case sections they link, above all "Practices to
+   copy". No proposal says which look is better; a question of look goes to the owner. Order them
+   by what the rest depends on: baselines first (questions 1 and 10), then a judge or simulated
+   user checked against people before its ratings are used, then the rest.
+7. Report as below, then stop until the owner picks. One change per proposal (or parts 3a, 3b).
+8. Revisit as [applying the lessons](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md#revisit) says; share a
+   [field report](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/field-reports.md) once an item has met its problem (optional).
+
+### Report format
+
+Report, record and baseline files follow
+[the checklist report](https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/docs/applying-lessons.md#the-checklist-report): each answer with its
+measurement, a baseline file per count in `docs/interface-baselines/` (written before anything
+changes), numbered proposals with a one-word recommendation (do, later or skip), "Check now" and
+"Event that proves it", and the record in `docs/interface-review.md` once the owner picks. In a
+read-only run, write no file: the report's Baselines section stands in for them.
+
+[Agentic audit]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-09-08-mishra-agentic-a11y-audit.md
+[Anthropic harness]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-03-24-anthropic-harness-design.md
+[ArtifactsBench]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-07-tencent-artifactsbench.md
+[Concordia repair]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-26-concordia-llm-accessibility-repair.md
+[GitHub a11y agent]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-05-15-github-accessibility-agent.md
+[UW heuristic review]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-07-03-uw-synthetic-heuristic-evaluation.md
+[Brazil heuristic review]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-06-19-unespar-gpt4o-heuristic-evaluation.md
+[UCI code study]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-03-20-uci-human-or-llm-accessible-code.md
+[UW walkthrough]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2025-12-03-uw-synthetic-cognitive-walkthrough.md
+[studio-go]: https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/cases/2026-11-14-studio-go-interface-redesign.md
