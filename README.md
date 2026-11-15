@@ -54,6 +54,9 @@ only reads your project and changes nothing: you get measurements and numbered p
 with a one-word recommendation (do, later or skip) and a reason, and you choose. No proposal says
 which look is better. Run step 1 in a fresh session. The prompts for step 2 (apply), step 3
 (revisit later) and sharing a field report are in [docs/try-it.md](docs/try-it.md).
+A revisit reads [corrections.md](corrections.md) first: what this collection published wrong, and
+how to find and repair what it changed in your project. If you ran a route while an entry there
+was published, run the revisit again.
 
 ### Before an interface change
 
@@ -62,7 +65,7 @@ an agent can measure and how your agents check their work, with a baseline for e
 same counts can be taken after the change. Paste:
 
 ```text
-Read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and follow it. Run the checklist on this project: measure every question with its check, on a running page where the check needs one and I allow it, else by its static route marked "static"; do not judge from memory or from how the interface looks. Report in the checklist's report format: each answer with its measurement, a baseline for every count, and the cases behind each gap. Give each proposal a recommendation of exactly one word, do, later or skip, with a reason. Change nothing.
+Read https://raw.githubusercontent.com/ntroccoli/ai-interfaces/main/llms.txt and follow it. Run the checklist on this project: measure every question with its check, on a running page where the check needs one and I allow it, else by its static route marked "static"; do not judge from memory or from how the interface looks. Report in the checklist's report format: each answer with its measurement, a baseline for every count, and the cases behind each gap. Give each proposal a recommendation of exactly one word, do, later or skip, with a reason: proposals are options for me, the owner. Change nothing.
 ```
 
 ### Learning from the lessons

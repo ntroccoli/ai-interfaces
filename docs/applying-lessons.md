@@ -13,7 +13,10 @@ route also reads, on this page, the [measuring notes](#measuring-notes) and
   held. This page describes that route.
 
 Both routes measure; neither says which look is better. A question of look goes to the owner,
-never into a proposal.
+never into a proposal; a value below a standard's target (contrast) is a measured gap, not a
+question of look: propose values that pass, and the owner picks among them. Proposals are options
+for the project's owner: the one-word recommendation is the agent's suggestion, and nothing is
+applied without the owner's yes.
 
 ## How to run it
 
@@ -58,9 +61,15 @@ Run it when the collection has grown or after a few weeks of work, in a fresh se
 record the review wrote (`docs/interface-review.md` for the checklist,
 `docs/interface-lessons-review.md` for the lessons).
 
+- Corrections first, every time: read [corrections.md](../corrections.md). For each entry the
+  record does not list as checked, follow its "Recognise it" on the project; where it matches,
+  follow "Find what it changed" and put its "Propose to the owner" first among the proposals. Name
+  every entry checked in the record's "Corrections checked" line, matched or not.
 - Start: compare the log entry the record names (date and title) with the newest one
-  [llms.txt](../llms.txt) names. If they match and no item is due for re-check (due: waiting or
-  open, with commits in the project since the record's date), say so and stop.
+  [llms.txt](../llms.txt) names. If they match, no correction was new and no item is due for
+  re-check (due: waiting or open, with commits in the project since the record's date, or its due
+  date passed), say so and stop.
+- Past due: list first the open and waiting rows whose due date has passed, with their owners.
 - Re-check: rerun each item's "Check now" unchanged (for a count, the command in its baseline
   file, with the same tool version) and look for its "Event that proves it" in the work since;
   compare with its baseline. Mark each exactly proven, still waiting, stopped holding or not
@@ -73,9 +82,10 @@ record the review wrote (`docs/interface-review.md` for the checklist,
   added, changed or removed. Open only those, and measure them as in step 4.
 - Lint: list the applied lessons that a newer lesson now contradicts or supersedes, and the
   record's items whose lesson or question changed.
-- Propose only the new or changed lessons and questions, earlier "later" items, applied items
-  that stopped holding and what the lint found, each with exactly one word, do, later or skip,
-  and a reason. Update the record in its existing layout and name in it the newest log entry
+- Propose only the corrections that matched, the new or changed lessons and questions, earlier
+  "later" items, applied items that stopped holding and what the lint found, each with exactly one
+  word, do, later or skip (a suggestion), and a reason. Update the record in its existing layout,
+  give each open or waiting row an owner and a new due date, and name in it the newest log entry
   read, by date and title.
 - The too-early rule below holds for the re-check only: new lessons can be proposed before
   anything has met its problem.
@@ -108,7 +118,7 @@ rate screens, walk jobs as a user>.
    Evidence: the lesson's strength and people tag, its "Against" line, and links to case sections you read.
    Depends on: <proposal numbers, or none>.
    Cost: S | M | L (S under a day of agent work, M a few days, L a week or more).
-   Recommendation: do | later | skip (exactly one word), with a one-line reason.
+   Recommendation: do | later | skip (exactly one word, a suggestion for the owner), with a one-line reason.
    Baseline: <how often the problem happened so far, with the evidence; for a count, its baseline file>.
    Check now: <a command or count that passes once the change is applied>.
    Event that proves it: <what later work must show for the change to have held>.
@@ -124,16 +134,20 @@ rate screens, walk jobs as a user>.
 
 Lessons: <ai-interfaces commit or date>.
 Log entry: <date and title of the newest log.md entry this review covered>.
+Corrections checked: <date and title of each corrections.md entry checked, or "none published">.
 
-| # | Lesson | Proposal | Baseline | Status | Event that shows it | Date |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | <ID> | <one line> | <how often, evidence> | <status> | <commit, test run, count or incident> | <YYYY-MM-DD> |
-| 3a | <ID> | <one part of a bundled proposal> | ... | ... | ... | ... |
+| # | Lesson | Proposal | Baseline | Status | Event that shows it | Owner | Due | Date |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | <ID> | <one line> | <how often, evidence> | <status> | <commit, test run, count or incident> | <who> | <YYYY-MM-DD> | <YYYY-MM-DD> |
+| 3a | <ID> | <one part of a bundled proposal> | ... | ... | ... | ... | ... | ... |
 ```
 
 One status per row: a proposal with parts gets a row per part (3a, 3b...), each with its own status
-and event. Assumed owner answers go under the table, one line each: "Assumed: <question> —
-<default>, <date>".
+and event. Every open or waiting row has an owner (the person or session that acts or checks next)
+and a due date (when it is checked next; default: four weeks after the record's date, our guess);
+a revisit lists the rows past their due date first. Proven and skipped rows leave both as "—".
+Assumed owner answers go under the table, one line each: "Assumed: <question> — <default>,
+<date>".
 
 Baseline: written before any change, how often the proposal's problem happened so far, with the
 evidence (a count from the history, logs or a checker run), marked "(recorded)" when it comes from
@@ -163,11 +177,15 @@ template file, leave out included partials and loop repeats, and say so.
 
 - **Q1 jobs.** List the jobs from the docs, the navigation and the end-to-end tests; none written:
   ask the owner (default: one job per top-level navigation entry, plus forms whose page exists to
-  save them, at most 10 jobs). A screen is a full page load; a swapped fragment is no screen, but
-  its trigger is a click. Walk with the project's end-to-end tool or Playwright on a running page;
-  static from routes, links and forms, marked "static" ("static, floor" for flows of more than
-  three server round trips). The newcomer starts from the start page, types no address and knows
-  no code, where project rules allow; name who walked, else ask the owner.
+  save them). Count every job in the baseline; when there are many, ask the owner which to walk on
+  a running page first, and count the rest statically, never leaving one out. A screen is a full
+  page load; a swapped fragment is no screen, but its trigger is a click. Walk with the project's
+  end-to-end tool or Playwright on a running page; static from routes, links and forms, marked
+  "static" ("static, floor" for flows of more than three server round trips). The newcomer starts
+  from the start page, types no address and knows no code, where project rules allow; name who
+  walked, else ask the owner. Provenance: the default job list and the three round trips are our
+  guesses; a cap of ten jobs, published until 2026-11-15, made a behaviour check's agent leave five
+  of fifteen jobs out of its baseline ([corrections](../corrections.md)).
 - **Q2 jobs finish.** A whole-job test drives a browser or walks the HTTP requests and responses.
   Run the tests once (a running page or the project's harness). For work an agent built, also note
   whether a check apart from the builder used the running app against criteria in a file committed
@@ -177,7 +195,12 @@ template file, leave out included partials and loop repeats, and say so.
   states a run by address missed). Static: a component linter (`eslint-plugin-jsx-a11y` for JSX) or
   `html-validate` on HTML files, marked "static" (fewer rules). Server templates: render the routes
   through the project's tests and check the output; with no run allowed, write "no static checker
-  for this template language", never a text-search stand-in. Name the checker, its version and
+  for this template language" and give no checker count, then list apart, as "read from the code,
+  not a checker count", the failures you can see in the templates (images without a text
+  alternative, fields without a label, click handlers on elements that are not controls); a
+  text-search count never stands in for a checker's count (our guess: a grep finds a fraction of
+  what a checker does). Until 2026-11-15 this note said only the first part, and a behaviour
+  check's agent then reported no failure at all ([corrections](../corrections.md)). Name the checker, its version and
   rule set; count the pages with none too. After a change, list rules that newly fail anywhere and
   pages that got worse, not only the total. A fix rate quoted for an agent states what counts as
   fixed, out of what total, and who decided.
@@ -187,7 +210,10 @@ template file, leave out included partials and loop repeats, and say so.
   ("approximate" when the blend space differs). Targets: 4.5:1 for normal text, 3:1 for large text
   and focus indicators, and 3:1 for control borders where nothing else (a fill, a label) marks the
   control's bounds. Colours set at run time or inline need a running page and axe's
-  `color-contrast` rule. List colours that preview the user's own content apart.
+  `color-contrast` rule. List colours that preview the user's own content apart. Provenance: the
+  targets are WCAG 2.2 success criteria 1.4.3 and 1.4.11 at level AA (standard guidance), "large"
+  as WCAG defines it; a pair below its target is a gap to fix with values that pass, never a
+  question of look to defer (a behaviour check saw two brand-colour failures marked "later").
 - **Q5 keyboard.** What the checker cannot judge: keyboard operation (tab order, visible focus,
   traps), what ARIA roles and names mean, reading order, announcements. On a running page, script
   Tab, Shift+Tab, Enter and Escape through each job and count focus stops, traps and controls never
@@ -197,13 +223,19 @@ template file, leave out included partials and loop repeats, and say so.
   ancestor. High-risk widgets: drag and drop, data grids, custom comboboxes, rich text editors,
   canvas. Where an agent audits accessibility, count apart the known failures it found, those it
   declined or skipped, and its findings no audit lists, kept as candidates for a person.
+  Provenance: `tabindex` above zero is WCAG failure technique F44 and the arrow-key roles follow
+  the WAI-ARIA Authoring Practices (standard guidance); the high-risk list is a published case
+  ([GitHub a11y agent](../cases/2026-05-15-github-accessibility-agent.md)) plus our guess (canvas,
+  rich text). They are proxies: a hit is a place to test, not a proven failure.
 - **Q6 controls.** Count the shared layout once, apart. Behind a fold: anything hidden until a
   click (menus, disclosures, tabs, dialogs, script-toggled parts). Consistency counts: style values
   outside the design tokens (colour literals, font sizes, pixel spacing, arbitrary utility values),
   controls of a kind that skip its shared component (the class or partial most of that kind uses),
   modifier classes or props in use per shared component, and action labels shown with more than
   one icon or icons with more than one label. Static from the code; shown counts are firmer on a
-  running page. A change meant to remove or fold options states what each job loses.
+  running page. A change meant to remove or fold options states what each job loses; a control
+  that serves no job the owner listed is a question for the owner, never removed on that ground
+  (a behaviour check's agent held to this and asked).
 - **Q7 judges.** Look in scripts, CI steps, prompts, agent instructions and past audit or review
   reports written by models; leave out models that rate the content the product makes. Note
   whether the shared items were held out from tuning, the judge version (changed since: not
@@ -229,7 +261,11 @@ template file, leave out included partials and loop repeats, and say so.
   reruns with the project's suite on every change, not only at a review. After a change, rerun
   each count with the same command and checker version and list each that rose, by job, page or
   rule, beside its baseline. No baseline taken before the change: say so; its effect cannot be
-  shown.
+  shown. A rise a change needs (a new job's control) is listed with the job it serves for the
+  owner to accept; never remove or hide a control, a job or a check to make a count hold. In a
+  behaviour check an agent asked to add a needed control kept every control, raised the baseline
+  itself and asked the owner to accept it: nothing blocked an agent there, which is the gap this
+  question asks about.
 
 ## The checklist report
 
@@ -280,12 +316,23 @@ The record, `docs/interface-review.md` in the project, written after the owner p
 
 Checklist: <ai-interfaces commit, or the date when run from an uncommitted copy>.
 Log entry: <date and title of the newest log.md entry this review covered>.
+Corrections checked: <date and title of each corrections.md entry checked, or "none published">.
 
-| # | Question | Proposal | Baseline | Status | Event that shows it | Date |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | Q<n> | <one line> | <baseline file and its value> | <status> | <commit, test run or count> | <YYYY-MM-DD> |
+| # | Question | Proposal | Baseline | Status | Event that shows it | Owner | Due | Date |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Q<n> | <one line> | <baseline file and its value> | <status> | <commit, test run or count> | <who> | <YYYY-MM-DD> | <YYYY-MM-DD> |
 ```
 
-Statuses, baselines and assumed owner answers work as in [the record](#the-record) of the lessons
-route: one status per row (a proposal's parts: rows 3a, 3b), and a revisit reruns each baseline
+Statuses, owners, due dates, baselines and assumed owner answers work as in
+[the record](#the-record) of the lessons route: one status per row (a proposal's parts: rows 3a,
+3b), every open or waiting row with an owner and a due date, and a revisit reruns each baseline
 file's command and compares.
+
+Provenance of the report's rules (all our guesses, carried over from the sibling collection
+ai-migrations, none measured): the S, M and L sizes (prevent proposals with no size; applied
+blindly, an agent's day is not a person's day, so read them as relative), one word per
+recommendation (prevents hedged advice; the reason line carries the nuance), one change per
+proposal (keeps each check traceable; applied blindly, it can split changes that only work
+together, so number them 3a, 3b and say "Depends on"), and the four-week default due date
+(prevents rows that wait forever; applied blindly, a slow project gets reminders before anything
+could have happened, so set a date that fits its pace).

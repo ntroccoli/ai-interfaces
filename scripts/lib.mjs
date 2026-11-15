@@ -20,6 +20,10 @@ export const CHECKLIST = join(ROOT, 'checklist.md');
 export const NOTICE = join(ROOT, 'NOTICE.md');
 // Agents read checklist.md whole before measuring a project: keep it small.
 export const CHECKLIST_MAX_BYTES = 20 * 1024;
+// A checklist threshold's evidence level (docs/format.md "Checklist", provenance), and the words that make a
+// Check a threshold or a cut, cap or forbid rule that needs one.
+export const PROVENANCE_LEVELS = ['published case', "others' measurement", 'standard or vendor guidance', 'our single case', 'our guess'];
+export const RULE_WORDS = /\b(cut|cuts|cap|caps|capped|delete|deletes|remove|removes|forbid|forbids|forbidden|drop|drops|limit|limits|at most|at least|may not|must not|never|no more than|more than|fewer than|less than|below|above|rise|rises|exceed|exceeds|threshold)\b/i;
 
 // Field values. Keep in sync with docs/format.md "Case files".
 export const SOURCE_TYPES = ['engineering-post', 'paper', 'talk', 'repo', 'vendor-marketing', 'evidence-file'];

@@ -10,7 +10,7 @@ import { join, dirname, resolve, basename } from 'node:path';
 import {
   ROOT, CASES_DIR, EVIDENCE_DIR, CHECKLIST, NOTICE, SOURCE_TYPES, RELATIONS, EVIDENCE, OUTCOMES,
   STATUSES, BASES, REQUIRED, CASE_TYPES, AI_ROLES, MEASURES, CHECKED_AGAINST, SECTIONS, NUMBERS_HEADER, UNITS, SCALES,
-  CHECKLIST_MAX_BYTES, REPO_SLUGS, REPO_BLOB,
+  CHECKLIST_MAX_BYTES, PROVENANCE_LEVELS, RULE_WORDS, REPO_SLUGS, REPO_BLOB,
   parseCase, listCases, sections, refDefs, linksIn, anchor, practices, closestPractices,
   LESSONS_DIR, LESSON_PAGES, LESSON_MAX_BYTES, INDEX_MAX_BYTES, LLMS_MAX_BYTES, LESSON_NOTE, LESSON_LEGEND, KARPATHY_IDEAS,
   PEOPLE_CHECK, PEOPLE_GROUND, AGENTS_MAX_BYTES, MODEL_DEPENDENCE, STRENGTHS, META_LABEL, META_LINE, parseLessonPage, strengthCeiling, lessonMeta,
@@ -529,6 +529,56 @@ function validateLessons() {
   return { ids, cited };
 }
 
+// Provenance (docs/format.md "Checklist"): an unmeasured number in a published checklist gets applied as
+// advice, and an agent then cuts until it holds (2026-11-15). So a Check that holds a threshold (a
+// number other than a question reference) or a cut, cap or forbid word needs a "Provenance:" line in its
+// question, and every Provenance line names an evidence level, what it prevents and how it fails when
+// applied blindly; a "published case" line links the case.
+const LABELLED = /^\s*(Check|Evidence|Ask|Trade-offs|Lessons|Provenance):/;
+function labelled(text, label) {
+  const out = [];
+  let cur = null;
+  for (const l of text.split('\n')) {
+    const m = l.match(LABELLED);
+    if (m) { cur = m[1] === label ? [] : null; if (cur) out.push(cur); }
+    if (cur) cur.push(l.trim());
+  }
+  return out.map(x => x.join(' ').replace(new RegExp(`^${label}:\\s*`), ''));
+}
+function checkProvenance(qtext, refs, caseFiles) {
+  const msgs = [];
+  const check = labelled(qtext, 'Check').join(' ').replace(/\bquestions? \d+(?:(?:,| to| and|, and) \d+)*/gi, '').replace(/\bQ\d+\b/g, '');
+  const prov = labelled(qtext, 'Provenance');
+  const hit = /\d/.test(check) ? 'a number' : check.match(RULE_WORDS)?.[0];
+  if (hit && !prov.length) msgs.push(`its Check holds ${hit === 'a number' ? hit : `"${hit}"`} but the question has no "Provenance:" line (source, level, what it prevents, how it fails when applied blindly)`);
+  for (const p of prov) {
+    const level = PROVENANCE_LEVELS.find(x => p.includes(x));
+    if (!level) msgs.push(`a "Provenance:" line names no evidence level (${PROVENANCE_LEVELS.join(', ')}): "${p.slice(0, 50)}"`);
+    if (!/\bPrevents:\s*\S/.test(p)) msgs.push(`a "Provenance:" line needs "Prevents: <what>": "${p.slice(0, 50)}"`);
+    if (!/\bApplied blindly:\s*\S/.test(p)) msgs.push(`a "Provenance:" line needs "Applied blindly: <how it fails>": "${p.slice(0, 50)}"`);
+    if (p.includes('published case') && !caseLinks(p, refs).some(c => caseFiles.has(c))) msgs.push(`a "Provenance:" line at level "published case" must link the case: "${p.slice(0, 50)}"`);
+  }
+  return msgs;
+}
+
+// corrections.md (docs/format.md "Corrections"): every revisit reads it first, so it always exists, even
+// with no entry; each entry ("## YYYY-MM-DD — title") has the five parts a project needs to repair what
+// the wrong text changed.
+const CORRECTION_PARTS = ['Wrong', 'Published', 'Recognise it', 'Find what it changed', 'Propose to the owner'];
+function validateCorrections() {
+  const f = 'corrections.md';
+  const p = join(ROOT, f);
+  if (!existsSync(p)) return err(f, 'missing; it may hold no entry, but every revisit reads it first');
+  const text = readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
+  for (const e of text.split(/^## /m).slice(1)) {
+    const head = e.split('\n')[0];
+    if (!/^\d{4}-\d{2}-\d{2} — \S/.test(head)) err(f, `entry heading "${head}" must be "YYYY-MM-DD — title"`);
+    const parts = [...e.matchAll(/^- \*\*([^*]+):\*\*/gm)].map(m => m[1]);
+    if (parts.join('|') !== CORRECTION_PARTS.join('|')) err(f, `${head}: parts must be, in order: ${CORRECTION_PARTS.join(', ')} (found: ${parts.join(', ') || 'none'})`);
+  }
+  for (const t of brokenLinks(text, ROOT)) err(f, `broken link ${t}`);
+}
+
 // The checklist arrives after the first ten cases (docs/format.md "Checklist"): until checklist.md exists,
 // its rules are skipped and the run says so; once it exists, every rule applies.
 function validateChecklist(caseFiles, lessonIds) {
@@ -557,6 +607,7 @@ function validateChecklist(caseFiles, lessonIds) {
     if (!ids.length) err(f, `"${q.title}" cites no lesson ("Lessons: TST-1, REV-3")`);
     for (const id of ids) if (!lessonIds.has(id)) err(f, `"${q.title}" cites lesson ${id}, which no lesson page holds`);
     for (const l of caseLinks(q.text, refs)) { if (!caseFiles.has(l)) err(f, `"${q.title}" links to missing case ${l}`); cited.add(l); }
+    for (const m of checkProvenance(q.text, refs, caseFiles)) err(f, `"${q.title}": ${m}`);
   }
   for (const { text: t, file: cf } of caseLinkTexts(lines.join('\n'), refs)) {
     const label = caseMetas.get(cf)?.label;
@@ -664,6 +715,7 @@ if (!args.length) {
     const size = Buffer.byteLength(readFileSync(agents, 'utf8').replace(/\r\n/g, '\n'), 'utf8');
     if (size > AGENTS_MAX_BYTES) err('AGENTS.md', `${size} bytes (at most ${AGENTS_MAX_BYTES}); move detail to docs/format.md`);
   }
+  validateCorrections();
   for (const c of files) if (!lessons.cited.has(c) && !list?.cited.has(c)) err(c, 'no lesson and no checklist question cites this case');
   summary = ` ${lessons.ids.size} lessons valid. ` + (list ? `checklist.md valid: ${list.n} questions, each citing lessons.`
     : 'checklist.md absent: its rules are skipped until it exists.');

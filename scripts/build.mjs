@@ -367,6 +367,9 @@ out['llms.txt'] = [
   `- Once a prediction has met a real event (a change measured before and after, a problem a lesson foresaw or missed): ` +
     `tell what the ${HAS_CHECKLIST ? 'questions and lessons' : 'lessons'} foresaw and what they missed in a field report ([how](${RAW_BASE}/docs/field-reports.md)); show ` +
     'the user the exact text before posting.',
+  `- Corrections: read [corrections.md](${RAW_BASE}/corrections.md) first on every revisit, even when nothing else is new: ` +
+    'what this collection published wrong, between which dates, how to recognise it in a project and what to propose to ' +
+    'its owner. Whoever ran a route while an entry was published should run the revisit again.',
   `- Revisit: the newest update is "${NEWEST.head}". For each [log.md](${RAW_BASE}/log.md) entry newer than your record's, ` +
     `read changes/<entry>.md (newest: [${NEWEST.slug}](${RAW_BASE}/changes/${NEWEST.slug}.md)), the lesson IDs and questions it ` +
     'added, changed or removed.',

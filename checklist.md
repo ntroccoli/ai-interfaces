@@ -1,10 +1,15 @@
 # Interface checklist: measure before and after a change
 
 Questions an agent answers about a project's interface before a change made with AI, and again
-after it. Each has a **Check** (one measurement an agent runs), an **Evidence** line in our words
-("ours" marks our inference) and the **Lessons** behind it (`ACC-5`: lesson 5 on the accessibility
-page; listed in [lessons/evidence.md](lessons/evidence.md)). Every answer is a count, a file or a
-command's output. No question asks which look is better: taste stays with a person.
+after it. The questions guide; they impose nothing: what applies is for the project's owner to
+decide. Each has a **Check** (one measurement an agent runs), an **Evidence** line (what the cases
+show, in our words, with links; "ours" marks our inference), **Ask** (questions for this project),
+**Trade-offs** (what it costs, and when not to apply it), a **Provenance** line for each threshold
+or rule (its source and evidence level: a published case, others' measurement, a standard or
+vendor guidance, our single case, or our guess; what it prevents; how it fails when applied
+blindly) and the **Lessons** behind it (`ACC-5`: lesson 5 on the accessibility page; listed in
+[lessons/evidence.md](lessons/evidence.md)). Every answer is a count, a file or a command's output.
+No question asks which look is better: taste stays with a person.
 
 How to take each measurement (tools, the static route, server templates, examples) is in the
 [measuring notes](docs/applying-lessons.md#measuring-notes); read the note of a question before
@@ -20,87 +25,131 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    Check: for each job, the screens, clicks or key presses and fields typed by its shortest route
    (a scripted walk on a running page, else static), and again as a newcomer walks it, written to
    a baseline file before any change.
-   Evidence: at studio-go every agent-written rule test passed while jobs stayed long; its job walk
-   became a test with a committed baseline, taken only after the first round of changes. In the UW
-   walkthrough models finished more tasks in fewer steps than people, so an agent's newcomer count
-   is a floor, not people's cost.
+   Evidence: at [studio-go][] every agent-written rule test passed while jobs stayed long; its job
+   walk became a test with a committed baseline, taken only after the first round of changes. In
+   the [UW walkthrough][] models finished more tasks in fewer steps than people, so an agent's
+   newcomer count is a floor, not people's cost.
+   Ask: which jobs do the docs, the navigation and the tests name, and does the owner know others?
+   Trade-offs: a scripted walk costs set-up; a static count is a floor for multi-step flows. Not
+   needed for a change that touches no job.
+   Provenance: a baseline before any change — our single case ([studio-go][]: taken after its first
+   round, whose effect then could not be shown). Prevents: a change whose effect cannot be shown.
+   Applied blindly: a baseline of only some jobs leaves the rest unmeasured; list every job.
    Lessons: JOB-1, JOB-2, JOB-3, JOB-5, SIM-1.
 2. **Do the jobs finish, end to end, in the running interface?**
    Check: the jobs of question 1 that no passing test drives from start to finish (no test, a
    failing test, or one that does not run), by name.
-   Evidence: in the Anthropic harness a solo build looked finished while its core feature failed; a
-   grading agent that drove the app against agreed criteria caught specific bugs. A build that
-   passed its per-feature tests still kept a workflow the screen never explained (ours: walk whole
-   jobs after the grader passes).
+   Evidence: in the [Anthropic harness][] a solo build looked finished while its core feature
+   failed; a grading agent that drove the app against agreed criteria caught specific bugs. A
+   build that passed its per-feature tests still kept a workflow the screen never explained (ours:
+   walk whole jobs after the grader passes).
+   Ask: does each job's test run on every change, and who wrote its criteria, and when?
+   Trade-offs: whole-job tests run slower and break more often than unit tests.
    Lessons: BLD-1, BLD-8, JOB-1.
 3. **How many accessibility violations does an automated checker find, by page and by rule?**
    Check: a named rule checker's violations by page, rule and impact, on every page and state the
    jobs reach (running page; static route in the note), written to a baseline file.
-   Evidence: model-written fixes in Concordia repair lowered axe's count on most pages but left only
-   about a quarter of pages clean, and some broke other rules (duplicate IDs, ARIA hiding focusable
-   content). In the UCI code study, asking models for accessible code added attributes that broke
-   other rules. The GitHub a11y agent post quotes a fix rate without defining it.
+   Evidence: model-written fixes in [Concordia repair][] lowered axe's count on most pages but left
+   only about a quarter of pages clean, and some broke other rules (duplicate IDs, ARIA hiding
+   focusable content). In the [UCI code study][], asking models for accessible code added
+   attributes that broke other rules. The [GitHub a11y agent][] post quotes a fix rate without
+   defining it.
+   Ask: which checker and version does the project already run, and on which pages and states?
+   Trade-offs: a checker sees only part of what fails (question 5), and a total can fall while one
+   rule rises. Failures read from code without a checker run are listed apart, as candidates.
    Lessons: ACC-2, ACC-3, ACC-4, ACC-13.
 4. **How many text and control colour pairs fall below the contrast target, in each theme?**
    Check: the colour pairs below the WCAG contrast target, per theme and state, computed from the
    design tokens and stylesheets (static), written to a baseline file.
-   Evidence: in the UCI code study contrast made up most checker violations, and pages rewritten by
-   models had fewer than the human code on average, not in every project. Counting pairs from the
-   tokens is ours: it reaches themes and states a page checker never rendered.
+   Evidence: in the [UCI code study][] contrast made up most checker violations, and pages
+   rewritten by models had fewer than the human code on average, not in every project. Counting
+   pairs from the tokens is ours: it reaches themes and states a page checker never rendered.
+   Ask: which themes and states ship, and is a brand colour behind a failing pair?
+   Trade-offs: "possible" pairs no selector combines are not failures today.
+   Provenance: 4.5:1 for normal text, 3:1 for large text and for control bounds and focus — standard
+   or vendor guidance (WCAG 2.2, success criteria 1.4.3 and 1.4.11, level AA). Prevents: text and
+   controls people with low vision cannot read. Applied blindly: AA read as enough where a project
+   promises more; a failing pair deferred as a matter of look, when it is a measured gap (propose
+   values that pass; the owner picks among them).
    Lessons: ACC-1.
 5. **What can the checker not see here, and who covers it?**
-   Check: per job, the keyboard traps and controls a keyboard-only walk never reaches (running
+   Check: per job, the keyboard traps and the controls a keyboard-only walk does not reach (running
    page; static proxies in the note), with each high-risk widget listed for a person.
    Evidence: a checker-clean page is no proof it works for disabled users: rates count every
-   violation alike, and checkers miss ARIA meaning and keyboard use (UCI code study, GitHub a11y
-   agent, Agentic audit). There, one browser agent per WCAG criterion found more of the
-   expert-reported failures than axe-core and both keyboard traps the batch models missed; its extra
-   findings were never settled by a person. The GitHub a11y agent keeps off high-risk widgets.
+   violation alike, and checkers miss ARIA meaning and keyboard use ([UCI code study][],
+   [GitHub a11y agent][], [Agentic audit][]). There, one browser agent per WCAG criterion found
+   more of the expert-reported failures than axe-core and both keyboard traps the batch models
+   missed; its extra findings were never settled by a person. The [GitHub a11y agent][] keeps off
+   high-risk widgets.
+   Ask: which widgets are custom (drag and drop, grids, comboboxes, editors, canvas), and who tests
+   them with a keyboard or a screen reader?
+   Trade-offs: a scripted keyboard walk finds traps, not whether a screen-reader user understands
+   the page.
    Lessons: ACC-5, ACC-7, ACC-8, ACC-10, ACC-11, ACC-15.
 6. **How many controls does each page carry, and do the pages agree?**
    Check: per page, the interactive controls shown and those behind a fold, and the style values
    and controls that bypass the design tokens and shared components, written to a baseline file.
-   Evidence: at studio-go agents told only to fold options kept them and added controls, and a walk
-   of the jobs found pages that disagreed where an audit from code and screenshots did not. The
-   token and component counts are ours.
+   Evidence: at [studio-go][] agents told only to fold options kept them and added controls, and a
+   walk of the jobs found pages that disagreed where an audit from code and screenshots did not.
+   The token and component counts are ours.
+   Ask: which job does each control serve, and which serve no job the owner listed?
+   Trade-offs: fewer controls can cost a job more clicks, and a fold hides a control from
+   newcomers. A control that serves no listed job is a question for the owner, not a cut.
    Lessons: JOB-4, JOB-6.
 7. **Where a model rates, reviews or grades the interface, was it checked against people?**
    Check: for each place a model scores, reviews or grades the interface, the set of items both it
    and people rated: its size, their agreement, and the judge version it was measured on.
-   Evidence: ArtifactsBench chose its judge by agreement with experts, measured on a subset;
-   screenshots and code together agreed with experts more than either alone. UW heuristic review and
-   Brazil heuristic review split on a model's coverage of expert issues (above pooled experts in
-   one, a fifth in the other); both saw non-issues raised and cross-screen problems missed. In the
-   Anthropic harness the builder rated its own work too kindly, and its QA agent argued real bugs
-   away until tuned on logs.
+   Evidence: [ArtifactsBench][] chose its judge by agreement with experts, measured on a subset;
+   screenshots and code together agreed with experts more than either alone.
+   [UW heuristic review][] and [Brazil heuristic review][] split on a model's coverage of expert
+   issues (above pooled experts in one, a fifth in the other); both saw non-issues raised and
+   cross-screen problems missed. In the [Anthropic harness][] the builder rated its own work too
+   kindly, and its QA agent argued real bugs away until tuned on logs.
+   Ask: who acts on the model's findings, and has a person ever rated the same items?
+   Trade-offs: people's ratings cost their time; a small shared set is a start.
    Lessons: JDG-1, JDG-2, JDG-3, JDG-4, JDG-5, JDG-6, JDG-9, JDG-10, JDG-13.
 8. **Where a model walks the interface as a user, how far do its runs agree, and with people?**
    Check: for each agent walk used as usability evidence, the runs per setup, how far repeat runs
    agree, and whether its steps were ever compared with people's on the same tasks.
-   Evidence: in the UW walkthrough models finished more tasks, in fewer steps, than people and
+   Evidence: in the [UW walkthrough][] models finished more tasks, in fewer steps, than people and
    voiced far fewer doubts until asked to rate confusion per screen; screens rated one at a time,
    without the walk's history, gave weak ratings that changed between runs. Measuring how far runs
    agree is ours.
+   Ask: what decisions rest on the simulated walk, and could people walk the same tasks once?
+   Trade-offs: repeat runs cost tokens; one run says little about the next.
    Lessons: SIM-1, SIM-2, SIM-3, SIM-4, JOB-3.
 9. **How do agents here build, fix and check interface work?**
    Check: which items of the build loop the project has, and which something enforces (the list
    is in the note): checker failures fed back by name, a check apart from the builder, a retry
    limit, rules that send high-risk work to people, and the cost of a run.
-   Evidence: in Concordia repair a retry loop, told only of structural failures, cost more and fixed
-   no more; a UCI code study loop fed a model-written violation report beat the plain prompt on
-   average. GitHub a11y agent runs one reviewer and one fixer, feeds its own archive of fixes, and
-   saw its agent try to work round its stop rule. The Anthropic harness criteria pulled designs
-   toward one look, its harness cost many times a solo run, and it removed parts one at a time when
-   the model changed.
+   Evidence: in [Concordia repair][] a retry loop, told only of structural failures, cost more and
+   fixed no more; a [UCI code study][] loop fed a model-written violation report beat the plain
+   prompt on average. [GitHub a11y agent][] runs one reviewer and one fixer, feeds its own archive
+   of fixes, and saw its agent try to work round its stop rule. The [Anthropic harness][] criteria
+   pulled designs toward one look, its harness cost many times a solo run, and it removed parts one
+   at a time when the model changed.
+   Ask: what does a run cost, and what stops a loop that is not converging?
+   Trade-offs: each added check costs time and tokens on every run.
+   Provenance: a retry limit as an item — published case ([Concordia repair][]: more retries cost
+   more and fixed no more). Prevents: loops that spend without fixing. Applied blindly: a low
+   fixed limit stops a loop that was converging; the question asks whether one exists, not its
+   value.
    Lessons: BLD-2, BLD-3, BLD-4, BLD-5, BLD-6, BLD-7, ACC-14.
 10. **Which counts may not rise, and does anything stop them rising?**
     Check: for each count of questions 1 to 6, whether a test the project reruns on every change
-    fails when it rises above a committed baseline; the job walk of question 1 is kept as such a
-    test.
-    Evidence: studio-go's job walk is a test that fails when a job cannot finish or a count goes
-    above its committed baseline, taken after the first round and not yet tested by a change. Fixes
-    that lower a total can raise single rules (Concordia repair, UCI code study). Gating every
-    count, not only jobs, is ours.
+    fails when it rises above a committed baseline, and who may raise that baseline; the job walk
+    of question 1 is kept as such a test.
+    Evidence: [studio-go][]'s job walk is a test that fails when a job cannot finish or a count
+    goes above its committed baseline, taken after the first round and not yet tested by a change.
+    Fixes that lower a total can raise single rules ([Concordia repair][], [UCI code study][]).
+    Gating every count, not only jobs, is ours.
+    Ask: who may raise a baseline here, and does anything outside the agent's reach review it?
+    Trade-offs: a gate makes needed growth (a new job's control) wait for a review; without one,
+    counts drift unseen.
+    Provenance: no count above its baseline — our single case ([studio-go][], untested by a change);
+    gating every count is our guess. Prevents: a fix that lowers one count while another rises
+    unseen. Applied blindly: a control, job or check removed or hidden to make the number hold; a
+    rise a change needs is listed with the job it serves, for the owner to accept.
     Lessons: JOB-2, JOB-5, ACC-3, ACC-4.
 
 ## How to run this checklist
@@ -122,21 +171,26 @@ Cases named below, each by its label (all in [index.md](index.md)): [Agentic aud
    rule).
 6. Base proposals on the Evidence lines and, if you can, the cited lessons (their "Against" lines
    and "Checked against people" tags) and the case sections they link, above all "Practices to
-   copy". No proposal says which look is better; a question of look goes to the owner. Order them
-   by what the rest depends on: baselines first (questions 1 and 10), then a judge or simulated
-   user checked against people before its ratings are used, then the rest.
-7. Report as below, then stop until the owner picks. One change per proposal (or parts 3a, 3b).
-8. Revisit as [applying the lessons](docs/applying-lessons.md#revisit) says; share a
-   [field report](docs/field-reports.md) once an item has met its problem (optional).
+   copy", weighing each question's Trade-offs. No proposal says which look is better; a question
+   of look goes to the owner. A value below a standard's target is a measured gap, not a question
+   of look: propose values that pass, and the owner picks among them. Order proposals by what the
+   rest depends on: baselines first (questions 1 and 10), then a judge or simulated user checked
+   against people before its ratings are used, then the rest.
+7. Report as below, then stop until the owner picks. Proposals are options for the owner; the
+   one-word recommendation is your suggestion. One change per proposal (or parts 3a, 3b).
+8. Revisit as [applying the lessons](docs/applying-lessons.md#revisit) says, reading
+   [corrections.md](corrections.md) first; share a [field report](docs/field-reports.md) once an
+   item has met its problem (optional).
 
 ## Report format
 
 Report, record and baseline files follow
 [the checklist report](docs/applying-lessons.md#the-checklist-report): each answer with its
 measurement, a baseline file per count in `docs/interface-baselines/` (written before anything
-changes), numbered proposals with a one-word recommendation (do, later or skip), "Check now" and
-"Event that proves it", and the record in `docs/interface-review.md` once the owner picks. In a
-read-only run, write no file: the report's Baselines section stands in for them.
+changes), numbered proposals with a one-word suggestion (do, later or skip), "Check now" and "Event
+that proves it", and the record in `docs/interface-review.md` once the owner picks, where every
+open or waiting item has an owner and a due date. In a read-only run, write no file: the report's
+Baselines section stands in for them.
 
 [Agentic audit]: cases/2026-09-08-mishra-agentic-a11y-audit.md
 [Anthropic harness]: cases/2026-03-24-anthropic-harness-design.md

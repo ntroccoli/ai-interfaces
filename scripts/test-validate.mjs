@@ -11,7 +11,7 @@ import { ROOT, parseCase, expectedEra, eraText, modelFamily, LESSON_PAGES, REPO_
 
 const TMP = join(ROOT, '.test-tmp');
 const PARTS = ['scripts', 'AGENTS.md', 'cases', 'evidence', 'lessons', 'NOTICE.md', 'index.md', 'llms.txt', 'llms-full.txt',
-  'README.md', 'CONTRIBUTING.md', 'docs', 'changes', 'LICENSE-CONTENT.md', '.github', 'lychee.toml', 'log.md', 'checklist.md'];
+  'README.md', 'CONTRIBUTING.md', 'docs', 'changes', 'LICENSE-CONTENT.md', '.github', 'lychee.toml', 'log.md', 'checklist.md', 'corrections.md'];
 let n = 0;
 const failed = [];
 
@@ -314,6 +314,25 @@ test('a checklist.md citing an unknown lesson fails', 1, d => { base(d); writeFi
 test('a valid checklist.md passes and is counted', 0, d => { base(d); writeFileSync(join(d, 'checklist.md'), checklist(5, FXID(d))); }, null, 'checklist.md valid: 5 questions');
 test('checklist over the size cap fails', 1,
   d => { base(d); writeFileSync(join(d, 'checklist.md'), `${checklist(5, FXID(d))}\n${'Padding words for the size test. '.repeat(700)}\n`); }, null, 'bytes (at most');
+
+// Provenance (docs/format.md "Checklist"): a Check holding a threshold or a cut, cap or forbid word needs a
+// "Provenance:" line with a level, "Prevents:" and "Applied blindly:"; a "published case" line links the case.
+const withQ1 = (d, check, extra = '') => writeFileSync(join(d, 'checklist.md'),
+  checklist(5, FXID(d)).replace('   Check: count something.\n', `   Check: ${check}\n${extra}`));
+const PROV = '   Provenance: the limit — our guess (none). Prevents: drift. Applied blindly: things get cut to fit.\n';
+test('a Check holding a number without provenance fails', 1, d => { base(d); withQ1(d, 'pages with more than 3 controls.'); }, null, 'its Check holds a number but the question has no "Provenance:" line');
+test('a Check holding a cap word without provenance fails', 1, d => { base(d); withQ1(d, 'whether the count may not rise.'); }, null, 'its Check holds "may not"');
+test('a Check naming only a question number needs no provenance', 0, d => { base(d); withQ1(d, 'the jobs of questions 1 to 3, by name.'); });
+test('a Check with a full provenance line passes', 0, d => { base(d); withQ1(d, 'pages with more than 3 controls.', PROV); });
+test('a provenance line without an evidence level fails', 1, d => { base(d); withQ1(d, 'pages with more than 3 controls.', PROV.replace('our guess', 'someone said')); }, null, 'names no evidence level');
+test('a provenance line without "Applied blindly:" fails', 1, d => { base(d); withQ1(d, 'pages with more than 3 controls.', PROV.replace('Applied blindly:', 'Else:')); }, null, 'needs "Applied blindly: <how it fails>"');
+test('a provenance line at "published case" without a case link fails', 1, d => { base(d); withQ1(d, 'pages with more than 3 controls.', PROV.replace('our guess', 'published case')); }, null, 'must link the case');
+
+// corrections.md (docs/format.md "Corrections"): always present; each entry has its five parts in order.
+test('without corrections.md the run fails', 1, d => { rmSync(join(d, 'corrections.md'), { force: true }); }, null, 'corrections.md: missing');
+test('a corrections entry missing a part fails', 1, d => {
+  appendFileSync(join(d, 'corrections.md'), '\n## 2027-01-01 — a test entry\n\n- **Wrong:** x.\n- **Published:** y.\n- **Recognise it:** z.\n- **Propose to the owner:** w.\n');
+}, null, 'parts must be, in order');
 
 // ---- Lessons (docs/format.md "Lessons"): one broken copy per rule, on the fixture lesson -------------------
 test('lesson with an unknown tag fails', 1, d => { base(d); fx(d, '- **ID** [ours]', '- **ID** [maybe]'); }, null, 'tag must be [stated] or [ours]');

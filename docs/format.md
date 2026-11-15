@@ -13,7 +13,8 @@ before a commit, and so must the Markdown linter: `npx markdownlint-cli2@0.24.0 
 (pinned; the version in markdownlint-cli2-action v25.0.0; rules in `.markdownlint-cli2.jsonc`). A
 case staged outside `cases/` validates in place with
 `node scripts/validate.mjs --cases-dir cases <staged case>` (its links to other cases resolve in
-`cases/`). After a change to the validator or the build, `node scripts/test-validate.mjs`
+`cases/`). A new case comes with its lesson edits ("Upkeep" under Lessons) and a rebuild. After a
+change to the validator or the build, `node scripts/test-validate.mjs`
 (broken-copy tests on fixture cases) must exit 0; add a test for each new rule. `npm run check:all`
 runs the validator, `build.mjs --check` and the tests in one call.
 
@@ -129,12 +130,15 @@ Field rules (all checked):
   not make it wrong. Use `superseded` only when the same org publishes a later account of the same
   work (corrected numbers, a new version of the same benchmark); then `superseded_by` names the
   newer case file, both cases have the same `org` (checked), and the newer case's Context links
-  back.
+  back. When the field moves on, say so in the checklist's Evidence lines and keep the older case
+  `current`.
 
 Body rules (all checked):
 
 - The first heading equals `title`; a summary of 40 to 150 words follows; the sections above appear
   in that order, none empty. "In their words" is optional.
+- "Source": what was read and when; when part of the source was written by a model, which parts,
+  and each claim is cited from the part that says it; a notes-only case says so.
 - "What was made or studied": the interface, the tasks or the benchmark, and why.
 - "Who did what" has the three bullets **AI:**, **Rule-based tools:** (checkers such as axe,
   scripted walks, test runners, browser automation), **People:** (participants, experts, raters,
@@ -250,12 +254,14 @@ Rules (all checked by `node scripts/validate.mjs`; one broken-copy test each):
 - "May be outdated": `build.mjs` marks, in `lessons/index.md`, `lessons/evidence.md` and
   `llms.txt`, every lesson tagged `yes` whose most recent case in "Cases" is more than 12 months
   (`OUTDATED_MONTHS`) older than the date of the newest `log.md` entry, never today's date, so the
-  output never changes by itself (`--today YYYY-MM-DD` is for tests only).
+  output never changes by itself (`--today YYYY-MM-DD` is for tests only). The next update's log
+  entry and rebuild refresh the mark; re-check each marked lesson against newer cases then.
 - "Strength" is capped by the cases in "Cases" (`strengthCeiling` in `scripts/lib.mjs`): `strong`
   needs two or more cases, or one whose `evidence` is `shown-in-source` or `independent-data`, and at
   least one case whose `author_relation` is not `seller-of-tool`; `medium` needs two or more cases,
   or one that shows its data; any other lesson is `weak`. A `maintainer-own` case never counts toward
-  the cap (it is not independent evidence), so a lesson resting on it alone is `weak`. Below the cap,
+  the cap (it is not independent evidence), so a lesson resting on it alone is `weak`. A notes-only
+  case (the site's terms forbid storing its text) counts like any other. Below the cap,
   grade by how well the cases support the lesson; recount as cases arrive. The legend on every page
   states this rule.
 - Links in "Cases" and "Against" go to a case section, `../cases/<file>.md#<section>`, and must
@@ -287,16 +293,31 @@ says so; once it exists, every rule below applies (tested both ways).
 Only what an agent can measure on a project: accessibility violations (an automated checker),
 contrast pairs below the target, screens and clicks per job (a scripted walk), component and token
 consistency counts, and before/after counts that may not rise. No question asks for a judgement of
-taste. 5 to 12 questions; merge before adding. Each question has a "Check:" an agent can run on a
-project, an "Evidence:" line saying briefly, in our words, what the cases show, and a "Lessons:" line
-citing the lesson IDs behind it (`Lessons: JDG-1, SIM-2`); detail lives in the lessons. Our own
-inferences are allowed and marked "(ours)". One measurement per Check; examples, report skeletons
-and the record live in [applying-lessons.md](applying-lessons.md). `checklist.md` stays at or under
-20 KB (20,480 bytes; agents read it whole; keep it near 17 KB so a sweep has room) and has a
+taste. The questions guide; they impose nothing on a project, whose owner decides what applies. 5 to
+12 questions; merge before adding. Each question has, in this order: a "Check:" an agent can run on
+a project; an "Evidence:" line saying briefly, in our words, what the cases show, naming each case
+by its reference link; "Ask:" (questions for the project); "Trade-offs:" (what it costs and when not
+to apply it); a "Provenance:" line per threshold or rule; and a "Lessons:" line citing the lesson
+IDs behind it (`Lessons: JDG-1, SIM-2`); detail lives in the lessons. Our own inferences are
+allowed and marked "(ours)". One measurement per Check; examples, report skeletons and the record
+live in [applying-lessons.md](applying-lessons.md).
+
+Provenance (owner, 2026-11-15, after an unmeasured size limit spread from one project's test into
+published checklists): a Check that holds a threshold (a number other than a question reference) or
+a cut, cap or forbid word (`RULE_WORDS` in `scripts/lib.mjs`) needs a line
+`Provenance: <the rule> — <level> (<source>). Prevents: <what>. Applied blindly: <how it fails>.`,
+where the level is one of `published case` (link the case), `others' measurement`,
+`standard or vendor guidance` (name it), `our single case` (studio-go: say so) or `our guess`
+(checked, with broken-copy tests). Thresholds in the measuring notes and the report format carry
+the same in prose. Before a release, each item that tells an agent to cut, cap, remove or forbid
+gets a behaviour check (below).
+
+`checklist.md` stays at or under 20 KB (20,480 bytes; agents read it whole; keep it near 17 KB so a
+sweep has room; both numbers are guesses, see "Limits and where they come from") and has a
 "## Report format" section that links the formats. Cases, where named, are named by their
 `label` and cited by reference links defined once at the end of the file (`[UW walkthrough][]`). The validator checks the count, the size,
-"Check:", "Evidence:", that each question cites lesson IDs that exist, case links and the report
-format. **Maintainer only:** run `check-copy` on `checklist.md` against all the source texts after
+"Check:", "Evidence:", provenance, that each question cites lesson IDs that exist, case links and
+the report format. **Maintainer only:** run `check-copy` on `checklist.md` against all the source texts after
 changing it.
 
 ## Update log
@@ -364,3 +385,51 @@ the front matter only:
 ```markdown
 - **<label>**: [<title>](cases/<file>) — <case_type>: <subject>; AI: <ai_role>; measured: <measures>; checked against: <checked_against>; sample: <sample>; evidence: <evidence>; author: <author_relation>; cost: <cost>. <summary>
 ```
+
+## Corrections
+
+`corrections.md` (hand-written, linked from `llms.txt`, README and the revisit) lists what this
+collection published wrong, newest first. It always exists, even with no entry, because every
+revisit reads it first. An entry is `## YYYY-MM-DD — title` with five bullets in this order
+(checked, with a broken-copy test): **Wrong:** (what, and how it was found), **Published:**
+(between which releases, commits or dates), **Recognise it:** (what it leaves in a project's
+record, baselines, tests or files), **Find what it changed:** (where to look and what to compare),
+**Propose to the owner:** (the repair, never applied without the owner's yes). The project's record
+names the entries it checked. An item a behaviour check finds harmful after it was released gets
+an entry.
+
+## Limits and where they come from
+
+Every number this repository enforces on itself, with its source and evidence level, what it
+prevents and how it fails when applied blindly. Most are guesses from our sibling projects
+(ai-migrations, karpathy-ideas); none was measured. They suit this repository's own files; a reader
+must not copy them as advice for another project.
+
+| Limit | Source and level | Prevents | Fails when applied blindly |
+| --- | --- | --- | --- |
+| `AGENTS.md` at or under 8 KB (`AGENTS_MAX_BYTES`) | our guess: the karpathy-ideas coordinator's tip of 2026-11-14, resting on its own checklist's start-file sizes, which were never measured | every session paying to read rules it does not need | rules every session needs get cut to fit; the 2026-11-15 cut from 26.6 to 5.8 KB was compared with the template: nothing a session needs at start was lost, four writing rules were missing here and are restored |
+| `checklist.md` at or under 20 KB, kept near 17 KB (`CHECKLIST_MAX_BYTES`) | our guess: ai-migrations' cap (2026-11-13) and its tip to trim to about 17 KB | a checklist too long to read whole on every run; growth by appending | questions merged or guidance cut to make room; a sweep trims a Check's caveat |
+| `llms.txt` at or under 20 KB (`LLMS_MAX_BYTES`) | our guess: ai-migrations' reading budget (2026-11-14) | the entry file growing with every case | how-to-use lines dropped to fit; the fix used was moving the case list out |
+| `lessons/index.md` at or under 12 KB (`INDEX_MAX_BYTES`) | our guess: ai-migrations (2026-11-14); the same figure as the unmeasured start-file limit that spread between projects | a table of contents for people that grows without bound | "By model" rows folded until a family's lessons are hard to find |
+| a lesson page at or under 20 KB (`LESSON_MAX_BYTES`) | our guess: the ai-migrations template | a page an agent cannot read whole | lessons trimmed instead of the page split (the validator says split) |
+| strength cap (`strengthCeiling`) | our guess at a rule, from the ai-migrations template; not tested against outcomes | one seller's or one anecdote's lesson called strong | it counts cases, not their quality: two thin cases outrank one careful study |
+| "may be outdated" after 12 months (`OUTDATED_MONTHS`) | our guess: ai-migrations (2026-11-14) | model-ability lessons read as current long after models changed | a lesson that still holds gets doubted at 13 months; one about a retired model passes at 11 |
+| text lengths: `label` 32 characters, `summary` 160 characters, lesson and practice lines 200 characters, case summary 40 to 150 words | our guesses, from the ai-migrations template | lines too long for one-line lists and indexes | a claim's limit or unit dropped to fit the length |
+| one quote per file, 15 words or fewer; a quoted span over four words counts as a quote | our guess at a copyright caution, from ai-migrations; not legal advice | copying a source's words | none known beyond paraphrase that drifts from the source; the copy check guards that |
+| `check-copy`: runs of 5 or more words shared with the source | our guess, from ai-migrations | close paraphrase passing as our own words | flags names and stock phrases; reworded by hand |
+| 5 to 12 checklist questions | our guess, from ai-migrations | a checklist that grows past what a run can answer | a needed question merged into another until neither reads clearly |
+| a unit within three words of a number | a parser heuristic of ours | numbers without units | a unit further away fails the check; reword or add the unit to `UNITS` |
+
+## Behaviour checks
+
+Before a release, each checklist item that tells an agent to cut, cap, remove or forbid is applied
+by a fresh agent to a small prepared project, and the result is checked for the intended effect and
+for the named harm (for a cap or a "may not rise" rule: was anything that changes behaviour or
+serves a job removed to make the number hold?). The samples, prompts and results are kept in the
+maintainer's private archive. The first round (2026-11-15) checked five items: the job default of
+question 1 left five of fifteen jobs out of the baseline, the template note of question 3 made the
+agent report no failure, and the look rule deferred two contrast failures; all three were reworded,
+re-run without the harm, and listed in `corrections.md`. The "may not rise" rule of question 10
+removed nothing (the agent raised the baseline itself and asked the owner), and the fold rule of
+question 6 removed nothing (the agent asked about controls no job used). One run per item: a
+sample, not proof.

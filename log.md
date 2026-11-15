@@ -3,6 +3,41 @@
 Each update of the collection: when it ran, the sources it covered, and what changed. Newest
 first.
 
+## 2026-11-15 — provenance and behaviour checks
+
+- **Why:** a size limit nobody had measured travelled from one project's test into a published
+  checklist and shipped instructions, and agents then cut text until the number held. Every
+  threshold we publish now says where it comes from.
+- **Rules:** each threshold, cap, default or "may not rise" rule in the checklist carries a
+  "Provenance:" line: its source, its evidence level (a published case, others' measurement, a
+  standard or vendor guidance, our single case, or our guess), what it prevents and how it fails
+  when applied blindly. The validator refuses a Check that holds a number or a cut, cap or forbid
+  word without one. The repository's own limits (file sizes, the strength cap, the "may be
+  outdated" age) get the same in `docs/format.md`; most are guesses from sibling projects and say
+  so.
+- **Rules:** every checklist item that tells an agent to cut, cap, remove or forbid was applied by
+  a fresh agent to a small prepared sample before release, looking for the intended effect and the
+  named harm; the results are summarised in `docs/format.md`.
+  Three did harm and were reworded: the default job list no longer stops at ten jobs, a template
+  that no checker can read gets its failures listed as candidates instead of nothing, and a colour
+  pair below the contrast target is a gap to fix, not a question of look. They are the first entry
+  of the new `corrections.md`.
+- **Rules:** the checklist guides rather than imposes: each question adds "Ask" (questions for the
+  project) and "Trade-offs" (what it costs and when not to apply it), names its cases by link, and
+  proposals are options for the owner, the one-word recommendation being the agent's suggestion.
+- **Rules:** `corrections.md` lists what we published wrong, between which dates, how to recognise
+  it in a project and what to propose to its owner; every revisit reads it first.
+- **Rules:** in the review records, every open or waiting item has an owner and a due date, and the
+  revisit lists the ones past their date first.
+
+### Checklist and lessons impact
+
+- **Checklist:** every question (Ask, Trade-offs and linked cases; provenance lines on questions 1,
+  4, 9 and 10; questions 1, 3, 4, 6 and 10 reworded after the behaviour checks). A revisit checks
+  the first entry of `corrections.md`.
+- **New lessons:** none.
+- **Changed lessons:** none.
+
 ## 2026-11-15 — studio-go process update
 
 - **Covered:** the maintainer's own case (studio-go) after the first night of building its redesign:
