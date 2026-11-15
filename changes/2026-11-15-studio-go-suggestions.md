@@ -5,7 +5,7 @@
 What this [log.md](../log.md) entry added, changed or removed, since "2026-11-15 — reopen rule": lesson IDs and checklist questions (Q1 is question 1). A revisit reads these lines for every entry newer than the one its record names, then only the lessons and questions they list.
 
 - Added lessons: BLD-11, JOB-8, JOB-9, JOB-10, JOB-11
-- Changed lessons: JOB-2
+- Changed lessons: ACC-4, JOB-2
 - Lessons gone: none
 - Added questions: Q11
 - Changed questions: Q1, Q2, Q6, Q7, Q10
@@ -32,7 +32,7 @@ BLD-11 f931c988
 ACC-1 dd4234d9
 ACC-2 71a9e4b1
 ACC-3 6d58ff3c
-ACC-4 ad12de73
+ACC-4 cdffa8bf
 ACC-5 c1be9c6e
 ACC-6 5ddfbb75
 ACC-7 44402b15

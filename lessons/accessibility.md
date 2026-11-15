@@ -20,7 +20,7 @@ Evidence base: every lesson here comes from the **cases** in [this collection](.
   - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2026; newest: Kimi K2.x.
   - Cases: [Concordia repair: numbers][car-numbers], [Concordia repair: what went wrong][car-wrong].
   - Against: None found; one model on static HTML, run once and judged only by axe, which covers part of WCAG; no person tried the fixed pages.
-- **ACC-4** [stated] A model's fix that is right for one element can break the rest of the page (duplicate IDs, ARIA that hides focusable content, misused roles); re-check the whole page after each fix.
+- **ACC-4** [stated] A model's fix that is right for one element can break other parts of the page (duplicate IDs, ARIA that hides focusable content, misused roles); re-check the whole page after each fix.
   - Depends on model ability: yes. Checked against people: checker. Strength: medium. Era: 2025–2026; newest: Kimi K2.x.
   - Cases: [Concordia repair: what went wrong][car-wrong], [UCI code study: what went wrong][hol-wrong].
   - Against: None found; the repair examples come from three pages and neither study counts how many pages gained violations; the second study's fix loop raised a few rules' failures, while its prompted rewrites broke rules by adding accessibility attributes.

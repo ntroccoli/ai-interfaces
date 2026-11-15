@@ -27,7 +27,8 @@ first.
   `[ours]` and weak. One candidate was declined: that a rule checked on templates passes while
   rendered pages with real data break it (the records do not show which names came from data);
   question 6's measuring note takes the rendered route instead.
-- **Changed lessons:** JOB-2 (its "Against" line: the owner has now used the build).
+- **Changed lessons:** JOB-2 (its "Against" line: the owner has now used the build); ACC-4
+  reworded only (a stock phrase matched a newly archived record), meaning unchanged.
 
 ## 2026-11-15 — reopen rule
 
